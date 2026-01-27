@@ -17,7 +17,7 @@ const navItems = [
   { label: 'Contact', href: '#contact' }
 ]
 
-function handleSmoothScroll(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+function handleSmoothScroll(e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) {
   e.preventDefault()
   // Check if it's an anchor link (starts with #)
   if (href.startsWith('#')) {

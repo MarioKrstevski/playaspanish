@@ -1,7 +1,9 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-import { MessageCircle, Headphones, CheckCircle } from 'lucide-react'
+import { MessageCircle, Headphones } from 'lucide-react'
+import { MethodCard } from './MethodCard'
+import { FeatureItem } from './FeatureItem'
 import { cn } from '@/lib/utils'
 
 const methods = [
@@ -53,29 +55,15 @@ export function TeachingMethods() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
-          {methods.map((method, index) => {
-            const Icon = method.icon
-            const { ref, isVisible } = useScrollAnimation()
-            return (
-              <div
-                key={method.title}
-                ref={ref}
-                className={cn(
-                  'animate-on-scroll text-center p-6 rounded-lg hover:shadow-lg transition-all duration-300',
-                  isVisible && 'visible'
-                )}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="flex justify-center mb-4">
-                  <div className="p-4 bg-primary-100 rounded-full">
-                    <Icon className="h-8 w-8 text-primary-600" />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">{method.title}</h3>
-                <p className="text-gray-700">{method.description}</p>
-              </div>
-            )
-          })}
+          {methods.map((method, index) => (
+            <MethodCard
+              key={method.title}
+              icon={method.icon}
+              title={method.title}
+              description={method.description}
+              delay={index * 100}
+            />
+          ))}
         </div>
 
         <div className="max-w-4xl mx-auto">
@@ -84,23 +72,13 @@ export function TeachingMethods() {
               Key Features of Our Teaching Style
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {teachingFeatures.map((feature, index) => {
-                const { ref, isVisible } = useScrollAnimation()
-                return (
-                  <div
-                    key={feature}
-                    ref={ref}
-                    className={cn(
-                      'animate-on-scroll flex items-center gap-2',
-                      isVisible && 'visible'
-                    )}
-                    style={{ transitionDelay: `${index * 50}ms` }}
-                  >
-                    <CheckCircle className="h-5 w-5 text-primary-600 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </div>
-                )
-              })}
+              {teachingFeatures.map((feature, index) => (
+                <FeatureItem
+                  key={feature}
+                  feature={feature}
+                  delay={index * 50}
+                />
+              ))}
             </div>
           </div>
         </div>

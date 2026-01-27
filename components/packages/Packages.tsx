@@ -2,6 +2,7 @@
 
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { PackageCard } from './PackageCard'
+import { PersonalizedFeatureItem } from './PersonalizedFeatureItem'
 import { cn } from '@/lib/utils'
 
 const packages = [
@@ -96,22 +97,13 @@ export function Packages() {
               All courses can be customized to match your specific needs and learning goals
             </p>
             <div className="grid md:grid-cols-2 gap-4">
-              {personalizedFeatures.map((feature, index) => {
-                const { ref, isVisible } = useScrollAnimation()
-                return (
-                  <div
-                    key={feature}
-                    ref={ref}
-                    className={cn(
-                      'animate-on-scroll bg-white p-4 rounded-lg border border-primary-200',
-                      isVisible && 'visible'
-                    )}
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
-                    <p className="text-gray-800 font-medium">{feature}</p>
-                  </div>
-                )
-              })}
+              {personalizedFeatures.map((feature, index) => (
+                <PersonalizedFeatureItem
+                  key={feature}
+                  feature={feature}
+                  delay={index * 100}
+                />
+              ))}
             </div>
           </div>
         </div>

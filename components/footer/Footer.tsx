@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const navLinks = [
   { label: 'Home', href: '#hero' },
@@ -27,6 +28,8 @@ function handleSmoothScroll(e: React.MouseEvent<HTMLAnchorElement>, href: string
 }
 
 export function Footer() {
+  const pathname = usePathname()
+
   return (
     <footer className="bg-gray-900 text-gray-300 py-12">
       <div className="container mx-auto px-4">
@@ -43,17 +46,35 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleSmoothScroll(e, link.href)}
-                    className="hover:text-primary-400 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {navLinks.map((link) => {
+                if (link.href.startsWith('#')) {
+                  return (
+                    <li key={link.href}>
+                      <a
+                        href={pathname === '/' ? link.href : `/${link.href}`}
+                        onClick={(e) => {
+                          if (pathname === '/') {
+                            handleSmoothScroll(e, link.href)
+                          }
+                        }}
+                        className="hover:text-primary-400 transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  )
+                }
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="hover:text-primary-400 transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </div>
 

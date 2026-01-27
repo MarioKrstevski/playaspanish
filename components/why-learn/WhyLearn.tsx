@@ -2,6 +2,7 @@
 
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { Globe, Briefcase, Heart, Users, MapPin, Coffee } from 'lucide-react'
+import { BenefitCard } from './BenefitCard'
 import { cn } from '@/lib/utils'
 
 const benefits = [
@@ -75,29 +76,15 @@ export function WhyLearn() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {benefits.map((benefit, index) => {
-            const Icon = benefit.icon
-            const { ref, isVisible } = useScrollAnimation()
-            return (
-              <div
-                key={benefit.title}
-                ref={ref}
-                className={cn(
-                  'animate-on-scroll bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-all duration-300',
-                  isVisible && 'visible'
-                )}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-primary-100 rounded-lg">
-                    <Icon className="h-6 w-6 text-primary-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900">{benefit.title}</h3>
-                </div>
-                <p className="text-gray-700">{benefit.description}</p>
-              </div>
-            )
-          })}
+          {benefits.map((benefit, index) => (
+            <BenefitCard
+              key={benefit.title}
+              icon={benefit.icon}
+              title={benefit.title}
+              description={benefit.description}
+              delay={index * 100}
+            />
+          ))}
         </div>
       </div>
     </section>
