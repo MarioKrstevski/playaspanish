@@ -47,6 +47,13 @@ const packages = [
   }
 ]
 
+const personalizedFeatures = [
+  'PERSONALIZED COURSE = LENGTH OF STAY',
+  'Follow the order of the topics in the material',
+  'Choose specific grammar topics',
+  'Design a program for specific technical language'
+]
+
 export function Packages() {
   const { ref, isVisible } = useScrollAnimation()
 
@@ -68,7 +75,7 @@ export function Packages() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {packages.map((pkg, index) => (
             <PackageCard
               key={pkg.title}
@@ -78,6 +85,35 @@ export function Packages() {
               delay={index * 0.1}
             />
           ))}
+        </div>
+
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-primary-50 rounded-lg p-8 border-2 border-primary-200">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+              Personalized Course Options
+            </h3>
+            <p className="text-lg text-gray-700 mb-6 text-center">
+              All courses can be customized to match your specific needs and learning goals
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              {personalizedFeatures.map((feature, index) => {
+                const { ref, isVisible } = useScrollAnimation()
+                return (
+                  <div
+                    key={feature}
+                    ref={ref}
+                    className={cn(
+                      'animate-on-scroll bg-white p-4 rounded-lg border border-primary-200',
+                      isVisible && 'visible'
+                    )}
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <p className="text-gray-800 font-medium">{feature}</p>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>

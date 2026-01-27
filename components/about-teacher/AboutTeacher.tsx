@@ -60,32 +60,27 @@ export function AboutTeacher() {
           >
             <div>
               <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                Hi, nice to meet you. I&apos;m Angelica
+                Hi, nice to meet you. I&apos;m Angelica Torres
               </h3>
               <p className="text-lg text-gray-700 mb-4">
-                I come from [Location], and I have a [Degree] in [Field]. With years of experience teaching Spanish to students from all over the world, I bring both expertise and passion to every lesson.
+                Founder of Playa Spanish school with more than 15 years of experience teaching Spanish and Mexican culture.
               </p>
             </div>
 
             <div className="space-y-4">
               <div>
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">My Background</h4>
-                <p className="text-gray-700">
-                  [Degree details and professional background/portfolio information]
-                </p>
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">Credentials</h4>
+                <ul className="text-gray-700 space-y-1">
+                  <li>• Lic. in English Language</li>
+                  <li>• Certified Level C1</li>
+                  <li>• More than 15 years of teaching experience</li>
+                </ul>
               </div>
 
               <div>
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">My Passion</h4>
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">My Expertise</h4>
                 <p className="text-gray-700">
-                  Teaching Spanish is not just my profession—it&apos;s my passion. I love helping students discover the beauty of the Spanish language and culture, and I&apos;m committed to making your learning journey enjoyable and effective.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">Students Helped</h4>
-                <p className="text-gray-700">
-                  I&apos;ve had the privilege of helping hundreds of students achieve their Spanish learning goals, from beginners taking their first steps to advanced learners perfecting their fluency.
+                  As the founder of Playa Spanish, I bring extensive experience in teaching Spanish and Mexican culture. My passion for language education and cultural immersion has helped countless students achieve their Spanish learning goals.
                 </p>
               </div>
             </div>

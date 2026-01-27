@@ -8,14 +8,21 @@ const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Why Learn', href: '#why-learn' },
   { label: 'Reviews', href: '#reviews' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '#contact' }
 ]
 
 function handleSmoothScroll(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
   e.preventDefault()
-  const element = document.querySelector(href)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  // Check if it's an anchor link (starts with #)
+  if (href.startsWith('#')) {
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  } else {
+    // Regular link navigation
+    window.location.href = href
   }
 }
 
