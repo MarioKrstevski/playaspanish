@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react'
 
 const HEADLINE_EN = 'Your path to Spanish starts here'
 const HEADLINE_ES = 'Tu camino al español empieza aquí'
-const CURSOR_CIRCLE_RADIUS = 125
+const CURSOR_CIRCLE_RADIUS = 105 // 210px diameter
 
 function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
   e.preventDefault()
@@ -50,7 +50,7 @@ export function Hero() {
             >
               {/* Spanish layer: hidden by default, revealed only inside circle on hover */}
               <h1
-                className="absolute inset-0 flex items-center justify-start text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-nowrap"
+                className="absolute inset-0 flex items-center justify-start text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-nowrap py-10"
                 style={{
                   opacity: cursorReveal.isHovering ? 1 : 0,
                   WebkitMaskImage: cursorReveal.isHovering
@@ -66,7 +66,7 @@ export function Hero() {
               </h1>
               {/* English layer: always visible, with circular cutout on hover */}
               <h1
-                className="absolute inset-0 flex items-center justify-start text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-nowrap"
+                className="absolute inset-0 flex items-center justify-start text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-nowrap py-10"
                 style={{
                   WebkitMaskImage: cursorReveal.isHovering
                     ? `radial-gradient(circle ${CURSOR_CIRCLE_RADIUS}px at ${cursorReveal.x}px ${cursorReveal.y}px, transparent 0, transparent ${CURSOR_CIRCLE_RADIUS}px, black ${CURSOR_CIRCLE_RADIUS}px)`
@@ -78,11 +78,16 @@ export function Hero() {
               >
                 {HEADLINE_EN}
               </h1>
-              {/* Visible circle at cursor (250x250) */}
+              {/* Visible circle at cursor (210x210) with smoky inner rim and black border */}
               {cursorReveal.isHovering && (
                 <div
-                  className="pointer-events-none absolute w-[250px] h-[250px] rounded-full border-2 border-primary-400 -translate-x-1/2 -translate-y-1/2"
-                  style={{ left: cursorReveal.x, top: cursorReveal.y }}
+                  className="pointer-events-none absolute w-[210px] h-[210px] rounded-full border-2 border-gray-900 -translate-x-1/2 -translate-y-1/2"
+                  style={{
+                    left: cursorReveal.x,
+                    top: cursorReveal.y,
+                    background: 'radial-gradient(circle, transparent 60%, rgba(249, 115, 22, 0.15) 80%, rgba(249, 115, 22, 0.3) 100%)',
+                    boxShadow: 'inset 0 0 20px 8px rgba(249, 115, 22, 0.2), 0 0 15px 5px rgba(249, 115, 22, 0.15)'
+                  }}
                   aria-hidden
                 />
               )}
