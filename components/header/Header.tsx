@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 
 const navItems = [
   { label: 'Home', href: '#hero' },
@@ -49,7 +50,7 @@ export function Header() {
             }}
             className="text-2xl font-bold text-primary-600"
           >
-            Playa Spanish
+            <Image width={300} height={500}  src="/playaspanish_logowithtext.png" alt="Playa Spanish" />
           </Link>
 
           {/* Desktop Navigation */}

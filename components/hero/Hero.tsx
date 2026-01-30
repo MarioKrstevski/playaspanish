@@ -38,19 +38,18 @@ export function Hero() {
 
           {/* Right Image */}
           <div className="animate-slide-right visible" style={{ transitionDelay: '200ms' }}>
-            <div className="relative w-full h-[500px] rounded-lg overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-accent-400" />
-              <div className="absolute inset-0 flex items-center justify-center text-white text-6xl font-bold">
-                Teacher Photo
-              </div>
-              {/* Replace with actual image:
+            <div className="relative w-1/2 ml-auto h-[500px] rounded-lg overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 bg-transparent" />
+
+             
               <Image
-                src="/images/teacher-hero.jpg"
+                src="/angelica-playa-spanish.png"
                 alt="Spanish teacher"
                 fill
+                // i want this image to contain within the box around it
                 className="object-cover"
               />
-              */}
+             
             </div>
           </div>
         </div>
