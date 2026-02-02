@@ -8,7 +8,7 @@ import { ArrowRight } from 'lucide-react'
 const HEADLINE_EN = 'Your path to Spanish starts here'
 const HEADLINE_ES = 'Tu camino al español empieza aquí'
 const CURSOR_CIRCLE_RADIUS_DESKTOP = 105 // 210px diameter
-const CURSOR_CIRCLE_RADIUS_MOBILE = 52 // ~half on mobile (104px diameter)
+const CURSOR_CIRCLE_RADIUS_MOBILE = 120 // ~half on mobile (104px diameter)
 
 function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
   e.preventDefault()
