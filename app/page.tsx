@@ -18,8 +18,8 @@ export default function Home() {
         <Packages />
         <AboutTeacher />
         <WhyLearn />
-        <FoodCulture />
         <TeachingMethods />
+        <FoodCulture />
         <Reviews />
         <ContactForm />
       </main>

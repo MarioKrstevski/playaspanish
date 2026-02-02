@@ -59,19 +59,9 @@ export function WhyLearn() {
           </p>
           <div className="bg-primary-50 rounded-lg p-6 max-w-3xl mx-auto mb-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-3">Playa Spanish Location</h3>
-            <p className="text-lg text-gray-700 mb-4">
+            <p className="text-lg text-gray-700">
               Playa Spanish is located in <span className="font-semibold">Playa del Carmen</span>, an affluent international city to the south of Mexico.
             </p>
-            <p className="text-gray-700">
-              We offer guests the opportunity to experience and explore the language through:
-            </p>
-            <ul className="mt-4 space-y-2 text-gray-700">
-              <li>• Online schools</li>
-              <li>• Certified teachers</li>
-              <li>• Free Wi-Fi Access</li>
-              <li>• Native Spanish speaker</li>
-              <li>• Online material</li>
-            </ul>
           </div>
         </div>
 

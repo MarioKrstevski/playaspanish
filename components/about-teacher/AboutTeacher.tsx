@@ -34,18 +34,14 @@ export function AboutTeacher() {
             )}
           >
             <div className="relative w-full h-[500px] rounded-lg overflow-hidden shadow-xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-accent-400" />
-              <div className="absolute inset-0 flex items-center justify-center text-white text-4xl font-bold">
-                Angelica
-              </div>
-              {/* Replace with actual image:
               <Image
-                src="/images/angelica.jpg"
-                alt="Angelica - Spanish Teacher"
+                src="/angelica-playa-spanish.png"
+                alt="Angelica Torres - Spanish Teacher and Founder of Playa Spanish"
                 fill
-                className="object-cover"
+                className="object-cover object-top"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
               />
-              */}
             </div>
           </div>
 
@@ -62,8 +58,8 @@ export function AboutTeacher() {
               <h3 className="text-3xl font-bold text-gray-900 mb-4">
                 Hi, nice to meet you. I&apos;m Angelica Torres
               </h3>
-              <p className="text-lg text-gray-700 mb-4">
-                Founder of Playa Spanish school with more than 15 years of experience teaching Spanish and Mexican culture.
+              <p className="text-base text-gray-600 mb-4">
+                Real connection, real conversations—and lessons shaped around your life and goals.
               </p>
             </div>
 

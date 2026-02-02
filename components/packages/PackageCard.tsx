@@ -10,21 +10,29 @@ interface PackageCardProps {
   description: string
   features: string[]
   delay?: number
+  isPopular?: boolean
 }
 
-export function PackageCard({ title, description, features, delay = 0 }: PackageCardProps) {
+export function PackageCard({ title, description, features, delay = 0, isPopular }: PackageCardProps) {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
     <div
       ref={ref}
       className={cn(
-        'animate-on-scroll h-full transition-all duration-300 hover:-translate-y-2',
+        'animate-on-scroll h-full transition-all duration-300 hover:-translate-y-2 relative',
         isVisible && 'visible'
       )}
       style={{ transitionDelay: `${delay * 100}ms` }}
     >
-      <Card className="h-full hover:shadow-lg transition-shadow">
+      {isPopular && (
+        <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-10">
+          <span className="inline-flex items-center rounded-full bg-primary-500 px-3 py-1 text-xs font-semibold text-white shadow-md">
+            Most Popular
+          </span>
+        </div>
+      )}
+      <Card className={cn('h-full hover:shadow-lg transition-shadow', isPopular && 'ring-2 ring-primary-400')}>
         <CardHeader>
           <CardTitle className="text-2xl">{title}</CardTitle>
           <CardDescription className="text-base">{description}</CardDescription>

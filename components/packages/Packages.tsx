@@ -2,29 +2,20 @@
 
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { PackageCard } from './PackageCard'
-import { PersonalizedFeatureItem } from './PersonalizedFeatureItem'
+import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const packages = [
   {
-    title: 'Basic Spanish Lessons (Group)',
-    description: 'Learn Spanish in a supportive group environment with other students at your level.',
-    features: [
-      'Interactive group sessions',
-      'Structured curriculum',
-      'Peer practice opportunities',
-      'Affordable pricing'
-    ]
-  },
-  {
-    title: 'One-on-One Phone Calls',
+    title: '1-on-1 Lessons',
     description: 'Personalized Spanish lessons tailored to your specific needs and schedule.',
     features: [
       'Customized lesson plans',
       'Flexible scheduling',
       'Individual attention',
       'Focus on your weak areas'
-    ]
+    ],
+    isPopular: true
   },
   {
     title: 'Customized Business Spanish',
@@ -48,11 +39,11 @@ const packages = [
   }
 ]
 
-const personalizedFeatures = [
-  'PERSONALIZED COURSE = LENGTH OF STAY',
-  'Follow the order of the topics in the material',
-  'Choose specific grammar topics',
-  'Design a program for specific technical language'
+const courseOptions = [
+  'Start with a structured curriculum and follow topics in a clear order',
+  'Adjust pace and length to your stay or schedule',
+  'Dive deeper into specific grammar or topics you need',
+  'Add technical or professional vocabulary when relevant'
 ]
 
 export function Packages() {
@@ -76,7 +67,7 @@ export function Packages() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {packages.map((pkg, index) => (
             <PackageCard
               key={pkg.title}
@@ -84,28 +75,28 @@ export function Packages() {
               description={pkg.description}
               features={pkg.features}
               delay={index * 0.1}
+              isPopular={'isPopular' in pkg && pkg.isPopular}
             />
           ))}
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-primary-50 rounded-lg p-8 border-2 border-primary-200">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
-              Personalized Course Options
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              Start with a clear path, customize as you go
             </h3>
-            <p className="text-lg text-gray-700 mb-6 text-center">
-              All courses can be customized to match your specific needs and learning goals
+            <p className="text-gray-600">
+              Each course follows a structured curriculum so you always know where you&apos;re headed—with room to focus on what matters most to you.
             </p>
-            <div className="grid md:grid-cols-2 gap-4">
-              {personalizedFeatures.map((feature, index) => (
-                <PersonalizedFeatureItem
-                  key={feature}
-                  feature={feature}
-                  delay={index * 100}
-                />
-              ))}
-            </div>
           </div>
+          <ul className="space-y-3">
+            {courseOptions.map((item) => (
+              <li key={item} className="flex items-start gap-3 text-gray-700">
+                <Check className="h-5 w-5 text-primary-600 mt-0.5 flex-shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

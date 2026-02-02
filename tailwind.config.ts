@@ -36,7 +36,8 @@ const config: Config = {
           700: '#1d4ed8',
           800: '#1e40af',
           900: '#1e3a8a'
-        }
+        },
+        whitesmoke: '#f5f5f5'
       },
       keyframes: {
         'slide-in-left': {

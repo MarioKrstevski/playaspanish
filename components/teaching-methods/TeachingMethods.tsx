@@ -47,10 +47,10 @@ export function TeachingMethods() {
             How We Teach
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
-            A Results-driven Teaching Style
+            Beyond words and grammar—we focus on speaking and listening so you really get the language.
           </p>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Playa Spanish lessons are based on the premise that clear aims and hard work yield the best results. All lessons focus on the following key features:
+            Vocabulary and grammar matter, but the goal is to use Spanish. We emphasize conversation and comprehension so you build a real grasp of the language, not just theory.
           </p>
         </div>
 

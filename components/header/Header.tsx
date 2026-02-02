@@ -37,7 +37,17 @@ export function Header() {
   const pathname = usePathname()
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+    <>
+      {/* Backdrop dimmer when mobile menu is open */}
+      <div
+        className={cn(
+          'fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 lg:hidden',
+          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        )}
+        onClick={() => setMobileMenuOpen(false)}
+        aria-hidden
+      />
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link
@@ -54,7 +64,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => {
               if (item.href.startsWith('#')) {
                 return (
@@ -67,7 +77,7 @@ export function Header() {
                         handleSmoothScroll(e, item.href)
                       }
                     }}
-                    className="text-gray-700 hover:text-primary-600 transition-colors"
+                    className="text-gray-700 hover:text-primary-600 hover:bg-[#f1f1f1] rounded px-2 py-1 -mx-2 -my-1 transition-colors"
                   >
                     {item.label}
                   </a>
@@ -78,7 +88,7 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'text-gray-700 hover:text-primary-600 transition-colors',
+                    'text-gray-700 hover:text-primary-600 hover:bg-[#f1f1f1] rounded px-2 py-1 -mx-2 -my-1 transition-colors',
                     pathname === item.href && 'text-primary-600 font-semibold'
                   )}
                 >
@@ -96,20 +106,30 @@ export function Header() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: CTA + hamburger */}
+          <div className="lg:hidden flex items-center gap-2">
+            <Button
+              onClick={(e) => {
+                e.preventDefault()
+                handleSmoothScroll(e, '#contact')
+              }}
+            >
+              Get Started
+            </Button>
+            <button
+              className="p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
           {/* Mobile Navigation */}
           <div
             className={cn(
-              'md:hidden overflow-hidden transition-all duration-300',
+              'lg:hidden overflow-hidden transition-all duration-300',
               mobileMenuOpen ? 'max-h-96 mt-4' : 'max-h-0'
             )}
           >
@@ -127,7 +147,7 @@ export function Header() {
                         }
                         setMobileMenuOpen(false)
                       }}
-                      className="text-gray-700 hover:text-primary-600 transition-colors"
+                      className="text-gray-700 hover:text-primary-600 hover:bg-[#f1f1f1] rounded px-2 py-1 transition-colors"
                     >
                       {item.label}
                     </a>
@@ -139,7 +159,7 @@ export function Header() {
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
-                      'text-gray-700 hover:text-primary-600 transition-colors',
+                      'text-gray-700 hover:text-primary-600 hover:bg-[#f1f1f1] rounded px-2 py-1 transition-colors',
                       pathname === item.href && 'text-primary-600 font-semibold'
                     )}
                   >
@@ -147,19 +167,10 @@ export function Header() {
                   </Link>
                 )
               })}
-            <Button
-              onClick={(e) => {
-                e.preventDefault()
-                handleSmoothScroll(e, '#contact')
-                setMobileMenuOpen(false)
-              }}
-              className="w-full"
-            >
-              Get Started
-            </Button>
           </div>
         </div>
       </nav>
     </header>
+    </>
   )
 }

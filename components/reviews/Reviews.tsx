@@ -25,16 +25,7 @@ const reviews = [
     rating: 5,
     review: 'Before my trip to Mexico, I took the Traveling Spanish course. It made such a difference! I could order food, ask for directions, and have basic conversations.'
   },
-  {
-    name: 'Lisa K.',
-    rating: 5,
-    review: 'Angelica\'s teaching style is patient and encouraging. She makes learning Spanish enjoyable and accessible. Best investment I\'ve made!'
-  },
-  {
-    name: 'David P.',
-    rating: 5,
-    review: 'The pronunciation practice was incredibly helpful. I finally sound natural when speaking Spanish. Thank you, Angelica!'
-  }
+  
 ]
 
 export function Reviews() {
