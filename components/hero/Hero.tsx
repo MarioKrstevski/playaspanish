@@ -44,13 +44,13 @@ export function Hero() {
             {/* Cursor reveal: English with circular cutout, Spanish visible only in circle on hover */}
             <div
               ref={cursorRevealRef}
-              className="relative min-h-[5rem] flex items-center justify-start cursor-default select-none mb-12"
+              className="relative min-h-[5rem] flex items-center justify-center select-none mb-12 hover:cursor-none"
               onMouseMove={handleCursorRevealMove}
               onMouseLeave={handleCursorRevealLeave}
             >
               {/* Spanish layer: hidden by default, revealed only inside circle on hover */}
               <h1
-                className="absolute inset-0 flex items-center justify-start text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-nowrap py-10"
+                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-nowrap py-10"
                 style={{
                   opacity: cursorReveal.isHovering ? 1 : 0,
                   WebkitMaskImage: cursorReveal.isHovering
@@ -66,7 +66,7 @@ export function Hero() {
               </h1>
               {/* English layer: always visible, with circular cutout on hover */}
               <h1
-                className="absolute inset-0 flex items-center justify-start text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-nowrap py-10"
+                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-nowrap py-10 tracking-wider"
                 style={{
                   WebkitMaskImage: cursorReveal.isHovering
                     ? `radial-gradient(circle ${CURSOR_CIRCLE_RADIUS}px at ${cursorReveal.x}px ${cursorReveal.y}px, transparent 0, transparent ${CURSOR_CIRCLE_RADIUS}px, black ${CURSOR_CIRCLE_RADIUS}px)`
