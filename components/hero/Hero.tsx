@@ -88,11 +88,11 @@ export function Hero() {
     <section id="hero" className="min-h-screen flex items-center pt-20 pb-16 bg-gradient-to-br from-primary-50 to-accent-50">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="w-full md:col-span-2 max-w-4xl mx-auto text-center">
+          <div className="w-full md:col-span-2 max-w-4xl mx-auto  text-center">
             {/* Cursor reveal: English with circular cutout, Spanish visible only in circle on hover */}
             <div
               ref={cursorRevealRef}
-              className="hero-slide-in relative min-h-[5rem] flex items-center justify-center select-none mb-12 hover:cursor-none touch-none"
+              className="hero-slide-in relative min-h-[7rem]   md:min-h-[5rem] flex items-center justify-center select-none mb-24 md:mb-12 hover:cursor-none touch-none"
               onMouseMove={handleCursorRevealMove}
               onMouseLeave={handleCursorRevealLeave}
               onTouchStart={handleTouchStart}
@@ -102,7 +102,7 @@ export function Hero() {
             >
               {/* Spanish layer: hidden by default, revealed only inside circle on hover/touch */}
               <h1
-                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-10"
+                className="absolute inset-0 flex items-center justify-center text-4xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 my-4 md:py-10"
                 style={{
                   opacity: cursorReveal.isHovering ? 1 : 0,
                   WebkitMaskImage: cursorReveal.isHovering
@@ -118,7 +118,7 @@ export function Hero() {
               </h1>
               {/* English layer: always visible, with circular cutout on hover/touch */}
               <h1
-                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-10 tracking-wider"
+                className="absolute inset-0 flex items-center justify-center text-4xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 my-4 md:py-10 tracking-wider"
                 style={{
                   WebkitMaskImage: cursorReveal.isHovering
                     ? `radial-gradient(circle ${circleRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${circleRadius}px, black ${circleRadius}px)`
@@ -147,9 +147,9 @@ export function Hero() {
               )}
             </div>
 
-            <p className="hero-slide-in hero-slide-in-delay-1 text-base sm:text-xl md:text-2xl text-gray-700 mb-8" >
-              Personalized lessons with a native teacher.{' '} <br />
-              <span className="text-primary-600 font-semibold">For travel, work, or the joy of learning.</span>
+            <p className="hero-slide-in hero-slide-in-delay-1 text-base sm:text-lg md:text-xl text-gray-700 mb-8" >
+            You can understand more Spanish than you think.{' '} <br />
+              <span className="text-primary-600 font-semibold text-xl">Personalized lessons with a native teacher</span>
             </p>
             <Button
               size="lg"
