@@ -7,8 +7,8 @@ import { ArrowRight } from 'lucide-react'
 
 const HEADLINE_EN = 'Your path to Spanish starts here'
 const HEADLINE_ES = 'Tu camino al español empieza aquí'
-const CURSOR_CIRCLE_RADIUS_DESKTOP = 105 // 210px diameter
-const CURSOR_CIRCLE_RADIUS_MOBILE = 120 // ~half on mobile (104px diameter)
+const CURSOR_CIRCLE_RADIUS_DESKTOP = 92 // 210px diameter
+const CURSOR_CIRCLE_RADIUS_MOBILE = 75 // smaller for mobile
 
 function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
   e.preventDefault()
@@ -18,23 +18,36 @@ function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
   }
 }
 
+const MOBILE_BREAKPOINT = 768
+
 function useCircleRadius() {
-  const [radius, setRadius] = useState(CURSOR_CIRCLE_RADIUS_DESKTOP)
+  const [state, setState] = useState(() => ({
+    radius: CURSOR_CIRCLE_RADIUS_DESKTOP,
+    isMobile: typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT
+  }))
   useEffect(() => {
     const update = () => {
-      setRadius(window.innerWidth < 768 ? CURSOR_CIRCLE_RADIUS_MOBILE : CURSOR_CIRCLE_RADIUS_DESKTOP)
+      const isMobile = window.innerWidth < MOBILE_BREAKPOINT
+      setState({
+        radius: isMobile ? CURSOR_CIRCLE_RADIUS_MOBILE : CURSOR_CIRCLE_RADIUS_DESKTOP,
+        isMobile
+      })
     }
     update()
     window.addEventListener('resize', update)
     return () => window.removeEventListener('resize', update)
   }, [])
-  return radius
+  return state
 }
 
 export function Hero() {
   const cursorRevealRef = useRef<HTMLDivElement>(null)
   const [cursorReveal, setCursorReveal] = useState({ x: 0, y: 0, isHovering: false })
-  const circleRadius = useCircleRadius()
+  const { radius: circleRadius, isMobile } = useCircleRadius()
+  const circleCenterX = cursorReveal.isHovering ? cursorReveal.x : 0
+  const circleCenterY = cursorReveal.isHovering
+    ? (isMobile ? cursorReveal.y - circleRadius : cursorReveal.y)
+    : 0
 
   const updatePosition = useCallback((clientX: number, clientY: number) => {
     const el = cursorRevealRef.current
@@ -93,10 +106,10 @@ export function Hero() {
                 style={{
                   opacity: cursorReveal.isHovering ? 1 : 0,
                   WebkitMaskImage: cursorReveal.isHovering
-                    ? `radial-gradient(circle ${circleRadius}px at ${cursorReveal.x}px ${cursorReveal.y}px, black 0, black ${circleRadius}px, transparent ${circleRadius}px)`
+                    ? `radial-gradient(circle ${circleRadius}px at ${circleCenterX}px ${circleCenterY}px, black 0, black ${circleRadius}px, transparent ${circleRadius}px)`
                     : 'none',
                   maskImage: cursorReveal.isHovering
-                    ? `radial-gradient(circle ${circleRadius}px at ${cursorReveal.x}px ${cursorReveal.y}px, black 0, black ${circleRadius}px, transparent ${circleRadius}px)`
+                    ? `radial-gradient(circle ${circleRadius}px at ${circleCenterX}px ${circleCenterY}px, black 0, black ${circleRadius}px, transparent ${circleRadius}px)`
                     : 'none'
                 }}
                 aria-hidden={!cursorReveal.isHovering}
@@ -108,10 +121,10 @@ export function Hero() {
                 className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-10 tracking-wider"
                 style={{
                   WebkitMaskImage: cursorReveal.isHovering
-                    ? `radial-gradient(circle ${circleRadius}px at ${cursorReveal.x}px ${cursorReveal.y}px, transparent 0, transparent ${circleRadius}px, black ${circleRadius}px)`
+                    ? `radial-gradient(circle ${circleRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${circleRadius}px, black ${circleRadius}px)`
                     : 'none',
                   maskImage: cursorReveal.isHovering
-                    ? `radial-gradient(circle ${circleRadius}px at ${cursorReveal.x}px ${cursorReveal.y}px, transparent 0, transparent ${circleRadius}px, black ${circleRadius}px)`
+                    ? `radial-gradient(circle ${circleRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${circleRadius}px, black ${circleRadius}px)`
                     : 'none'
                 }}
               >
@@ -122,8 +135,8 @@ export function Hero() {
                 <div
                   className="pointer-events-none absolute rounded-full border-2 border-gray-900 -translate-x-1/2 -translate-y-1/2"
                   style={{
-                    left: cursorReveal.x,
-                    top: cursorReveal.y,
+                    left: circleCenterX,
+                    top: circleCenterY,
                     width: circleDiameter,
                     height: circleDiameter,
                     background: 'radial-gradient(circle, transparent 60%, rgba(249, 115, 22, 0.15) 80%, rgba(249, 115, 22, 0.3) 100%)',
