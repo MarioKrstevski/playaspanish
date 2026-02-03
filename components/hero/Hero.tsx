@@ -4,6 +4,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import { ClipartSprites } from '@/components/clipart/ClipartSprites'
 
 const HEADLINE_EN = 'Your path to Spanish starts here'
 const HEADLINE_ES = 'Tu camino al español empieza aquí'
@@ -85,7 +86,9 @@ export function Hero() {
   const circleDiameter = circleRadius * 2
 
   return (
-    <section id="hero" className="min-h-screen flex items-center pt-20 pb-16 bg-gradient-to-br from-primary-50 to-accent-50">
+    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 bg-gradient-to-br from-primary-50 to-accent-50">
+      {/* Cliparts: absolute on top, row – adjust position via className or wrapper */}
+      <ClipartSprites className="absolute top-4 left-0 right-0 z-10 pointer-events-none" />
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="w-full md:col-span-2 max-w-4xl mx-auto  text-center">
