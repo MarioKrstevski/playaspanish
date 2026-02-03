@@ -11,7 +11,7 @@ export function ClipartSprites({ className }: ClipartSpritesProps) {
     <div className={cn('relative w-full h-[120px] md:h-[160px]', className)}>
       {/* Flag: slides in from left, then gentle float (bob) */}
       <div
-        className="clipart-flag absolute w-24 h-24 md:w-32 md:h-32 bg-contain bg-no-repeat bg-center"
+        className="clipart-flag absolute w-32 h-32  bg-contain bg-no-repeat bg-center"
         style={{
           backgroundImage: 'url(/mexico-flag.png)',
           left: '10%',
@@ -21,11 +21,9 @@ export function ClipartSprites({ className }: ClipartSpritesProps) {
       />
       {/* Sombrero: slides in from right, then gentle sway (tilt) */}
       <div
-        className="clipart-hat absolute w-24 h-24 md:w-32 md:h-32 bg-contain bg-no-repeat bg-center"
+        className="clipart-hat absolute right-[40%] top-[195px] max-[550px]:right-[20%] max-[550px]:top-[195px] min-[887px]:right-[45%] w-32 h-32 bg-contain bg-no-repeat bg-center"
         style={{
-          backgroundImage: 'url(/mexican-sombrero.png)',
-          right: '10%',
-          top: '100px'
+          backgroundImage: 'url(/mexican-sombrero.png)'
         }}
         aria-hidden
       />
