@@ -21,13 +21,13 @@ export function ClipartSprites({ className }: ClipartSpritesProps) {
       />
       {/* Sombrero: slides in from right, then gentle sway (tilt) */}
       <div
-        className="clipart-hat absolute right-[40%] top-[195px] max-[550px]:right-[20%] max-[550px]:top-[195px] min-[887px]:right-[45%] w-32 h-32 bg-contain bg-no-repeat bg-center"
+        className="clipart-hat absolute right-[40%] top-[185px] max-[550px]:right-[20%] max-[550px]:top-[185px] min-[887px]:right-[45%] w-32 h-32 bg-contain bg-no-repeat bg-center"
         style={{
           backgroundImage: 'url(/mexican-sombrero.png)'
         }}
         aria-hidden
       />
-      Third: slides in from right (staggered), then pulse
+      {/* Third: slides in from right (staggered), then pulse
       <div
         className="clipart-hat absolute left-[calc(50%-2rem)] md:left-[calc(50%-2.5rem)] w-16 h-16 md:w-20 md:h-20 bg-contain bg-no-repeat bg-center"
         style={{
@@ -35,7 +35,7 @@ export function ClipartSprites({ className }: ClipartSpritesProps) {
           top: '80px'
         }}
         aria-hidden
-      />
+      /> */}
     </div>
   )
 }

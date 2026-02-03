@@ -84,6 +84,7 @@ export function Hero() {
   }, [])
 
   const circleDiameter = circleRadius * 2
+  const maskRadius = circleRadius - 2
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 bg-gradient-to-br from-primary-50 to-accent-50">
@@ -103,16 +104,16 @@ export function Hero() {
               onTouchEnd={handleTouchEnd}
               onTouchCancel={handleTouchEnd}
             >
-              {/* Spanish layer: hidden by default, revealed only inside circle on hover/touch */}
+              {/* Spanish layer: revealed only inside circle; clip-path only so edge is crisp and aligned to border */}
               <h1
-                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 my-4 md:py-10"
+                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10"
                 style={{
                   opacity: cursorReveal.isHovering ? 1 : 0,
-                  WebkitMaskImage: cursorReveal.isHovering
-                    ? `radial-gradient(circle ${circleRadius}px at ${circleCenterX}px ${circleCenterY}px, black 0, black ${circleRadius}px, transparent ${circleRadius}px)`
+                  clipPath: cursorReveal.isHovering
+                    ? `circle(${maskRadius}px at ${circleCenterX}px ${circleCenterY}px)`
                     : 'none',
-                  maskImage: cursorReveal.isHovering
-                    ? `radial-gradient(circle ${circleRadius}px at ${circleCenterX}px ${circleCenterY}px, black 0, black ${circleRadius}px, transparent ${circleRadius}px)`
+                  WebkitClipPath: cursorReveal.isHovering
+                    ? `circle(${maskRadius}px at ${circleCenterX}px ${circleCenterY}px)`
                     : 'none'
                 }}
                 aria-hidden={!cursorReveal.isHovering}
@@ -121,13 +122,13 @@ export function Hero() {
               </h1>
               {/* English layer: always visible, with circular cutout on hover/touch */}
               <h1
-                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 my-4 md:py-10 tracking-wider"
+                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10 tracking-wider"
                 style={{
                   WebkitMaskImage: cursorReveal.isHovering
-                    ? `radial-gradient(circle ${circleRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${circleRadius}px, black ${circleRadius}px)`
+                    ? `radial-gradient(circle ${maskRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${maskRadius}px, black ${maskRadius}px)`
                     : 'none',
                   maskImage: cursorReveal.isHovering
-                    ? `radial-gradient(circle ${circleRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${circleRadius}px, black ${circleRadius}px)`
+                    ? `radial-gradient(circle ${maskRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${maskRadius}px, black ${maskRadius}px)`
                     : 'none'
                 }}
               >
