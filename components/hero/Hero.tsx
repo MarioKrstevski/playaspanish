@@ -105,7 +105,7 @@ export function Hero() {
             >
               {/* Spanish layer: hidden by default, revealed only inside circle on hover/touch */}
               <h1
-                className="absolute inset-0 flex items-center justify-center text-4xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 my-4 md:py-10"
+                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 my-4 md:py-10"
                 style={{
                   opacity: cursorReveal.isHovering ? 1 : 0,
                   WebkitMaskImage: cursorReveal.isHovering
@@ -121,7 +121,7 @@ export function Hero() {
               </h1>
               {/* English layer: always visible, with circular cutout on hover/touch */}
               <h1
-                className="absolute inset-0 flex items-center justify-center text-4xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 my-4 md:py-10 tracking-wider"
+                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 my-4 md:py-10 tracking-wider"
                 style={{
                   WebkitMaskImage: cursorReveal.isHovering
                     ? `radial-gradient(circle ${circleRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${circleRadius}px, black ${circleRadius}px)`
