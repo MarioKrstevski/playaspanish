@@ -135,20 +135,20 @@
     }
   }
 
-  /* Compound: slide-in then continuous (delay 0.6s so loop starts after slide-in) */
+  /* Compound: slide-in starts after 1.5s, movement starts after slide-in ends */
   .clipart-flag {
-    animation: clipart-slide-in-left 0.6s ease-out both,
-      clipart-float 3s ease-in-out 0.6s infinite;
+    animation: clipart-slide-in-left 0.6s ease-out 1.5s both,
+      clipart-float 3s ease-in-out 2.1s infinite;
   }
 
   .clipart-hat {
-    animation: clipart-slide-in-right 0.6s ease-out both,
-      clipart-sway 2.5s ease-in-out 0.6s infinite;
+    animation: clipart-slide-in-right 0.6s ease-out 1.5s both,
+      clipart-sway 2.5s ease-in-out 2.1s infinite;
   }
 
   .clipart-extra {
-    animation: clipart-slide-in-right 0.6s ease-out 0.2s both,
-      clipart-pulse 2s ease-in-out 0.8s infinite;
+    animation: clipart-slide-in-right 0.6s ease-out 1.7s both,
+      clipart-pulse 2s ease-in-out 2.3s infinite;
   }
 }
 
