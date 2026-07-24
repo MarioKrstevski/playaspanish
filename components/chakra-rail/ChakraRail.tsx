@@ -42,7 +42,7 @@ export function ChakraRail() {
   return (
     <nav
       aria-label="Page sections"
-      className="fixed left-6 xl:left-10 top-1/2 -translate-y-1/2 z-40 hidden lg:block"
+      className="fixed left-1 md:left-6 xl:left-10 top-1/2 -translate-y-1/2 z-40 scale-75 md:scale-100 origin-left"
     >
       <div className="relative flex flex-col items-center gap-5 py-1">
         <div className="absolute inset-y-1 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-violet-300 via-emerald-300 to-red-300 opacity-40" />
