@@ -13,51 +13,92 @@ function handleContactScroll(e: React.MouseEvent<HTMLButtonElement>) {
   }
 }
 
+const MOON_LIGHT = '#fdba74'
+const MOON_DARK = '#7c2d12'
+
+// A row of lessons drawn as a waxing moon cycle: each lesson a little
+// fuller than the last.
+function LessonMoons({ count }: { count: number }) {
+  return (
+    <div aria-hidden className="flex items-center gap-1.5 flex-wrap">
+      {Array.from({ length: count }, (_, i) => {
+        const fill = ((i + 1) / count) * 100
+        const isFull = i === count - 1
+        return (
+          <span
+            key={i}
+            className="w-3.5 h-3.5 rounded-full"
+            style={{
+              background: isFull
+                ? MOON_LIGHT
+                : `linear-gradient(to left, ${MOON_LIGHT} ${fill}%, ${MOON_DARK} ${fill}%)`,
+              border: '1px solid #ea580c',
+              boxShadow: isFull ? '0 0 8px 1px rgba(253, 186, 116, 0.8)' : 'none'
+            }}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
 // Laid out as an ascending staircase: new students enter on the lower
-// steps, everyone arrives at the same $30 summit. Order matters.
+// steps, everyone arrives at the same $30 summit. The 10-lesson step is
+// the recommended entrance; the summit is the anchor.
 const steps = [
   {
     label: 'New students',
+    badge: 'The way most students start',
     name: '10 Lessons',
     price: '$28',
     unit: 'per lesson · $280 upfront',
     tagline: 'The full first climb',
+    moons: 10,
+    moonCaption: 'Ten lessons — watch it wax to full',
     features: [
       'Save $20 on your first ten lessons',
       'Schedule them whenever you like',
       '50% money-back if it is not for you'
     ],
-    // Tallest top margin = lowest step
     offset: 'md:mt-32',
-    summit: false
+    summit: false,
+    recommended: true
   },
   {
     label: 'New students',
+    badge: null,
     name: '5 Lessons',
     price: '$29',
     unit: 'per lesson · $145 upfront',
     tagline: 'A gentle start',
+    moons: 5,
+    moonCaption: 'Five lessons to find your footing',
     features: [
       'Save $5 on your first five lessons',
       'Schedule them whenever you like',
       '50% money-back if it is not for you'
     ],
     offset: 'md:mt-16',
-    summit: false
+    summit: false,
+    recommended: false
   },
   {
     label: 'Everyone',
+    badge: null,
     name: 'The Lesson',
     price: '$30',
-    unit: 'per 45-min lesson',
+    unit: 'per lesson · pay as you go',
     tagline: 'The rhythm — where everyone arrives',
+    moons: 0,
+    moonCaption: null,
     features: [
-      'Pay as you go — per class or per month',
+      'Pay per class or per month, as you like',
       'Lessons at your own pace, no expiry',
       'Same price for as long as you learn'
     ],
     offset: 'mt-0',
-    summit: true
+    summit: true,
+    recommended: false
   }
 ]
 
@@ -80,7 +121,8 @@ export function Pricing() {
             A lesson is <span className="font-bold text-orange-600">$30</span>. That never changes.
           </p>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-3">
-            New students climb in from a lower step — then everyone learns at the same summit.
+            Each lesson is a one-hour session — 45 minutes of focused Spanish, with breathing
+            room built in. New students climb in from a lower step.
           </p>
         </div>
 
@@ -88,19 +130,29 @@ export function Pricing() {
         <div
           ref={cardsRef}
           className={cn(
-            'animate-on-scroll grid md:grid-cols-3 gap-6 md:gap-0 max-w-5xl mx-auto mt-14 items-stretch',
+            'animate-on-scroll grid md:grid-cols-3 gap-6 md:gap-0 max-w-5xl mx-auto mt-16 items-stretch',
             cardsVisible && 'visible'
           )}
         >
           {steps.map((step, index) => (
-            <div key={step.name} className={cn('flex flex-col', step.offset)}>
+            <div key={step.name} className={cn('relative flex flex-col', step.offset)}>
+              {step.badge && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 w-max">
+                  <span className="inline-flex items-center rounded-full bg-orange-500 px-4 py-1 text-xs font-semibold text-white shadow-md">
+                    {step.badge}
+                  </span>
+                </div>
+              )}
               <div
                 className={cn(
-                  'flex flex-col flex-1 p-8 bg-white border border-orange-100 shadow-sm',
+                  'flex flex-col flex-1 p-8 bg-white shadow-sm',
                   'rounded-lg md:rounded-none',
                   index === 0 && 'md:rounded-l-lg',
+                  step.recommended &&
+                    'ring-2 ring-orange-500 shadow-lg bg-gradient-to-b from-orange-50 to-white z-[1]',
                   step.summit &&
-                    'md:rounded-tr-lg md:rounded-br-lg bg-gradient-to-b from-orange-100 to-white ring-1 ring-orange-300 shadow-md'
+                    'md:rounded-tr-lg md:rounded-br-lg border-2 border-orange-300',
+                  !step.recommended && !step.summit && 'border border-orange-100'
                 )}
               >
                 <p
@@ -113,10 +165,31 @@ export function Pricing() {
                 </p>
                 <h3 className="text-xl font-bold text-gray-900 mb-1">{step.name}</h3>
                 <p className="text-sm text-gray-500 mb-5">{step.tagline}</p>
-                <div className="mb-6">
+                <div className="mb-5">
                   <span className="text-5xl font-bold text-gray-900">{step.price}</span>
                   <span className="block text-sm text-gray-500 mt-1">{step.unit}</span>
                 </div>
+
+                {step.moons > 0 && step.moonCaption ? (
+                  <div className="mb-6">
+                    <LessonMoons count={step.moons} />
+                    <p className="text-xs text-gray-400 mt-2">{step.moonCaption}</p>
+                  </div>
+                ) : (
+                  <div className="mb-6 flex items-center gap-3">
+                    <span
+                      aria-hidden
+                      className="w-5 h-5 rounded-full"
+                      style={{
+                        background: MOON_LIGHT,
+                        border: '1px solid #ea580c',
+                        boxShadow: '0 0 10px 2px rgba(253, 186, 116, 0.8)'
+                      }}
+                    />
+                    <p className="text-xs text-gray-400">Full moon — full value, every lesson</p>
+                  </div>
+                )}
+
                 <ul className="space-y-3 mt-auto">
                   {step.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
@@ -125,6 +198,12 @@ export function Pricing() {
                     </li>
                   ))}
                 </ul>
+
+                {step.recommended && (
+                  <Button className="mt-6" size="lg" onClick={handleContactScroll}>
+                    Start with 10 lessons
+                  </Button>
+                )}
               </div>
             </div>
           ))}
