@@ -1,33 +1,31 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-import { MessageCircle, Headphones } from 'lucide-react'
+import { MessageCircle, Headphones, BookOpen, PenLine } from 'lucide-react'
 import { MethodCard } from './MethodCard'
-import { FeatureItem } from './FeatureItem'
 import { cn } from '@/lib/utils'
 
 const methods = [
   {
     icon: MessageCircle,
     title: 'Speaking',
-    description: 'Engage in real conversations from day one. Practice speaking Spanish through interactive dialogues, role-playing, and guided conversations that build your confidence and fluency.'
+    description: 'Real conversations from day one to build confidence and fluency.'
   },
   {
     icon: Headphones,
     title: 'Listening',
-    description: 'Develop your listening comprehension skills through authentic audio materials, conversations, and exercises. Learn to understand native speakers at natural speeds and in various contexts.'
+    description: 'Understand native speakers at natural speeds through authentic audio.'
+  },
+  {
+    icon: BookOpen,
+    title: 'Reading',
+    description: 'Build vocabulary and comprehension with engaging texts at your level.'
+  },
+  {
+    icon: PenLine,
+    title: 'Writing',
+    description: 'Express yourself clearly through guided writing practice and feedback.'
   }
-]
-
-const teachingFeatures = [
-  'Transparent objectives',
-  'Key language skills',
-  'Appropriate time limits',
-  'A pace calculated',
-  'Interaction',
-  'Feedback on progress',
-  'Private study exercises',
-  'Classroom activities'
 ]
 
 export function TeachingMethods() {
@@ -54,7 +52,7 @@ export function TeachingMethods() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
           {methods.map((method, index) => (
             <MethodCard
               key={method.title}
@@ -64,23 +62,6 @@ export function TeachingMethods() {
               delay={index * 100}
             />
           ))}
-        </div>
-
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-gray-50 rounded-lg p-8">
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6 text-center">
-              Key Features of Our Teaching Style
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {teachingFeatures.map((feature, index) => (
-                <FeatureItem
-                  key={feature}
-                  feature={feature}
-                  delay={index * 50}
-                />
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -35,7 +35,7 @@ export function AboutTeacher() {
           >
             <div className="relative w-full h-[500px] rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="/angelica-playa-spanish.png"
+                src="/angelica-professional.jpg"
                 alt="Angelica Torres - Spanish Teacher and Founder of Playa Spanish"
                 fill
                 className="object-cover object-top"

@@ -51,16 +51,16 @@ export function WhyLearn() {
             titleVisible && 'visible'
           )}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Why Learn Spanish?
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
             Discover the incredible benefits of learning Spanish, especially for those interested in Mexico and Spanish-speaking cultures.
           </p>
           <div className="bg-primary-50 rounded-lg p-6 max-w-3xl mx-auto mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-3">Playa Spanish Location</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-3">Playa Spanish Location</h3>
             <p className="text-lg text-gray-700">
-              Playa Spanish is located in <span className="font-semibold">Playa del Carmen</span>, an affluent international city to the south of Mexico.
+              Playa Spanish is located in <span className="font-semibold">Playa del Carmen</span>, an affluent international city to the south east of Mexico.
             </p>
           </div>
         </div>
