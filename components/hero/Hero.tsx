@@ -3,7 +3,7 @@
 // import Image from 'next/image' // restore when uncommenting teacher image below
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Moon } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 const HEADLINE_EN = 'Your path to Spanish starts here'
 const HEADLINE_ES = 'Tu camino al español empieza aquí'
@@ -19,6 +19,23 @@ function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
 }
 
 const MOBILE_BREAKPOINT = 768
+
+// The page's chakra descent, previewed as a quiet rail of dots in the hero
+const CHAKRA_COLORS = ['#8b5cf6', '#6366f1', '#0ea5e9', '#10b981', '#f59e0b', '#f97316', '#ef4444']
+
+// 0 at the top of the page, 1 once the hero is mostly scrolled past
+function useHeroScrollProgress() {
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    const onScroll = () => {
+      setProgress(Math.min(window.scrollY / (window.innerHeight * 0.8), 1))
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  return progress
+}
 
 function useCircleRadius() {
   const [state, setState] = useState(() => ({
@@ -41,6 +58,7 @@ function useCircleRadius() {
 }
 
 export function Hero() {
+  const scrollProgress = useHeroScrollProgress()
   const cursorRevealRef = useRef<HTMLDivElement>(null)
   const [cursorReveal, setCursorReveal] = useState({ x: 0, y: 0, isHovering: false })
   const { radius: circleRadius, isMobile } = useCircleRadius()
@@ -87,12 +105,42 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 bg-gradient-to-b from-violet-100 via-violet-50 to-indigo-50">
-      {/* Crescent accent: one thin line, top-right — the single literal touch up here */}
-      <Moon
+      {/* Setting moon, top-right: starts as a crescent, fills and sinks as you scroll */}
+      <div
         aria-hidden
-        className="absolute top-28 right-[12%] w-12 h-12 text-violet-300 pointer-events-none"
-        strokeWidth={1}
-      />
+        className="absolute top-24 right-[10%] pointer-events-none hidden sm:block"
+        style={{
+          transform: `translateY(${scrollProgress * 260}px)`,
+          opacity: 1 - scrollProgress * 0.4
+        }}
+      >
+        <svg width="88" height="88" viewBox="0 0 100 100">
+          <defs>
+            <mask id="hero-moon-mask">
+              <rect width="100" height="100" fill="white" />
+              <circle cx={38 - scrollProgress * 130} cy="44" r="46" fill="black" />
+            </mask>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="#a78bfa" opacity="0.55" mask="url(#hero-moon-mask)" />
+        </svg>
+      </div>
+
+      {/* Chakra rail, left edge: the page's color descent, previewed as seven quiet dots */}
+      <div
+        aria-hidden
+        className="absolute left-8 lg:left-14 top-1/2 -translate-y-1/2 hidden md:block pointer-events-none"
+      >
+        <div className="relative flex flex-col items-center gap-5 py-2">
+          <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-violet-300 via-emerald-300 to-red-300 opacity-40" />
+          {CHAKRA_COLORS.map((color, index) => (
+            <span
+              key={color}
+              className="relative w-2.5 h-2.5 rounded-full"
+              style={{ backgroundColor: color, opacity: index === 0 ? 0.9 : 0.5 }}
+            />
+          ))}
+        </div>
+      </div>
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="w-full md:col-span-2 max-w-4xl mx-auto  text-center">

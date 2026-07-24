@@ -35,7 +35,7 @@ export function SectionDivider({ variant, from, to, accent }: SectionDividerProp
             d={paths[variant]}
             fill="none"
             stroke={accent}
-            strokeWidth={2.5}
+            strokeWidth={1.5}
             vectorEffect="non-scaling-stroke"
             strokeLinejoin="round"
           />
