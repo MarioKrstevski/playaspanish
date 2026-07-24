@@ -5,11 +5,10 @@ import { usePathname } from 'next/navigation'
 
 const navLinks = [
   { label: 'Home', href: '#hero' },
-  { label: 'Packages', href: '#packages' },
-  { label: 'About', href: '#about' },
-  { label: 'Why Learn', href: '#why-learn' },
-  { label: 'Reviews', href: '#reviews' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'The Course', href: '#course' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Teachers', href: '#about' },
+  { label: 'Anki', href: '/anki' },
   { label: 'Contact', href: '#contact' }
 ]
 
@@ -31,14 +30,15 @@ export function Footer() {
   const pathname = usePathname()
 
   return (
-    <footer className="bg-gray-900 text-gray-300 py-12">
+    <footer className="bg-[#450a0a] text-red-100/80 py-12">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-bold text-white mb-4">Playa Spanish</h3>
-            <p className="text-gray-400">
-              Learn Spanish online with personalized, customized lessons from experienced native teachers.
+            <p className="text-red-200/70">
+              Learn Spanish as it is lived — language, culture, and people — with native Mexican
+              teachers, for as long as your journey takes.
             </p>
           </div>
 
@@ -81,7 +81,7 @@ export function Footer() {
           {/* Contact Info */}
           <div>
             <h4 className="text-lg font-semibold text-white mb-4">Contact</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-red-200/70">
               <li>Email: info@playaspanish.com</li>
               <li>Online Classes via Zoom or Teams – flexible to your platform if needed
               </li>
@@ -89,7 +89,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+        <div className="border-t border-red-900 pt-8 text-center text-sm text-red-200/60">
           <p>&copy; {new Date().getFullYear()} Playa Spanish. All rights reserved.</p>
         </div>
       </div>

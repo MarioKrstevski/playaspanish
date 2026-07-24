@@ -3,8 +3,7 @@
 // import Image from 'next/image' // restore when uncommenting teacher image below
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
-import { ClipartSprites } from '@/components/clipart/ClipartSprites'
+import { ArrowRight, Moon } from 'lucide-react'
 
 const HEADLINE_EN = 'Your path to Spanish starts here'
 const HEADLINE_ES = 'Tu camino al español empieza aquí'
@@ -87,9 +86,13 @@ export function Hero() {
   const maskRadius = circleRadius - 2
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 bg-gradient-to-br from-primary-50 to-accent-50">
-      {/* Cliparts: absolute on top, row – adjust position via className or wrapper */}
-      <ClipartSprites className="absolute top-4 left-0 right-0 z-10 pointer-events-none" />
+    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 bg-gradient-to-b from-violet-100 via-violet-50 to-indigo-50">
+      {/* Crescent accent: one thin line, top-right — the single literal touch up here */}
+      <Moon
+        aria-hidden
+        className="absolute top-28 right-[12%] w-12 h-12 text-violet-300 pointer-events-none"
+        strokeWidth={1}
+      />
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="w-full md:col-span-2 max-w-4xl mx-auto  text-center">
@@ -143,8 +146,8 @@ export function Hero() {
                     top: circleCenterY,
                     width: circleDiameter,
                     height: circleDiameter,
-                    background: 'radial-gradient(circle, transparent 60%, rgba(249, 115, 22, 0.15) 80%, rgba(249, 115, 22, 0.3) 100%)',
-                    boxShadow: 'inset 0 0 20px 8px rgba(249, 115, 22, 0.2), 0 0 15px 5px rgba(249, 115, 22, 0.15)'
+                    background: 'radial-gradient(circle, transparent 60%, rgba(139, 92, 246, 0.15) 80%, rgba(139, 92, 246, 0.3) 100%)',
+                    boxShadow: 'inset 0 0 20px 8px rgba(139, 92, 246, 0.2), 0 0 15px 5px rgba(139, 92, 246, 0.15)'
                   }}
                   aria-hidden
                 />
@@ -153,7 +156,7 @@ export function Hero() {
 
             <p className="hero-slide-in hero-slide-in-delay-1 text-base sm:text-lg md:text-xl text-gray-700 mb-8" >
             You can understand more Spanish than you think.{' '} <br />
-              <span className="text-primary-600 font-semibold text-xl">Personalized lessons with a native teacher</span>
+              <span className="text-violet-700 font-semibold text-xl">Personalized lessons with native Mexican teachers</span>
             </p>
             <Button
               size="lg"

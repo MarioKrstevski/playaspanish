@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Playa Spanish - Online Spanish School',
-  description: 'Learn Spanish online with personalized, customized lessons from experienced native teachers. Choose from group classes, one-on-one sessions, business Spanish, or travel Spanish.'
+  description: 'Learn Spanish as it is lived — language, culture, and people — with native Mexican teachers. An unlimited course that moves at your pace, plus custom courses for professionals.'
 }
 
 export default function RootLayout({

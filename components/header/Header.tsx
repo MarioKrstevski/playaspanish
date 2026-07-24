@@ -10,11 +10,10 @@ import Image from 'next/image'
 
 const navItems = [
   { label: 'Home', href: '#hero' },
-  { label: 'Packages', href: '#packages' },
-  { label: 'About', href: '#about' },
-  { label: 'Why Learn', href: '#why-learn' },
-  { label: 'Reviews', href: '#reviews' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'The Course', href: '#course' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Teachers', href: '#about' },
+  { label: 'Anki', href: '/anki' },
   { label: 'Contact', href: '#contact' }
 ]
 

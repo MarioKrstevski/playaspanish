@@ -8,9 +8,10 @@ export function AboutTeacher() {
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation()
   const { ref: imageRef, isVisible: imageVisible } = useScrollAnimation()
   const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation()
+  const { ref: secondRef, isVisible: secondVisible } = useScrollAnimation()
 
   return (
-    <section id="about" className="py-20 bg-gray-50">
+    <section id="about" className="py-24 bg-emerald-50">
       <div className="container mx-auto px-4">
         <div
           ref={titleRef}
@@ -20,8 +21,11 @@ export function AboutTeacher() {
           )}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Meet Your Teacher
+            Meet Your Teachers
           </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Every teacher at Playa Spanish is Mexican — and every student starts with Angelica.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
@@ -81,6 +85,25 @@ export function AboutTeacher() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Second teacher — swap in photo + bio when the client sends them.
+            Layout mirrors Angelica's (image right, text left) for the yin-yang rhythm. */}
+        <div
+          ref={secondRef}
+          className={cn(
+            'animate-on-scroll max-w-3xl mx-auto mt-16 bg-white rounded-lg border border-emerald-100 shadow-sm p-8 text-center',
+            secondVisible && 'visible'
+          )}
+        >
+          <h3 className="text-2xl font-bold text-gray-900 mb-3">
+            …and a second guide is joining soon
+          </h3>
+          <p className="text-gray-600 leading-relaxed">
+            A fellow Mexican teacher is joining Playa Spanish. Angelica is always your first
+            hello — after your intro call, she pairs you with the teacher who fits your goals
+            best.
+          </p>
         </div>
       </div>
     </section>

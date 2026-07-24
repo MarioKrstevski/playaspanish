@@ -150,6 +150,16 @@
     animation: clipart-slide-in-right 0.6s ease-out 1.7s both,
       clipart-pulse 2s ease-in-out 2.3s infinite;
   }
+
+  /* Yin-yang: barely-perceptible slow rotation */
+  @keyframes yinyang-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 /* Override Tailwind Preflight so our --default-font-family is used */

@@ -32,7 +32,7 @@ export function Reviews() {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
-    <section id="reviews" className="py-20 bg-gray-50">
+    <section id="reviews" className="py-24 bg-rose-50">
       <div className="container mx-auto px-4">
         <div
           ref={ref}
