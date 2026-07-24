@@ -17,35 +17,6 @@ const navItems = [
   { label: 'Contact', href: '#contact' }
 ]
 
-// A tiny Mexican flag built from vertical slices, each rippling with a
-// staggered delay so the whole flag appears to wave.
-const FLAG_SLICES = 12
-function flagSliceColor(index: number) {
-  if (index < FLAG_SLICES / 3) return '#006847'
-  if (index < (FLAG_SLICES / 3) * 2) return '#f3f4f6'
-  return '#ce1126'
-}
-
-function WavingFlag() {
-  return (
-    <span
-      aria-hidden
-      className="hidden sm:inline-flex items-center rounded-[2px] overflow-hidden shadow-sm ring-1 ring-black/10"
-    >
-      {Array.from({ length: FLAG_SLICES }, (_, i) => (
-        <span
-          key={i}
-          className="w-[3px] h-4"
-          style={{
-            backgroundColor: flagSliceColor(i),
-            animation: `flag-ripple 1.6s ease-in-out ${i * 0.12}s infinite`
-          }}
-        />
-      ))}
-    </span>
-  )
-}
-
 function handleSmoothScroll(e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) {
   e.preventDefault()
   // Check if it's an anchor link (starts with #)
@@ -88,10 +59,7 @@ export function Header() {
             }}
             className="text-2xl font-bold text-primary-600"
           >
-            <span className="flex items-center gap-3">
-              <Image width={300} height={500} src="/playaspanish_logowithtext.png" alt="Playa Spanish" />
-              <WavingFlag />
-            </span>
+            <Image width={300} height={500} src="/playaspanish_logowithtext.png" alt="Playa Spanish" />
           </Link>
 
           {/* Desktop Navigation */}

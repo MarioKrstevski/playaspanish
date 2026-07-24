@@ -151,17 +151,6 @@
       clipart-pulse 2s ease-in-out 2.3s infinite;
   }
 
-  /* Flag slices ripple with staggered delays to read as waving */
-  @keyframes flag-ripple {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-2px);
-    }
-  }
-
   /* Yin-yang: barely-perceptible slow rotation */
   @keyframes yinyang-spin {
     from {
