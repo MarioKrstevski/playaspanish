@@ -34,15 +34,15 @@ export default function Home() {
         <Experience />
         <SectionDivider variant="ziggurat" from={colors.experience} to={colors.whySpanish} />
         <WhySpanish />
-        <SectionDivider variant="shikhara" from={colors.whySpanish} to={colors.about} />
+        <SectionDivider variant="shikhara" from={colors.whySpanish} to={colors.about} accent="#6ee7b7" />
         <AboutTeacher />
         <SectionDivider variant="egyptian" from={colors.about} to={colors.journey} />
         <MoonJourney />
         <SectionDivider variant="ziggurat" from={colors.journey} to={colors.pricing} />
         <Pricing />
-        <SectionDivider variant="shikhara" from={colors.pricing} to={colors.reviews} />
+        <SectionDivider variant="shikhara" from={colors.pricing} to={colors.reviews} accent="#fda4af" />
         <Reviews />
-        <SectionDivider variant="egyptian" from={colors.reviews} to={colors.contact} />
+        <SectionDivider variant="egyptian" from={colors.reviews} to={colors.contact} accent="#fca5a5" />
         <ContactForm />
         <SectionDivider variant="ziggurat" from={colors.contact} to={colors.footer} />
       </main>
