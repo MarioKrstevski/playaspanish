@@ -62,8 +62,24 @@ export function MoonJourney() {
   const { ref: stepsRef, isVisible: stepsVisible } = useScrollAnimation()
 
   return (
-    <section id="how-it-works" className="py-24 bg-amber-950 text-amber-50">
-      <div className="container mx-auto px-4">
+    <section id="how-it-works" className="relative py-24 pb-44 bg-amber-950 text-amber-50 overflow-hidden">
+      {/* Kukulkan on the horizon: El Castillo's terraces and temple, in the
+          distance under the moons. Never labeled, just felt. */}
+      <svg
+        aria-hidden
+        viewBox="0 0 1440 150"
+        preserveAspectRatio="xMidYMax meet"
+        className="absolute bottom-0 inset-x-0 w-full h-28 md:h-36 pointer-events-none"
+      >
+        <path
+          d="M420,150 L420,116 L470,116 L470,92 L520,92 L520,68 L570,68 L570,44 L665,44 L665,8 L775,8 L775,44 L870,44 L870,68 L920,68 L920,92 L970,92 L970,116 L1020,116 L1020,150 Z"
+          fill="#78350f"
+          opacity="0.45"
+        />
+        {/* Central staircase, one shade deeper */}
+        <path d="M690,150 L690,44 L750,44 L750,150 Z" fill="#5c2a08" opacity="0.5" />
+      </svg>
+      <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
           className={cn('animate-on-scroll text-center mb-16', titleVisible && 'visible')}

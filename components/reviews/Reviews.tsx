@@ -96,7 +96,7 @@ export function Reviews() {
             What Our Students Say
           </h2>
           <p className="text-xl text-gray-600">
-            Four students, four phases of the same journey
+            Don&apos;t just take our word for it—hear from our students
           </p>
         </div>
 

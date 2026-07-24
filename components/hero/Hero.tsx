@@ -20,8 +20,6 @@ function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
 
 const MOBILE_BREAKPOINT = 768
 
-// The page's chakra descent, previewed as a quiet rail of dots in the hero
-const CHAKRA_COLORS = ['#8b5cf6', '#6366f1', '#0ea5e9', '#10b981', '#f59e0b', '#f97316', '#ef4444']
 
 // Tracks scroll through the hero: `progress` is 0 at the top of the page and
 // 1 once the hero is mostly scrolled past; `y`/`vh` drive the moon's descent.
@@ -135,22 +133,6 @@ export function Hero() {
         </svg>
       </div>
 
-      {/* Chakra rail, left edge: the page's color descent, previewed as seven quiet dots */}
-      <div
-        aria-hidden
-        className="absolute left-8 lg:left-14 top-1/2 -translate-y-1/2 hidden md:block pointer-events-none"
-      >
-        <div className="relative flex flex-col items-center gap-5 py-2">
-          <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-violet-300 via-emerald-300 to-red-300 opacity-40" />
-          {CHAKRA_COLORS.map((color, index) => (
-            <span
-              key={color}
-              className="relative w-2.5 h-2.5 rounded-full"
-              style={{ backgroundColor: color, opacity: index === 0 ? 0.9 : 0.5 }}
-            />
-          ))}
-        </div>
-      </div>
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="w-full md:col-span-2 max-w-4xl mx-auto  text-center">

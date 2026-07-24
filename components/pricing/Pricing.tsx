@@ -13,35 +13,6 @@ function handleContactScroll(e: React.MouseEvent<HTMLButtonElement>) {
   }
 }
 
-const MOON_LIGHT = '#fdba74'
-const MOON_DARK = '#7c2d12'
-
-// A row of lessons drawn as a waxing moon cycle: each lesson a little
-// fuller than the last.
-function LessonMoons({ count }: { count: number }) {
-  return (
-    <div aria-hidden className="flex items-center gap-1.5 flex-wrap">
-      {Array.from({ length: count }, (_, i) => {
-        const fill = ((i + 1) / count) * 100
-        const isFull = i === count - 1
-        return (
-          <span
-            key={i}
-            className="w-3.5 h-3.5 rounded-full"
-            style={{
-              background: isFull
-                ? MOON_LIGHT
-                : `linear-gradient(to left, ${MOON_LIGHT} ${fill}%, ${MOON_DARK} ${fill}%)`,
-              border: '1px solid #ea580c',
-              boxShadow: isFull ? '0 0 8px 1px rgba(253, 186, 116, 0.8)' : 'none'
-            }}
-          />
-        )
-      })}
-    </div>
-  )
-}
-
 // Laid out as an ascending staircase: new students enter on the lower
 // steps, everyone arrives at the same $30 summit. The 10-lesson step is
 // the recommended entrance; the summit is the anchor.
@@ -53,8 +24,6 @@ const steps = [
     price: '$28',
     unit: 'per lesson · $280 upfront',
     tagline: 'The full first climb',
-    moons: 10,
-    moonCaption: 'Ten lessons — watch it wax to full',
     features: [
       'Save $20 on your first ten lessons',
       'Schedule them whenever you like',
@@ -71,8 +40,6 @@ const steps = [
     price: '$29',
     unit: 'per lesson · $145 upfront',
     tagline: 'A gentle start',
-    moons: 5,
-    moonCaption: 'Five lessons to find your footing',
     features: [
       'Save $5 on your first five lessons',
       'Schedule them whenever you like',
@@ -89,8 +56,6 @@ const steps = [
     price: '$30',
     unit: 'per lesson · pay as you go',
     tagline: 'The rhythm — where everyone arrives',
-    moons: 0,
-    moonCaption: null,
     features: [
       'Pay per class or per month, as you like',
       'Lessons at your own pace, no expiry',
@@ -169,26 +134,6 @@ export function Pricing() {
                   <span className="text-5xl font-bold text-gray-900">{step.price}</span>
                   <span className="block text-sm text-gray-500 mt-1">{step.unit}</span>
                 </div>
-
-                {step.moons > 0 && step.moonCaption ? (
-                  <div className="mb-6">
-                    <LessonMoons count={step.moons} />
-                    <p className="text-xs text-gray-400 mt-2">{step.moonCaption}</p>
-                  </div>
-                ) : (
-                  <div className="mb-6 flex items-center gap-3">
-                    <span
-                      aria-hidden
-                      className="w-5 h-5 rounded-full"
-                      style={{
-                        background: MOON_LIGHT,
-                        border: '1px solid #ea580c',
-                        boxShadow: '0 0 10px 2px rgba(253, 186, 116, 0.8)'
-                      }}
-                    />
-                    <p className="text-xs text-gray-400">Full moon — full value, every lesson</p>
-                  </div>
-                )}
 
                 <ul className="space-y-3 mt-auto">
                   {step.features.map((feature) => (

@@ -9,6 +9,7 @@ import { Reviews } from '@/components/reviews/Reviews'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { Footer } from '@/components/footer/Footer'
 import { SectionDivider } from '@/components/dividers/SectionDivider'
+import { ChakraRail } from '@/components/chakra-rail/ChakraRail'
 
 // Section background colors, descending through the chakra scale:
 // violet (crown) → indigo → blue → green → gold → orange → rose → red (root)
@@ -28,6 +29,7 @@ export default function Home() {
   return (
     <>
       <Header />
+      <ChakraRail />
       <main>
         <Hero />
         <SectionDivider variant="egyptian" from={colors.heroBottom} to={colors.experience} />
