@@ -13,45 +13,51 @@ function handleContactScroll(e: React.MouseEvent<HTMLButtonElement>) {
   }
 }
 
-const tiers = [
+// Laid out as an ascending staircase: new students enter on the lower
+// steps, everyone arrives at the same $30 summit. Order matters.
+const steps = [
   {
-    name: 'The Lesson',
-    price: '$30',
-    unit: 'per 45-min lesson',
-    tagline: 'The one true price',
-    features: [
-      'Pay as you go — per class or per month',
-      'Schedule lessons at your own pace',
-      'No commitment, no expiry',
-      'Same price for as long as you learn'
-    ],
-    highlighted: false
-  },
-  {
-    name: 'New Student · 5 Lessons',
-    price: '$29',
-    unit: 'per lesson · $145 upfront',
-    tagline: 'A gentle start',
-    features: [
-      'For first-time students only',
-      'Save $5 on your first five lessons',
-      'Schedule them whenever you like',
-      '50% money-back if it is not for you'
-    ],
-    highlighted: false
-  },
-  {
-    name: 'New Student · 10 Lessons',
+    label: 'New students',
+    name: '10 Lessons',
     price: '$28',
     unit: 'per lesson · $280 upfront',
     tagline: 'The full first climb',
     features: [
-      'For first-time students only',
       'Save $20 on your first ten lessons',
       'Schedule them whenever you like',
       '50% money-back if it is not for you'
     ],
-    highlighted: true
+    // Tallest top margin = lowest step
+    offset: 'md:mt-32',
+    summit: false
+  },
+  {
+    label: 'New students',
+    name: '5 Lessons',
+    price: '$29',
+    unit: 'per lesson · $145 upfront',
+    tagline: 'A gentle start',
+    features: [
+      'Save $5 on your first five lessons',
+      'Schedule them whenever you like',
+      '50% money-back if it is not for you'
+    ],
+    offset: 'md:mt-16',
+    summit: false
+  },
+  {
+    label: 'Everyone',
+    name: 'The Lesson',
+    price: '$30',
+    unit: 'per 45-min lesson',
+    tagline: 'The rhythm — where everyone arrives',
+    features: [
+      'Pay as you go — per class or per month',
+      'Lessons at your own pace, no expiry',
+      'Same price for as long as you learn'
+    ],
+    offset: 'mt-0',
+    summit: true
   }
 ]
 
@@ -65,50 +71,54 @@ export function Pricing() {
       <div className="container mx-auto px-4">
         <div
           ref={titleRef}
-          className={cn('animate-on-scroll text-center mb-6', titleVisible && 'visible')}
+          className={cn('animate-on-scroll text-center mb-4', titleVisible && 'visible')}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             One price, one path
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            A lesson is $30 — that never changes. New students get a warmer welcome for their
-            first lessons, then everyone walks the same path.
+          <p className="text-2xl text-gray-800 max-w-2xl mx-auto">
+            A lesson is <span className="font-bold text-orange-600">$30</span>. That never changes.
+          </p>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-3">
+            New students climb in from a lower step — then everyone learns at the same summit.
           </p>
         </div>
 
+        {/* The staircase: bottom-aligned cards with stepped tops */}
         <div
           ref={cardsRef}
           className={cn(
-            'animate-on-scroll grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-12 items-end',
+            'animate-on-scroll grid md:grid-cols-3 gap-6 md:gap-0 max-w-5xl mx-auto mt-14 items-stretch',
             cardsVisible && 'visible'
           )}
         >
-          {tiers.map((tier) => (
-            <div key={tier.name} className="relative">
-              {/* Pyramid apex on each card */}
-              <div
-                aria-hidden
-                className={cn(
-                  'mx-auto w-10 h-5 [clip-path:polygon(50%_0,100%_100%,0_100%)]',
-                  tier.highlighted ? 'bg-orange-500' : 'bg-white'
-                )}
-              />
+          {steps.map((step, index) => (
+            <div key={step.name} className={cn('flex flex-col', step.offset)}>
               <div
                 className={cn(
-                  'bg-white rounded-b-lg rounded-t-sm p-8 shadow-sm border border-orange-100 flex flex-col',
-                  tier.highlighted && 'ring-2 ring-orange-400 shadow-lg'
+                  'flex flex-col flex-1 p-8 bg-white border border-orange-100 shadow-sm',
+                  'rounded-lg md:rounded-none',
+                  index === 0 && 'md:rounded-l-lg',
+                  step.summit &&
+                    'md:rounded-tr-lg md:rounded-br-lg bg-gradient-to-b from-orange-100 to-white ring-1 ring-orange-300 shadow-md'
                 )}
               >
-                <p className="text-sm uppercase tracking-widest text-orange-600 mb-1">
-                  {tier.tagline}
+                <p
+                  className={cn(
+                    'text-xs uppercase tracking-[0.2em] mb-1',
+                    step.summit ? 'text-orange-700 font-semibold' : 'text-orange-500'
+                  )}
+                >
+                  {step.label}
                 </p>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{tier.name}</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-1">{step.name}</h3>
+                <p className="text-sm text-gray-500 mb-5">{step.tagline}</p>
                 <div className="mb-6">
-                  <span className="text-5xl font-bold text-gray-900">{tier.price}</span>
-                  <span className="block text-sm text-gray-500 mt-1">{tier.unit}</span>
+                  <span className="text-5xl font-bold text-gray-900">{step.price}</span>
+                  <span className="block text-sm text-gray-500 mt-1">{step.unit}</span>
                 </div>
-                <ul className="space-y-3 mb-2">
-                  {tier.features.map((feature) => (
+                <ul className="space-y-3 mt-auto">
+                  {step.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
                       <Check className="h-5 w-5 text-orange-600 mt-0.5 flex-shrink-0" />
                       <span className="text-gray-700 text-sm">{feature}</span>
@@ -121,9 +131,9 @@ export function Pricing() {
         </div>
 
         <p className="text-center text-gray-600 max-w-2xl mx-auto mt-10">
-          Starter packs are paid upfront and yours to schedule freely. After your pack, lessons
-          continue at $30 — and if a pack truly isn&apos;t for you, half your money comes back.
-          No questions, no hard feelings.
+          Starter steps are for first-time students, paid upfront and yours to schedule freely.
+          If a pack truly isn&apos;t for you, half your money comes back — no questions, no hard
+          feelings.
         </p>
 
         {/* Custom professional courses */}
