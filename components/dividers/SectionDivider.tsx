@@ -10,22 +10,22 @@ interface SectionDividerProps {
 
 const paths: Record<SectionDividerProps['variant'], string> = {
   // One wide smooth triangle rising into the section above
-  egyptian: 'M0,64 L720,0 L1440,64 Z',
-  // Symmetric steps climbing to a flat top
+  egyptian: 'M0,120 L720,0 L1440,120 Z',
+  // Symmetric stairs climbing to a flat top: four tall steps up, four down
   ziggurat:
-    'M0,64 L240,64 L240,48 L480,48 L480,32 L600,32 L600,16 L840,16 L840,32 L960,32 L960,48 L1200,48 L1200,64 L1440,64 Z',
+    'M0,120 L180,120 L180,90 L400,90 L400,60 L560,60 L560,30 L660,30 L660,0 L780,0 L780,30 L880,30 L880,60 L1040,60 L1040,90 L1260,90 L1260,120 L1440,120 Z',
   // Layered spire: a tall center peak flanked by two lower peaks
   shikhara:
-    'M0,64 L360,64 L520,24 L600,40 L720,0 L840,40 L920,24 L1080,64 L1440,64 Z'
+    'M0,120 L340,120 L500,45 L590,75 L720,0 L850,75 L940,45 L1100,120 L1440,120 Z'
 }
 
 export function SectionDivider({ variant, from, to }: SectionDividerProps) {
   return (
     <div aria-hidden style={{ backgroundColor: from }} className="leading-[0]">
       <svg
-        viewBox="0 0 1440 64"
+        viewBox="0 0 1440 120"
         preserveAspectRatio="none"
-        className="block w-full h-10 md:h-16"
+        className="block w-full h-14 md:h-24"
       >
         <path d={paths[variant]} fill={to} />
       </svg>
