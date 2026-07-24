@@ -23,18 +23,27 @@ const MOBILE_BREAKPOINT = 768
 // The page's chakra descent, previewed as a quiet rail of dots in the hero
 const CHAKRA_COLORS = ['#8b5cf6', '#6366f1', '#0ea5e9', '#10b981', '#f59e0b', '#f97316', '#ef4444']
 
-// 0 at the top of the page, 1 once the hero is mostly scrolled past
+// Tracks scroll through the hero: `progress` is 0 at the top of the page and
+// 1 once the hero is mostly scrolled past; `y`/`vh` drive the moon's descent.
 function useHeroScrollProgress() {
-  const [progress, setProgress] = useState(0)
+  const [state, setState] = useState({ progress: 0, y: 0, vh: 0 })
   useEffect(() => {
     const onScroll = () => {
-      setProgress(Math.min(window.scrollY / (window.innerHeight * 0.8), 1))
+      setState({
+        progress: Math.min(window.scrollY / (window.innerHeight * 0.8), 1),
+        y: window.scrollY,
+        vh: window.innerHeight
+      })
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
-  return progress
+  return state
 }
 
 function useCircleRadius() {
@@ -58,7 +67,11 @@ function useCircleRadius() {
 }
 
 export function Hero() {
-  const scrollProgress = useHeroScrollProgress()
+  const { progress: scrollProgress, y: scrollY, vh: viewportHeight } = useHeroScrollProgress()
+  // Follow the viewport (counter the page scroll) until landing ~150px above
+  // the hero's bottom edge, then stay and exit with the section.
+  const moonLanding = Math.max(viewportHeight - 96 - 88 - 150, 0)
+  const moonY = Math.min(scrollY, moonLanding)
   const cursorRevealRef = useRef<HTMLDivElement>(null)
   const [cursorReveal, setCursorReveal] = useState({ x: 0, y: 0, isHovering: false })
   const { radius: circleRadius, isMobile } = useCircleRadius()
@@ -109,10 +122,7 @@ export function Hero() {
       <div
         aria-hidden
         className="absolute top-24 right-[10%] pointer-events-none hidden sm:block"
-        style={{
-          transform: `translateY(${scrollProgress * 260}px)`,
-          opacity: 1 - scrollProgress * 0.4
-        }}
+        style={{ transform: `translateY(${moonY}px)` }}
       >
         <svg width="88" height="88" viewBox="0 0 100 100">
           <defs>
