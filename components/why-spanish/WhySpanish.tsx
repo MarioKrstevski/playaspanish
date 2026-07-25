@@ -69,11 +69,14 @@ export function WhySpanish() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Left: the numbers */}
           <div
             ref={statsRef}
-            className={cn('animate-slide-left grid grid-cols-2 gap-6', statsVisible && 'visible')}
+            className={cn(
+              'animate-slide-left grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 gap-6',
+              statsVisible && 'visible'
+            )}
           >
             {stats.map((stat) => (
               <div
