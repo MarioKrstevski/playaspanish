@@ -87,7 +87,13 @@ export function Hero() {
   const maskRadius = circleRadius - 2
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden bg-[#462a7e]">
+    <section
+      id="hero"
+      // md+: hero height hugs the image (width/2.357 aspect) plus ~230px of
+      // sky for the header and headline, capped at the viewport height. This
+      // kills the dead purple gap on mid-size screens.
+      className="relative min-h-screen md:min-h-[min(100vh,calc(100vw/2.357+230px))] flex items-center pt-20 pb-16 overflow-hidden bg-[#462a7e]"
+    >
       {/* Dream-beach scene pinned to the bottom at natural proportions, never
           cropped or stretched: landscape composition on md+, purpose-made
           portrait recomposition on mobile. The section background is the
