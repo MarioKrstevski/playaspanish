@@ -92,17 +92,21 @@ export function Hero() {
           element is ever cropped as the viewport narrows. The section
           background is the image's own sky color (#8879d6, sampled), and the
           image top fades into it, so the sky simply extends upward. */}
+      {/* Full scene, never cropped: natural proportions on md+ (as on big
+          screens), and on mobile it stretches vertically to 60% of the section
+          so it does not end up as a tiny strip */}
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-[80%] pointer-events-none select-none"
+        className="absolute inset-x-0 bottom-0 h-[60%] md:h-auto pointer-events-none select-none"
       >
         <Image
           src="/images/hero-dream-desk.jpg"
           alt=""
-          fill
+          width={1584}
+          height={672}
           priority
           sizes="100vw"
-          className="object-cover object-[28%_100%] md:object-[center_100%]"
+          className="w-full h-full object-fill md:h-auto"
         />
         <div
           className="absolute inset-x-0 top-0 h-28"
