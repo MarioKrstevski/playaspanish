@@ -109,6 +109,17 @@ export function Hero() {
         }}
       />
 
+      {/* Soft radial scrim behind the text block: quiets the moon and its
+          reflection right where the copy sits, invisible at the edges */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[75%] pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 52% 46% at 50% 48%, rgba(245, 243, 255, 0.8) 0%, rgba(245, 243, 255, 0.45) 52%, transparent 74%)'
+        }}
+      />
+
       <div className="container mx-auto px-4 relative">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="w-full md:col-span-2 max-w-4xl mx-auto  text-center">
