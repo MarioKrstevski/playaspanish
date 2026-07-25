@@ -45,15 +45,6 @@ export function ChakraRail() {
       className="fixed left-1 md:left-6 xl:left-10 top-1/2 -translate-y-1/2 z-40 scale-75 md:scale-100 origin-left"
     >
       <div className="relative flex flex-col items-center gap-5 px-2 py-3">
-        {/* Soft feathered glow behind the dots: no edges, just lift from the background */}
-        <div
-          aria-hidden
-          className="absolute -inset-5 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 55%, transparent 80%)'
-          }}
-        />
         <div className="absolute inset-y-3 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-violet-300 via-emerald-300 to-red-300 opacity-40" />
         {/* Traveling halo: slides to the active dot, adopts its color */}
         <div
@@ -82,7 +73,10 @@ export function ChakraRail() {
             className="relative w-2.5 h-2.5 rounded-full transition-all duration-300"
             style={{
               backgroundColor: section.color,
-              opacity: index === activeIndex ? 1 : 0.4,
+              // White ring reads on dark sections, soft dark shadow on light ones
+              boxShadow:
+                '0 0 0 1.5px rgba(255, 255, 255, 0.9), 0 1px 3px rgba(0, 0, 0, 0.3)',
+              opacity: index === activeIndex ? 1 : 0.75,
               transform: index === activeIndex ? 'scale(1.15)' : 'scale(1)'
             }}
           />
