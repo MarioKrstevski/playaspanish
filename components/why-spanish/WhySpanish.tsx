@@ -43,7 +43,7 @@ export function WhySpanish() {
         aria-hidden
         fill
         sizes="100vw"
-        className="hidden lg:block object-cover object-center pointer-events-none select-none mix-blend-multiply"
+        className="hidden lg:block object-cover object-[center_35%] pointer-events-none select-none mix-blend-multiply"
       />
       <div className="container mx-auto px-4 relative">
         <div
