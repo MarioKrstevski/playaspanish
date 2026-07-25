@@ -45,7 +45,7 @@ export function Footer() {
           {/* Quick Links */}
           <div>
             <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <ul className="grid grid-cols-2 gap-x-8 gap-y-2">
               {navLinks.map((link) => {
                 if (link.href.startsWith('#')) {
                   return (

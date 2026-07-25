@@ -84,7 +84,7 @@ export function Reviews() {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
-    <section id="reviews" className="relative py-24 bg-rose-50 overflow-hidden">
+    <section id="reviews" className="relative pt-24 pb-10 bg-rose-50 overflow-hidden">
       {/* A large quiet quote mark, bottom-left */}
       <QuoteCorner className="hidden lg:block absolute -bottom-24 left-6 text-[240px] pointer-events-none" />
       <div className="container mx-auto px-4 relative">

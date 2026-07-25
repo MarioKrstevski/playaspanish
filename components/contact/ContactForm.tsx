@@ -11,7 +11,7 @@ export function ContactForm() {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
-    <section id="contact" className="py-24 bg-red-50">
+    <section id="contact" className="pt-12 pb-24 bg-red-50">
       <div className="container mx-auto px-4">
         <div
           ref={ref}

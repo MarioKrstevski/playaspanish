@@ -1,0 +1,125 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { cn } from '@/lib/utils'
+
+type ChatMessage = {
+  text: string
+  side: 'sent' | 'received'
+}
+
+const messages: ChatMessage[] = [
+  { text: 'Hola Ana! Como estas?', side: 'sent' },
+  { text: 'Muy bien!! Y tu? 😄', side: 'received' },
+  { text: 'Bien bien... today fue mi first clase de español', side: 'sent' },
+  { text: 'No way, en serio?? Que aprendiste?', side: 'received' },
+  { text: 'Un poco de everything jaja, me gusta mucho', side: 'sent' },
+  { text: 'Jaja ya hablas como local 🌮', side: 'received' }
+]
+
+// How long the typing dots show before a message appears
+const TYPING_MS = 1000
+// Pause after a message lands before the next person starts typing
+const READ_MS = 1400
+// Small beat before the very first message of a cycle
+const FIRST_DELAY_MS = 500
+// Pause on the finished conversation before it resets and loops
+const LOOP_PAUSE_MS = 4000
+
+function TypingDots({ side }: { side: ChatMessage['side'] }) {
+  return (
+    <div
+      className={cn(
+        'flex items-center gap-1 rounded-2xl px-3.5 py-2.5 w-fit',
+        side === 'sent'
+          ? 'self-end bg-sky-500 rounded-br-md'
+          : 'self-start bg-white shadow-sm rounded-bl-md'
+      )}
+    >
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className={cn(
+            'w-1.5 h-1.5 rounded-full animate-bounce',
+            side === 'sent' ? 'bg-white/80' : 'bg-gray-400'
+          )}
+          style={{ animationDelay: `${i * 150}ms` }}
+        />
+      ))}
+    </div>
+  )
+}
+
+function Bubble({ message }: { message: ChatMessage }) {
+  return (
+    <div
+      className={cn(
+        'max-w-[85%] rounded-2xl px-3.5 py-2 text-sm leading-snug w-fit',
+        message.side === 'sent'
+          ? 'self-end bg-sky-500 text-white rounded-br-md'
+          : 'self-start bg-white text-gray-700 shadow-sm rounded-bl-md'
+      )}
+    >
+      {message.text}
+    </div>
+  )
+}
+
+export function ChatMock({ className }: { className?: string }) {
+  const [visibleCount, setVisibleCount] = useState(0)
+  const [isTyping, setIsTyping] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReducedMotion(query.matches)
+    const onChange = (event: MediaQueryListEvent) => setReducedMotion(event.matches)
+    query.addEventListener('change', onChange)
+    return () => query.removeEventListener('change', onChange)
+  }, [])
+
+  useEffect(() => {
+    if (reducedMotion) return
+
+    let timeout: ReturnType<typeof setTimeout>
+    if (isTyping) {
+      // Typing dots have been showing, reveal the next message
+      timeout = setTimeout(() => {
+        setIsTyping(false)
+        setVisibleCount((count) => count + 1)
+      }, TYPING_MS)
+    } else if (visibleCount < messages.length) {
+      // Wait a beat, then the next person starts typing
+      timeout = setTimeout(
+        () => setIsTyping(true),
+        visibleCount === 0 ? FIRST_DELAY_MS : READ_MS
+      )
+    } else {
+      // Conversation finished, pause and start over
+      timeout = setTimeout(() => setVisibleCount(0), LOOP_PAUSE_MS)
+    }
+    return () => clearTimeout(timeout)
+  }, [isTyping, visibleCount, reducedMotion])
+
+  const shown = reducedMotion ? messages : messages.slice(0, visibleCount)
+  const typingSide = !reducedMotion && isTyping ? messages[visibleCount]?.side : undefined
+
+  return (
+    <div
+      aria-hidden
+      className={cn(
+        'hidden lg:block w-[280px] pointer-events-none select-none',
+        'rounded-3xl bg-white/40 p-4',
+        className
+      )}
+    >
+      {/* Fixed height so the loop reset never shifts layout */}
+      <div className="flex flex-col justify-end gap-2 h-[380px] overflow-hidden">
+        {shown.map((message, index) => (
+          <Bubble key={index} message={message} />
+        ))}
+        {typingSide && <TypingDots side={typingSide} />}
+      </div>
+    </div>
+  )
+}

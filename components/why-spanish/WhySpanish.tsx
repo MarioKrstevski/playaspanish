@@ -3,6 +3,7 @@
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { ChatMock } from './ChatMock'
 
 const stats = [
   { value: '600M+', label: 'speakers worldwide' },
@@ -52,6 +53,8 @@ export function WhySpanish() {
         className="hidden lg:block absolute inset-x-0 bottom-0 h-44 pointer-events-none"
         style={{ background: 'linear-gradient(to bottom, rgba(240, 249, 255, 0), #f0f9ff 90%)' }}
       />
+      {/* Decorative texting loop, peeking out from behind the content on the right */}
+      <ChatMock className="absolute -right-6 top-1/2 -translate-y-1/2 opacity-85" />
       <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
