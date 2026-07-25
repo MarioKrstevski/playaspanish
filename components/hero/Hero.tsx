@@ -20,6 +20,23 @@ function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
 
 const MOBILE_BREAKPOINT = 768
 
+// Desktop hero image height: 100% of the section at >=1300px wide, easing
+// down linearly to 73% at the md breakpoint (below which the mobile portrait
+// image takes over). Bottom-anchored, so the sky above shrinks, not the scene.
+function useHeroImageHeight() {
+  const [pct, setPct] = useState(100)
+  useEffect(() => {
+    const update = () => {
+      const t = Math.min(Math.max((window.innerWidth - MOBILE_BREAKPOINT) / (1300 - MOBILE_BREAKPOINT), 0), 1)
+      setPct(73 + 27 * t)
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+  return pct
+}
+
 
 function useCircleRadius() {
   const [state, setState] = useState(() => ({
@@ -42,6 +59,7 @@ function useCircleRadius() {
 }
 
 export function Hero() {
+  const imageHeightPct = useHeroImageHeight()
   const cursorRevealRef = useRef<HTMLDivElement>(null)
   const [cursorReveal, setCursorReveal] = useState({ x: 0, y: 0, isHovering: false })
   const { radius: circleRadius, isMobile } = useCircleRadius()
@@ -89,42 +107,47 @@ export function Hero() {
   return (
     <section
       id="hero"
-      // md+: hero height hugs the image (width/2.357 aspect) plus ~230px of
-      // sky for the header and headline, capped at the viewport height. This
-      // kills the dead purple gap on mid-size screens.
-      className="relative min-h-screen md:min-h-[min(100vh,calc(100vw/2.357+230px))] flex items-center pt-20 pb-16 overflow-hidden bg-[#462a7e]"
+      className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden bg-[#462a7e]"
     >
-      {/* Dream-beach scene pinned to the bottom at natural proportions, never
-          cropped or stretched: landscape composition on md+, purpose-made
-          portrait recomposition on mobile. The section background is the
-          image's sampled sky color (#462a7e) and the image top fades into it,
-          so the sky simply extends upward. */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 pointer-events-none select-none"
-      >
-        <Image
-          src="/images/hero-dream-beach-mobile.jpg"
-          alt=""
-          width={768}
-          height={1376}
-          priority
-          sizes="100vw"
-          className="w-full h-auto md:hidden"
-        />
-        <Image
-          src="/images/hero-dream-beach.jpg"
-          alt=""
-          width={1584}
-          height={672}
-          priority
-          sizes="100vw"
-          className="w-full h-auto hidden md:block"
-        />
+      {/* Dream-beach scene covering the full hero, anchored to the bottom so
+          the ground scene always shows; the sky crops from the top/sides as
+          needed. Landscape composition on md+, portrait recomposition on
+          mobile. The top blend into the section color hides any crop seam. */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
+        {/* Mobile: portrait recomposition covering the full hero */}
+        <div className="md:hidden absolute inset-0">
+          <Image
+            src="/images/hero-dream-beach-mobile.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-bottom"
+          />
+          <div
+            className="absolute inset-x-0 top-0 h-36"
+            style={{ background: 'linear-gradient(to bottom, #462a7e, rgba(70, 42, 126, 0))' }}
+          />
+        </div>
+        {/* Desktop: bottom-anchored wrapper whose height eases 100% -> 73%
+            as the viewport narrows from 1300px to md */}
         <div
-          className="absolute inset-x-0 top-0 h-36 md:h-28"
-          style={{ background: 'linear-gradient(to bottom, #462a7e, rgba(70, 42, 126, 0))' }}
-        />
+          className="hidden md:block absolute inset-x-0 bottom-0"
+          style={{ height: `${imageHeightPct}%` }}
+        >
+          <Image
+            src="/images/hero-dream-beach.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-fill"
+          />
+          <div
+            className="absolute inset-x-0 top-0 h-28"
+            style={{ background: 'linear-gradient(to bottom, #462a7e, rgba(70, 42, 126, 0))' }}
+          />
+        </div>
       </div>
 
       <div className="container mx-auto px-4 relative">
