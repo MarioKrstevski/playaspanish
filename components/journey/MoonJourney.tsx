@@ -2,7 +2,6 @@
 
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { cn } from '@/lib/utils'
-import { PyramidCorner, StarsCorner } from '@/components/decor/CornerArt'
 
 const MOON_LIGHT = '#fde68a'
 const MOON_DARK = '#451a03'
@@ -63,11 +62,8 @@ export function MoonJourney() {
   const { ref: stepsRef, isVisible: stepsVisible } = useScrollAnimation()
 
   return (
-    <section id="how-it-works" className="relative py-24 bg-amber-950 text-amber-50 overflow-hidden">
-      {/* Distant pyramid bottom-left, stars bottom-right */}
-      <PyramidCorner className="hidden lg:block absolute bottom-0 left-0 w-64 pointer-events-none" />
-      <StarsCorner className="hidden lg:block absolute bottom-6 right-6 w-64 pointer-events-none" />
-      <div className="container mx-auto px-4 relative">
+    <section id="how-it-works" className="py-24 bg-amber-950 text-amber-50">
+      <div className="container mx-auto px-4">
         <div
           ref={titleRef}
           className={cn('animate-on-scroll text-center mb-16', titleVisible && 'visible')}
