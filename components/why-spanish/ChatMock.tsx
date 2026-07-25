@@ -91,9 +91,11 @@ function Bubble({ message }: { message: ChatMessage }) {
 }
 
 export function ChatMock({ className }: { className?: string }) {
+  const [convoIndex, setConvoIndex] = useState(0)
   const [visibleCount, setVisibleCount] = useState(0)
   const [isTyping, setIsTyping] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
+  const messages = conversations[convoIndex]
 
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -120,13 +122,16 @@ export function ChatMock({ className }: { className?: string }) {
         visibleCount === 0 ? FIRST_DELAY_MS : READ_MS
       )
     } else {
-      // Conversation finished, pause and start over
-      timeout = setTimeout(() => setVisibleCount(0), LOOP_PAUSE_MS)
+      // Conversation finished: pause, then start the next one
+      timeout = setTimeout(() => {
+        setVisibleCount(0)
+        setConvoIndex((index) => (index + 1) % conversations.length)
+      }, LOOP_PAUSE_MS)
     }
     return () => clearTimeout(timeout)
-  }, [isTyping, visibleCount, reducedMotion])
+  }, [isTyping, visibleCount, reducedMotion, messages.length])
 
-  const shown = reducedMotion ? messages : messages.slice(0, visibleCount)
+  const shown = reducedMotion ? conversations[0] : messages.slice(0, visibleCount)
   const typingSide = !reducedMotion && isTyping ? messages[visibleCount]?.side : undefined
 
   return (
