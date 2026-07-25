@@ -63,7 +63,7 @@ export function AboutTeacher() {
             style={{ transitionDelay: '200ms' }}
           >
             <div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              <h3 className="text-3xl font-bold text-gray-900 mb-4 text-center md:text-left">
                 Hi, nice to meet you. I&apos;m
                 <span className="block mt-1 whitespace-nowrap [font-family:var(--font-caveat)] text-4xl sm:text-5xl text-emerald-700">
                   Angelica Torres
