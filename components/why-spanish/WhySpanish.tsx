@@ -44,7 +44,15 @@ export function WhySpanish() {
         aria-hidden
         fill
         sizes="100vw"
-        className="hidden lg:block object-cover object-[center_35%] pointer-events-none select-none opacity-70"
+        className="hidden lg:block object-cover object-[center_35%] pointer-events-none select-none"
+        style={{ filter: 'brightness(0.85) contrast(1.4) saturate(1.6)' }}
+      />
+      {/* Fade the deepened map in from the section color at the top so the
+          divider hand-off stays seamless */}
+      <div
+        aria-hidden
+        className="hidden lg:block absolute inset-x-0 top-0 h-32 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, #f0f9ff, rgba(240, 249, 255, 0))' }}
       />
       {/* Fade the map out before the section ends so it hands off cleanly
           to the divider below */}
