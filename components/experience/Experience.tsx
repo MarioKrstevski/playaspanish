@@ -70,7 +70,8 @@ export function Experience() {
               <span className="text-sm uppercase tracking-[0.3em] text-indigo-300 [writing-mode:vertical-rl] rotate-180">
                 Idioma
               </span>
-              <YinYang size={220} light="#e0e7ff" dark="#312e81" />
+              <YinYang size={140} light="#e0e7ff" dark="#312e81" className="md:hidden" />
+              <YinYang size={220} light="#e0e7ff" dark="#312e81" className="hidden md:block" />
               <span className="text-sm uppercase tracking-[0.3em] text-indigo-300 [writing-mode:vertical-rl]">
                 Cultura
               </span>

@@ -98,22 +98,24 @@ export function MoonJourney() {
                 {index < steps.length - 1 && (
                   <svg
                     aria-hidden
-                    viewBox="0 0 60 84"
+                    viewBox="0 0 100 84"
                     fill="none"
-                    className={`md:hidden w-10 h-16 mx-auto ${index % 2 === 1 ? '-scale-x-100' : ''}`}
+                    className="md:hidden w-24 h-20 ml-6"
                   >
+                    {/* Sweeps down the left side, then hooks right toward the
+                        next step's moon */}
                     <path
-                      d="M30 4 C 52 26, 8 48, 30 72"
+                      d="M22 4 C 8 28, 12 54, 48 66"
                       stroke="white"
-                      strokeOpacity="0.55"
-                      strokeWidth="2"
+                      strokeOpacity="0.6"
+                      strokeWidth="2.5"
                       strokeLinecap="round"
                     />
                     <path
-                      d="M23 66 L30 76 L37 66"
+                      d="M39 55 L50 66 L37 73"
                       stroke="white"
-                      strokeOpacity="0.55"
-                      strokeWidth="2"
+                      strokeOpacity="0.6"
+                      strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
