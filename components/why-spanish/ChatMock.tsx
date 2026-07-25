@@ -8,13 +8,38 @@ type ChatMessage = {
   side: 'sent' | 'received'
 }
 
-const messages: ChatMessage[] = [
-  { text: 'Hola Ana! Como estas?', side: 'sent' },
-  { text: 'Muy bien!! Y tu? 😄', side: 'received' },
-  { text: 'Bien bien... today fue mi first clase de español', side: 'sent' },
-  { text: 'No way, en serio?? Que aprendiste?', side: 'received' },
-  { text: 'Un poco de everything jaja, me gusta mucho', side: 'sent' },
-  { text: 'Jaja ya hablas como local 🌮', side: 'received' }
+// Three beginner-Spanglish conversations; each loop plays the next one.
+const conversations: ChatMessage[][] = [
+  [
+    { text: 'Hola Ana! Como estas?', side: 'sent' },
+    { text: 'Muy bien!! Y tu? 😄', side: 'received' },
+    { text: 'Bien bien... today fue mi first clase de español', side: 'sent' },
+    { text: 'No way, en serio?? Que aprendiste?', side: 'received' },
+    { text: 'Un poco de everything jaja, me gusta mucho', side: 'sent' },
+    { text: 'Que bueno! Ya puedes ordenar tacos solo 😎', side: 'received' },
+    { text: 'Claro que si... bueno, casi jaja', side: 'sent' },
+    { text: 'Jaja ya hablas como local 🌮', side: 'received' }
+  ],
+  [
+    { text: 'Amiga! Llegué a Playa del Carmen 🏖️', side: 'sent' },
+    { text: 'Nooo que envidia! Como esta el weather?', side: 'received' },
+    { text: 'Muy caliente jaja, hace mucho sol', side: 'sent' },
+    { text: 'Ya hablaste español con alguien?', side: 'received' },
+    { text: 'Si!! Pedí un café completamente en español', side: 'sent' },
+    { text: 'Orgullosa de ti!! 👏', side: 'received' },
+    { text: 'La señora me entendió y todo jaja', side: 'sent' },
+    { text: 'Ves? Tu puedes! 💪', side: 'received' }
+  ],
+  [
+    { text: 'Lista para la clase de mañana?', side: 'received' },
+    { text: 'Si! Pero estoy un poco nervous jaja', side: 'sent' },
+    { text: 'Tranquila, tu teacher es super paciente', side: 'received' },
+    { text: 'Ok ok... como se dice "homework" otra vez?', side: 'sent' },
+    { text: 'Tarea 😅', side: 'received' },
+    { text: 'Ah si!! Ya hice mi tarea entonces 🎉', side: 'sent' },
+    { text: 'Jaja perfecto, ya estas ready', side: 'received' },
+    { text: 'Gracias! Nos vemos mañana 👋', side: 'sent' }
+  ]
 ]
 
 // How long the typing dots show before a message appears

@@ -1,5 +1,6 @@
 'use client'
 
+import { Fragment } from 'react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { Button } from '@/components/ui/button'
 import { Briefcase, Check, Mic, Scale, Stethoscope } from 'lucide-react'
@@ -99,8 +100,31 @@ const floatingWords = [
     text: '¡Órale!',
     className: '-bottom-7 -right-6 text-sm text-orange-400/40 -rotate-6',
     animation: 'clipart-sway 5.5s ease-in-out 3s infinite'
+  },
+  {
+    text: '¡Empecemos!',
+    className: 'top-8 -left-8 text-lg text-orange-400/50 rotate-3',
+    animation: 'clipart-float 4.2s ease-in-out 0.3s infinite'
+  },
+  {
+    text: '¡Dale!',
+    className: 'top-10 -right-8 text-xl text-orange-300/60 -rotate-6',
+    animation: 'clipart-sway 4.8s ease-in-out 0.9s infinite'
+  },
+  {
+    text: '¡Hoy es el día!',
+    className: '-bottom-12 left-16 text-base text-orange-400/40 -rotate-2',
+    animation: 'clipart-float 5s ease-in-out 1.5s infinite'
+  },
+  {
+    text: '¡A darle!',
+    className: '-bottom-11 right-24 text-sm text-orange-300/50 rotate-6',
+    animation: 'clipart-sway 5.2s ease-in-out 2.1s infinite'
   }
 ]
+
+// On mobile the cards stack; these fill the gaps between them.
+const mobileWords = ['¡Vamos, tú puedes!', '¡Empieza hoy!']
 
 // Profession icons tucked behind the custom-course card, peeking past its edges.
 const professionIcons = [
@@ -172,7 +196,8 @@ export function Pricing() {
             )}
           >
             {steps.map((step, index) => (
-              <div key={step.name} className={cn('relative flex flex-col', step.offset)}>
+              <Fragment key={step.name}>
+              <div className={cn('relative flex flex-col', step.offset)}>
                 {step.badge && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 w-max">
                     <span className="inline-flex items-center rounded-full bg-orange-500 px-4 py-1 text-xs font-semibold text-white shadow-md">
@@ -223,6 +248,16 @@ export function Pricing() {
                   )}
                 </div>
               </div>
+              {index < steps.length - 1 && (
+                <span
+                  aria-hidden
+                  className="md:hidden text-center italic font-medium text-lg text-orange-400/60 pointer-events-none select-none"
+                  style={{ animation: `clipart-float 4s ease-in-out ${index * 0.8}s infinite` }}
+                >
+                  {mobileWords[index]}
+                </span>
+              )}
+              </Fragment>
             ))}
           </div>
         </div>

@@ -3,6 +3,7 @@
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { Check } from 'lucide-react'
 import { AgaveCorner } from '@/components/decor/CornerArt'
 
 export function AboutTeacher() {
@@ -63,7 +64,10 @@ export function AboutTeacher() {
           >
             <div>
               <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                Hi, nice to meet you. I&apos;m Angelica Torres
+                Hi, nice to meet you. I&apos;m{' '}
+                <span className="whitespace-nowrap [font-family:var(--font-caveat)] text-4xl sm:text-5xl text-emerald-700">
+                  Angelica Torres
+                </span>
               </h3>
               <p className="text-base text-gray-600 mb-4">
                 Real connection, real conversations, and lessons shaped around your life and goals.
@@ -73,10 +77,17 @@ export function AboutTeacher() {
             <div className="space-y-4">
               <div>
                 <h4 className="text-xl font-semibold text-gray-900 mb-2">Credentials</h4>
-                <ul className="text-gray-700 space-y-1">
-                  <li>• Lic. in English Language</li>
-                  <li>• Certified Level C1</li>
-                  <li>• More than 15 years of teaching experience</li>
+                <ul className="text-gray-700 space-y-2">
+                  {[
+                    'Lic. in English Language',
+                    'Certified Level C1',
+                    'More than 15 years of teaching experience'
+                  ].map((credential) => (
+                    <li key={credential} className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-emerald-600 flex-shrink-0" />
+                      {credential}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
