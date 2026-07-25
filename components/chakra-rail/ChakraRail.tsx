@@ -44,14 +44,18 @@ export function ChakraRail() {
       aria-label="Page sections"
       className="fixed left-1 md:left-6 xl:left-10 top-1/2 -translate-y-1/2 z-40 scale-75 md:scale-100 origin-left"
     >
-      <div className="relative flex flex-col items-center gap-5 py-1">
-        <div className="absolute inset-y-1 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-violet-300 via-emerald-300 to-red-300 opacity-40" />
+      <div
+        className="relative flex flex-col items-center gap-5 px-2 py-3 rounded-full bg-white/60 backdrop-blur-[2px]"
+        style={{ boxShadow: '0 0 18px 6px rgba(255, 255, 255, 0.6)' }}
+      >
+        <div className="absolute inset-y-3 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-violet-300 via-emerald-300 to-red-300 opacity-40" />
         {/* Traveling halo: slides to the active dot, adopts its color */}
         <div
           aria-hidden
           className="absolute left-1/2 w-[18px] h-[18px] rounded-full border transition-all duration-500 ease-out"
           style={{
-            top: activeIndex * DOT_PITCH,
+            // py-3 (12px) top padding + dot center (5px) - halo radius (9px)
+            top: activeIndex * DOT_PITCH + 8,
             transform: 'translateX(-50%)',
             borderColor: activeColor,
             backgroundColor: `${activeColor}26`,

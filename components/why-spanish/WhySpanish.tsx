@@ -45,6 +45,13 @@ export function WhySpanish() {
         sizes="100vw"
         className="hidden lg:block object-cover object-[center_35%] pointer-events-none select-none mix-blend-multiply"
       />
+      {/* Fade the map out before the section ends so it hands off cleanly
+          to the divider below */}
+      <div
+        aria-hidden
+        className="hidden lg:block absolute inset-x-0 bottom-0 h-44 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, rgba(240, 249, 255, 0), #f0f9ff 90%)' }}
+      />
       <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
