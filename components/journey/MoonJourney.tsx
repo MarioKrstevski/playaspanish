@@ -1,5 +1,6 @@
 'use client'
 
+import { Fragment } from 'react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { cn } from '@/lib/utils'
 
@@ -20,7 +21,7 @@ function Moon({ phase }: { phase: Phase }) {
   return (
     <div
       aria-hidden
-      className="w-16 h-16 md:w-20 md:h-20 rounded-full mx-auto"
+      className="w-14 h-14 md:w-20 md:h-20 rounded-full flex-shrink-0"
       style={{
         background: phaseBackground[phase],
         border: `1px solid ${MOON_RIM}`,
@@ -80,18 +81,45 @@ export function MoonJourney() {
             aria-hidden
             className="hidden md:block absolute top-10 left-[12%] right-[12%] border-t border-dashed border-amber-700"
           />
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
             {steps.map((step, index) => (
-              <div key={step.title} className="relative text-center">
-                <Moon phase={step.phase} />
-                <h3 className="text-xl font-semibold text-white mt-6 mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-amber-200 text-sm leading-relaxed max-w-xs mx-auto">
-                  {step.description}
-                </p>
-                <span className="sr-only">Step {index + 1}</span>
-              </div>
+              <Fragment key={step.title}>
+                <div className="relative text-center">
+                  {/* Mobile: moon and heading side by side; desktop: stacked */}
+                  <div className="flex items-center justify-center gap-4 md:flex-col md:gap-6">
+                    <Moon phase={step.phase} />
+                    <h3 className="text-xl font-semibold text-white">{step.title}</h3>
+                  </div>
+                  <p className="text-amber-200 text-sm leading-relaxed max-w-xs mx-auto mt-3 md:mt-2">
+                    {step.description}
+                  </p>
+                  <span className="sr-only">Step {index + 1}</span>
+                </div>
+                {index < steps.length - 1 && (
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 60 84"
+                    fill="none"
+                    className={`md:hidden w-10 h-16 mx-auto ${index % 2 === 1 ? '-scale-x-100' : ''}`}
+                  >
+                    <path
+                      d="M30 4 C 52 26, 8 48, 30 72"
+                      stroke="white"
+                      strokeOpacity="0.55"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M23 66 L30 76 L37 66"
+                      stroke="white"
+                      strokeOpacity="0.55"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+              </Fragment>
             ))}
           </div>
         </div>
