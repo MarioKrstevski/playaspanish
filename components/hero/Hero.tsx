@@ -88,9 +88,10 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden bg-gradient-to-b from-violet-100 via-violet-50 to-indigo-50">
-      {/* Moonrise over the playa: full-bleed background, moon and pyramid on the horizon */}
+      {/* Dream-desk scene: student on a call bottom-left, Mexico visions in the
+          top corners, empty violet center reserved for the content */}
       <Image
-        src="/images/hero-moon-beach.jpg"
+        src="/images/hero-dream-desk.jpg"
         alt=""
         aria-hidden
         fill
@@ -105,7 +106,7 @@ export function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(237, 233, 254, 0.45) 0%, rgba(255, 255, 255, 0.12) 40%, rgba(238, 242, 255, 0.55) 82%, #eef2ff 100%)'
+            'linear-gradient(to bottom, rgba(237, 233, 254, 0.35) 0%, rgba(255, 255, 255, 0.05) 35%, rgba(238, 242, 255, 0.15) 90%, #eef2ff 100%)'
         }}
       />
 
@@ -116,7 +117,7 @@ export function Hero() {
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[75%] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 52% 46% at 50% 48%, rgba(245, 243, 255, 0.8) 0%, rgba(245, 243, 255, 0.45) 52%, transparent 74%)'
+            'radial-gradient(ellipse 52% 46% at 50% 48%, rgba(245, 243, 255, 0.45) 0%, rgba(245, 243, 255, 0.2) 52%, transparent 74%)'
         }}
       />
 
