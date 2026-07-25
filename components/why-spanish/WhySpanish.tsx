@@ -44,7 +44,7 @@ export function WhySpanish() {
         aria-hidden
         fill
         sizes="100vw"
-        className="hidden lg:block object-cover object-[center_35%] pointer-events-none select-none mix-blend-multiply"
+        className="hidden lg:block object-cover object-[center_35%] pointer-events-none select-none opacity-70"
       />
       {/* Fade the map out before the section ends so it hands off cleanly
           to the divider below */}
