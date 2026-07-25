@@ -41,7 +41,7 @@ export function AboutTeacher() {
               imageVisible && 'visible'
             )}
           >
-            <div className="relative w-full h-[500px] rounded-lg overflow-hidden shadow-xl">
+            <div className="relative w-full max-w-xs mx-auto h-[380px] md:max-w-none md:h-[500px] rounded-lg overflow-hidden shadow-xl">
               <Image
                 src="/angelica-professional.jpg"
                 alt="Angelica Torres - Spanish Teacher and Founder of Playa Spanish"
@@ -64,8 +64,8 @@ export function AboutTeacher() {
           >
             <div>
               <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                Hi, nice to meet you. I&apos;m{' '}
-                <span className="whitespace-nowrap [font-family:var(--font-caveat)] text-4xl sm:text-5xl text-emerald-700">
+                Hi, nice to meet you. I&apos;m
+                <span className="block mt-1 whitespace-nowrap [font-family:var(--font-caveat)] text-4xl sm:text-5xl text-emerald-700">
                   Angelica Torres
                 </span>
               </h3>
