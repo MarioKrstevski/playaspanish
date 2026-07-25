@@ -3,7 +3,6 @@
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { EnyeCorner } from '@/components/decor/CornerArt'
 
 const stats = [
   { value: '600M+', label: 'speakers worldwide' },
@@ -37,17 +36,15 @@ export function WhySpanish() {
 
   return (
     <section id="why-spanish" className="relative py-24 bg-sky-50 overflow-hidden">
-      {/* The Spanish-speaking world as a soft map watermark behind the content;
-          the language itself bottom-right */}
+      {/* The Spanish-speaking world, covering the whole section as a soft backdrop */}
       <Image
         src="/images/map-spanish-world.jpg"
         alt=""
         aria-hidden
-        width={1024}
-        height={1024}
-        className="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] max-w-none pointer-events-none select-none mix-blend-multiply"
+        fill
+        sizes="100vw"
+        className="hidden lg:block object-cover object-center pointer-events-none select-none mix-blend-multiply"
       />
-      <EnyeCorner className="hidden lg:block absolute bottom-0 right-10 text-[150px] pointer-events-none" />
       <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
