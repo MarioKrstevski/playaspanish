@@ -138,7 +138,7 @@ export function ChatMock({ className }: { className?: string }) {
     <div
       aria-hidden
       className={cn(
-        'hidden lg:block w-[280px] pointer-events-none select-none',
+        'w-[280px] pointer-events-none select-none',
         'rounded-3xl bg-white/40 p-4',
         className
       )}

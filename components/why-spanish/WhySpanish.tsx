@@ -54,7 +54,7 @@ export function WhySpanish() {
         style={{ background: 'linear-gradient(to bottom, rgba(240, 249, 255, 0), #f0f9ff 90%)' }}
       />
       {/* Decorative texting loop, peeking out from behind the content on the right */}
-      <ChatMock className="absolute right-14 top-1/2 -translate-y-1/2 opacity-85" />
+      <ChatMock className="hidden lg:block absolute right-14 top-1/2 -translate-y-1/2 opacity-85" />
       <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
@@ -89,11 +89,17 @@ export function WhySpanish() {
           {/* Right: the reasons */}
           <div
             ref={reasonsRef}
-            className={cn('animate-slide-right space-y-6', reasonsVisible && 'visible')}
+            className={cn(
+              'animate-slide-right space-y-6 relative pr-24 lg:pr-0',
+              reasonsVisible && 'visible'
+            )}
             style={{ transitionDelay: '200ms' }}
           >
+            {/* Mobile: the chat peeks out from behind the text, into the
+                right padding reserved above */}
+            <ChatMock className="lg:hidden absolute -right-4 top-0 opacity-75 scale-[0.7] origin-top-right" />
             {reasons.map((reason) => (
-              <div key={reason.title}>
+              <div key={reason.title} className="relative">
                 <h3 className="text-xl font-semibold text-gray-900 mb-1">{reason.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{reason.description}</p>
               </div>
