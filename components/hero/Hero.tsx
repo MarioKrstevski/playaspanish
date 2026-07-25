@@ -1,6 +1,6 @@
 'use client'
 
-// import Image from 'next/image' // restore when uncommenting teacher image below
+import Image from 'next/image'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
@@ -20,29 +20,6 @@ function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
 
 const MOBILE_BREAKPOINT = 768
 
-
-// Tracks scroll through the hero: `progress` is 0 at the top of the page and
-// 1 once the hero is mostly scrolled past; `y`/`vh` drive the moon's descent.
-function useHeroScrollProgress() {
-  const [state, setState] = useState({ progress: 0, y: 0, vh: 0 })
-  useEffect(() => {
-    const onScroll = () => {
-      setState({
-        progress: Math.min(window.scrollY / (window.innerHeight * 0.8), 1),
-        y: window.scrollY,
-        vh: window.innerHeight
-      })
-    }
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
-  }, [])
-  return state
-}
 
 function useCircleRadius() {
   const [state, setState] = useState(() => ({
@@ -65,11 +42,6 @@ function useCircleRadius() {
 }
 
 export function Hero() {
-  const { progress: scrollProgress, y: scrollY, vh: viewportHeight } = useHeroScrollProgress()
-  // Follow the viewport (counter the page scroll) until landing ~150px above
-  // the hero's bottom edge, then stay and exit with the section.
-  const moonLanding = Math.max(viewportHeight - 96 - 88 - 150, 0)
-  const moonY = Math.min(scrollY, moonLanding)
   const cursorRevealRef = useRef<HTMLDivElement>(null)
   const [cursorReveal, setCursorReveal] = useState({ x: 0, y: 0, isHovering: false })
   const { radius: circleRadius, isMobile } = useCircleRadius()
@@ -115,23 +87,27 @@ export function Hero() {
   const maskRadius = circleRadius - 2
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 bg-gradient-to-b from-violet-100 via-violet-50 to-indigo-50">
-      {/* Setting moon, top-right: starts as a crescent, fills and sinks as you scroll */}
+    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden bg-gradient-to-b from-violet-100 via-violet-50 to-indigo-50">
+      {/* Moonrise over the playa: full-bleed background, moon and pyramid on the horizon */}
+      <Image
+        src="/images/hero-moon-beach.jpg"
+        alt=""
+        aria-hidden
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center pointer-events-none select-none"
+      />
+      {/* Readability wash on top, dissolving into the page color at the bottom
+          so the divider below connects seamlessly */}
       <div
         aria-hidden
-        className="absolute top-24 right-[10%] pointer-events-none hidden sm:block"
-        style={{ transform: `translateY(${moonY}px)` }}
-      >
-        <svg width="88" height="88" viewBox="0 0 100 100">
-          <defs>
-            <mask id="hero-moon-mask">
-              <rect width="100" height="100" fill="white" />
-              <circle cx={38 - scrollProgress * 130} cy="44" r="46" fill="black" />
-            </mask>
-          </defs>
-          <circle cx="50" cy="50" r="46" fill="#a78bfa" opacity="0.55" mask="url(#hero-moon-mask)" />
-        </svg>
-      </div>
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(to bottom, rgba(237, 233, 254, 0.45) 0%, rgba(255, 255, 255, 0.12) 40%, rgba(238, 242, 255, 0.55) 82%, #eef2ff 100%)'
+        }}
+      />
 
       <div className="container mx-auto px-4 relative">
         <div className="grid md:grid-cols-2 gap-12 items-center">
