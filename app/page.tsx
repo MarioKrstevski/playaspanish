@@ -14,7 +14,6 @@ import { ChakraRail } from '@/components/chakra-rail/ChakraRail'
 // Section background colors, descending through the chakra scale:
 // violet (crown) → indigo → blue → green → gold → orange → rose → red (root)
 const colors = {
-  heroBottom: '#eef2ff', // indigo-50, hero gradient end
   experience: '#1e1b4b', // indigo-950
   whySpanish: '#f0f9ff', // sky-50
   about: '#ecfdf5', // emerald-50
@@ -32,7 +31,11 @@ export default function Home() {
       <ChakraRail />
       <main>
         <Hero />
-        <SectionDivider variant="egyptian" from={colors.heroBottom} to={colors.experience} />
+        {/* The indigo pyramid rises directly out of the hero scene: transparent
+            band pulled up over the image's bottom edge */}
+        <div className="relative z-10 -mt-14 md:-mt-24">
+          <SectionDivider variant="egyptian" from="transparent" to={colors.experience} />
+        </div>
         <Experience />
         <SectionDivider variant="ziggurat" from={colors.experience} to={colors.whySpanish} />
         <WhySpanish />

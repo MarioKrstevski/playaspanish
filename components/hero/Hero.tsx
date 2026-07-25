@@ -107,12 +107,6 @@ export function Hero() {
           style={{ background: 'linear-gradient(to bottom, #8879d6, rgba(136, 121, 214, 0))' }}
         />
       </div>
-      {/* Thin hand-off into the page color so the divider below connects */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-14 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, rgba(238, 242, 255, 0), #eef2ff)' }}
-      />
 
       {/* Soft radial scrim behind the text block: quiets the moon and its
           reflection right where the copy sits, invisible at the edges */}
