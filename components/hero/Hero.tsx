@@ -20,15 +20,16 @@ function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
 
 const MOBILE_BREAKPOINT = 768
 
-// Desktop hero image height: 100% of the section at >=1300px wide, easing
-// down linearly to 73% at the md breakpoint (below which the mobile portrait
+// Desktop hero image height: capped at 93% of the section at >=1300px wide
+// (so the scene never stretches up under the fixed header), easing down
+// linearly to 73% at the md breakpoint (below which the mobile portrait
 // image takes over). Bottom-anchored, so the sky above shrinks, not the scene.
 function useHeroImageHeight() {
-  const [pct, setPct] = useState(100)
+  const [pct, setPct] = useState(93)
   useEffect(() => {
     const update = () => {
       const t = Math.min(Math.max((window.innerWidth - MOBILE_BREAKPOINT) / (1300 - MOBILE_BREAKPOINT), 0), 1)
-      setPct(73 + 27 * t)
+      setPct(73 + 20 * t)
     }
     update()
     window.addEventListener('resize', update)
