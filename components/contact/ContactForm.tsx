@@ -25,7 +25,7 @@ export function ContactForm() {
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             One email is the whole first step. Angelica reads every message and answers
-            personally — tell her where you are with Spanish, or just say hola.
+            personally. Tell her where you are with Spanish, or just say hola.
           </p>
         </div>
 
@@ -37,7 +37,7 @@ export function ContactForm() {
             </a>
           </Button>
           <p className="text-sm text-gray-500 mt-4">
-            Online classes via Zoom or Teams — flexible to your platform if needed.
+            Online classes via Zoom or Teams, flexible to your platform if needed.
           </p>
         </div>
       </div>

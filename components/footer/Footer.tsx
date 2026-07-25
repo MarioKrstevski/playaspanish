@@ -37,7 +37,7 @@ export function Footer() {
           <div>
             <h3 className="text-2xl font-bold text-white mb-4">Playa Spanish</h3>
             <p className="text-red-200/70">
-              Learn Spanish as it is lived — language, culture, and people — with native Mexican
+              Learn Spanish as it is lived: language, culture, and people. Native Mexican
               teachers, for as long as your journey takes.
             </p>
           </div>

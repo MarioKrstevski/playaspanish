@@ -3,6 +3,7 @@
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { AgaveCorner } from '@/components/decor/CornerArt'
 
 export function AboutTeacher() {
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation()
@@ -11,8 +12,10 @@ export function AboutTeacher() {
   const { ref: secondRef, isVisible: secondVisible } = useScrollAnimation()
 
   return (
-    <section id="about" className="py-24 bg-emerald-50">
-      <div className="container mx-auto px-4">
+    <section id="about" className="relative py-24 bg-emerald-50 overflow-hidden">
+      {/* Agave leaves, bottom-left */}
+      <AgaveCorner className="hidden lg:block absolute bottom-0 left-4 w-56 pointer-events-none" />
+      <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
           className={cn(
@@ -24,7 +27,7 @@ export function AboutTeacher() {
             Meet Your Teachers
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Every teacher at Playa Spanish is Mexican — and every student starts with Angelica.
+            Every teacher at Playa Spanish is Mexican, and every student starts with Angelica.
           </p>
         </div>
 
@@ -63,7 +66,7 @@ export function AboutTeacher() {
                 Hi, nice to meet you. I&apos;m Angelica Torres
               </h3>
               <p className="text-base text-gray-600 mb-4">
-                Real connection, real conversations—and lessons shaped around your life and goals.
+                Real connection, real conversations, and lessons shaped around your life and goals.
               </p>
             </div>
 
@@ -101,7 +104,7 @@ export function AboutTeacher() {
           </h3>
           <p className="text-gray-600 leading-relaxed">
             A fellow Mexican teacher is joining Playa Spanish. Angelica is always your first
-            hello — after your intro call, she pairs you with the teacher who fits your goals
+            hello. After your intro call, she pairs you with the teacher who fits your goals
             best.
           </p>
         </div>

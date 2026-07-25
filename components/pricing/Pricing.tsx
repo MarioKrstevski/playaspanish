@@ -4,6 +4,7 @@ import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { Button } from '@/components/ui/button'
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { SunCorner } from '@/components/decor/CornerArt'
 
 function handleContactScroll(e: React.MouseEvent<HTMLButtonElement>) {
   e.preventDefault()
@@ -55,7 +56,7 @@ const steps = [
     name: 'The Lesson',
     price: '$30',
     unit: 'per lesson · pay as you go',
-    tagline: 'The rhythm — where everyone arrives',
+    tagline: 'The rhythm, where everyone arrives',
     features: [
       'Pay per class or per month, as you like',
       'Lessons at your own pace, no expiry',
@@ -73,8 +74,10 @@ export function Pricing() {
   const { ref: customRef, isVisible: customVisible } = useScrollAnimation()
 
   return (
-    <section id="pricing" className="py-24 bg-orange-50">
-      <div className="container mx-auto px-4">
+    <section id="pricing" className="relative py-24 bg-orange-50 overflow-hidden">
+      {/* Sun peeking from the bottom-right corner */}
+      <SunCorner className="hidden lg:block absolute -bottom-16 -right-14 w-60 pointer-events-none" />
+      <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
           className={cn('animate-on-scroll text-center mb-4', titleVisible && 'visible')}
@@ -86,7 +89,7 @@ export function Pricing() {
             A lesson is <span className="font-bold text-orange-600">$30</span>. That never changes.
           </p>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-3">
-            Each lesson is a one-hour session — 45 minutes of focused Spanish, with breathing
+            Each lesson is a one-hour session: 45 minutes of focused Spanish, with breathing
             room built in. New students climb in from a lower step.
           </p>
         </div>
@@ -156,7 +159,7 @@ export function Pricing() {
 
         <p className="text-center text-gray-600 max-w-2xl mx-auto mt-10">
           Starter steps are for first-time students, paid upfront and yours to schedule freely.
-          If a pack truly isn&apos;t for you, half your money comes back — no questions, no hard
+          If a pack truly isn&apos;t for you, half your money comes back. No questions, no hard
           feelings.
         </p>
 
@@ -172,7 +175,7 @@ export function Pricing() {
             Spanish for your profession
           </h3>
           <p className="text-gray-600 mb-6 leading-relaxed">
-            Lawyers, doctors, job interviews, business negotiations — when you need Spanish for
+            Lawyers, doctors, job interviews, business negotiations. When you need Spanish for
             something specific, we start with a conversation. Angelica listens to what you need,
             then builds a course that fits it exactly. Custom scope, custom quote.
           </p>

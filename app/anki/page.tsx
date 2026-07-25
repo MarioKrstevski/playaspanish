@@ -6,7 +6,7 @@ import { Moon } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Anki Deck - Playa Spanish',
   description:
-    'A Spanish Anki deck from your Playa Spanish teacher — study between lessons with flashcards built to match what you learn in class. Coming soon.'
+    'A Spanish Anki deck from your Playa Spanish teacher. Study between lessons with flashcards built to match what you learn in class. Coming soon.'
 }
 
 export default function AnkiPage() {

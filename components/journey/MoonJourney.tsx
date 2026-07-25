@@ -2,6 +2,7 @@
 
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { cn } from '@/lib/utils'
+import { PyramidCorner, StarsCorner } from '@/components/decor/CornerArt'
 
 const MOON_LIGHT = '#fde68a'
 const MOON_DARK = '#451a03'
@@ -35,7 +36,7 @@ const steps: Array<{ phase: Phase; title: string; description: string }> = [
     phase: 'new',
     title: 'Say hola',
     description:
-      'Everything starts with an email. Tell us you want to learn Spanish — that is all it takes.'
+      'Everything starts with an email. Tell us you want to learn Spanish. That is all it takes.'
   },
   {
     phase: 'waxing',
@@ -47,7 +48,7 @@ const steps: Array<{ phase: Phase; title: string; description: string }> = [
     phase: 'full',
     title: 'Find your rhythm',
     description:
-      'Lessons begin. How much, how often, and for how long is entirely up to you — the course never expires.'
+      'Lessons begin. How much, how often, and for how long is entirely up to you. The course never expires.'
   },
   {
     phase: 'waning',
@@ -62,15 +63,18 @@ export function MoonJourney() {
   const { ref: stepsRef, isVisible: stepsVisible } = useScrollAnimation()
 
   return (
-    <section id="how-it-works" className="py-24 bg-amber-950 text-amber-50">
-      <div className="container mx-auto px-4">
+    <section id="how-it-works" className="relative py-24 bg-amber-950 text-amber-50 overflow-hidden">
+      {/* Distant pyramid bottom-left, stars bottom-right */}
+      <PyramidCorner className="hidden lg:block absolute bottom-0 left-0 w-64 pointer-events-none" />
+      <StarsCorner className="hidden lg:block absolute bottom-6 right-6 w-64 pointer-events-none" />
+      <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
           className={cn('animate-on-scroll text-center mb-16', titleVisible && 'visible')}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">How it works</h2>
           <p className="text-xl text-amber-200 max-w-2xl mx-auto">
-            Four phases, one cycle — and like the moon, it keeps going for as long as you do.
+            Four phases, one cycle. Like the moon, it keeps going for as long as you do.
           </p>
         </div>
 

@@ -44,7 +44,6 @@ export default function Home() {
         <Pricing />
         <SectionDivider variant="shikhara" from={colors.pricing} to={colors.reviews} accent="#fda4af" />
         <Reviews />
-        <SectionDivider variant="egyptian" from={colors.reviews} to={colors.contact} accent="#fca5a5" />
         <ContactForm />
         <SectionDivider variant="ziggurat" from={colors.contact} to={colors.footer} />
       </main>

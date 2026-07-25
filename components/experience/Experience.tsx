@@ -3,12 +3,13 @@
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { cn } from '@/lib/utils'
 import { YinYang } from './YinYang'
+import { ConstellationCorner } from '@/components/decor/CornerArt'
 
 const pillars = [
   {
     title: 'One course, no clock',
     description:
-      'Your course is unlimited in time. Learn for as long as you want and need — no expiring seats, no semesters, just steady progress at your pace.'
+      'Your course is unlimited in time. Learn for as long as you want and need. No expiring seats, no semesters, just steady progress at your pace.'
   },
   {
     title: 'Experience first',
@@ -18,7 +19,7 @@ const pillars = [
   {
     title: 'Mexican Spanish, understood everywhere',
     description:
-      'Every teacher is Mexican. The clear, standard Spanish of Mexico bridges Latin America and Spain — one accent that connects you to the whole Spanish-speaking world.'
+      'Every teacher is Mexican. The clear, standard Spanish of Mexico bridges Latin America and Spain: one accent that connects you to the whole Spanish-speaking world.'
   }
 ]
 
@@ -28,8 +29,10 @@ export function Experience() {
   const { ref: markRef, isVisible: markVisible } = useScrollAnimation()
 
   return (
-    <section id="course" className="py-24 bg-indigo-950 text-indigo-50">
-      <div className="container mx-auto px-4">
+    <section id="course" className="relative py-24 bg-indigo-950 text-indigo-50 overflow-hidden">
+      {/* Constellation, bottom-right */}
+      <ConstellationCorner className="hidden lg:block absolute bottom-10 right-8 w-72 pointer-events-none" />
+      <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
           className={cn('animate-on-scroll text-center mb-16', titleVisible && 'visible')}

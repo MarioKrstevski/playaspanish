@@ -98,7 +98,7 @@ export default function MitchelBlogPost() {
               </p>
 
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                <strong className="text-gray-900">Mitchel:</strong> Angelica is amazing! She&apos;s so patient and really understands how to teach. What I loved most was how she focused on both speaking and listening from day one. We didn&apos;t just memorize vocabulary—we actually had conversations. She would correct me gently and explain things in a way that made sense.
+                <strong className="text-gray-900">Mitchel:</strong> Angelica is amazing! She&apos;s so patient and really understands how to teach. What I loved most was how she focused on both speaking and listening from day one. We didn&apos;t just memorize vocabulary. We actually had conversations. She would correct me gently and explain things in a way that made sense.
               </p>
 
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
@@ -166,7 +166,7 @@ export default function MitchelBlogPost() {
               </p>
 
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                <strong className="text-gray-900">Mitchel:</strong> The confidence to actually use Spanish in real situations is huge. Before, I was too scared to try speaking because I was worried about making mistakes. But Angelica created such a supportive environment that I learned it&apos;s okay to make mistakes—that&apos;s how you learn.
+                <strong className="text-gray-900">Mitchel:</strong> The confidence to actually use Spanish in real situations is huge. Before, I was too scared to try speaking because I was worried about making mistakes. But Angelica created such a supportive environment that I learned it&apos;s okay to make mistakes. That&apos;s how you learn.
               </p>
 
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
@@ -182,7 +182,7 @@ export default function MitchelBlogPost() {
               </p>
 
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                The best part is that you&apos;re not just learning from a textbook—you&apos;re learning from someone who understands Mexican culture and can teach you how to actually use Spanish in real life. That made all the difference for me.
+                The best part is that you&apos;re not just learning from a textbook. You&apos;re learning from someone who understands Mexican culture and can teach you how to actually use Spanish in real life. That made all the difference for me.
               </p>
 
               <h2 className="text-3xl font-bold text-gray-900 mt-10 mb-6">
@@ -201,7 +201,7 @@ export default function MitchelBlogPost() {
                 <p className="text-lg text-gray-800 italic">
                   &quot;Learning Spanish with Playa Spanish has been one of the best investments I&apos;ve made. The personalized approach and real-world focus gave me the confidence to actually use Spanish during my trip to Mexico. I couldn&apos;t be happier with my progress!&quot;
                 </p>
-                <p className="text-gray-700 font-semibold mt-4">— Mitchel, Playa Spanish Student</p>
+                <p className="text-gray-700 font-semibold mt-4">Mitchel, Playa Spanish Student</p>
               </div>
             </div>
           </div>

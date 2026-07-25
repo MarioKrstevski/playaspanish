@@ -4,6 +4,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import { WavesCorner } from '@/components/decor/CornerArt'
 
 const HEADLINE_EN = 'Your path to Spanish starts here'
 const HEADLINE_ES = 'Tu camino al español empieza aquí'
@@ -133,7 +134,10 @@ export function Hero() {
         </svg>
       </div>
 
-      <div className="container mx-auto px-4">
+      {/* Shoreline waves, bottom-left */}
+      <WavesCorner className="hidden lg:block absolute bottom-8 left-0 w-72 pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="w-full md:col-span-2 max-w-4xl mx-auto  text-center">
             {/* Cursor reveal: English with circular cutout, Spanish visible only in circle on hover */}

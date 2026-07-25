@@ -3,6 +3,7 @@
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { Star } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { QuoteCorner } from '@/components/decor/CornerArt'
 
 const MOON_LIGHT = '#fecdd3'
 const MOON_DARK = '#4c0519'
@@ -58,7 +59,7 @@ const reviews: Array<{
     phase: 'full',
     quote: 'I now speak confidently with my Spanish-speaking clients.',
     review:
-      'The business Spanish course was perfect for my work — tailored exactly to the situations I face every week.'
+      'The business Spanish course was perfect for my work, tailored exactly to the situations I face every week.'
   },
   {
     name: 'Emily R.',
@@ -83,8 +84,10 @@ export function Reviews() {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
-    <section id="reviews" className="py-24 bg-rose-50">
-      <div className="container mx-auto px-4">
+    <section id="reviews" className="relative py-24 bg-rose-50 overflow-hidden">
+      {/* A large quiet quote mark, bottom-left */}
+      <QuoteCorner className="hidden lg:block absolute -bottom-24 left-6 text-[240px] pointer-events-none" />
+      <div className="container mx-auto px-4 relative">
         <div
           ref={ref}
           className={cn(
@@ -96,7 +99,7 @@ export function Reviews() {
             What Our Students Say
           </h2>
           <p className="text-xl text-gray-600">
-            Don&apos;t just take our word for it—hear from our students
+            Don&apos;t just take our word for it. Hear from our students.
           </p>
         </div>
 

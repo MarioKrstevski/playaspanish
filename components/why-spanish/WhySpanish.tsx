@@ -2,6 +2,7 @@
 
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { cn } from '@/lib/utils'
+import { GlobeCorner, EnyeCorner } from '@/components/decor/CornerArt'
 
 const stats = [
   { value: '600M+', label: 'speakers worldwide' },
@@ -14,12 +15,12 @@ const reasons = [
   {
     title: 'Connect across cultures',
     description:
-      'From Mexico City to Buenos Aires to Madrid — Spanish opens conversations with people across Latin America, Spain, and Spanish-speaking communities everywhere.'
+      'From Mexico City to Buenos Aires to Madrid, Spanish opens conversations with people across Latin America, Spain, and Spanish-speaking communities everywhere.'
   },
   {
     title: 'Work with the Spanish-speaking world',
     description:
-      'If your work touches Spanish-speaking clients, partners, or markets — even indirectly — the language turns transactions into relationships.'
+      'If your work touches Spanish-speaking clients, partners, or markets, even indirectly, the language turns transactions into relationships.'
   },
   {
     title: 'Experience Mexico for real',
@@ -34,8 +35,11 @@ export function WhySpanish() {
   const { ref: reasonsRef, isVisible: reasonsVisible } = useScrollAnimation()
 
   return (
-    <section id="why-spanish" className="py-24 bg-sky-50">
-      <div className="container mx-auto px-4">
+    <section id="why-spanish" className="relative py-24 bg-sky-50 overflow-hidden">
+      {/* Globe bottom-left; the language itself bottom-right */}
+      <GlobeCorner className="hidden lg:block absolute -bottom-10 -left-8 w-44 pointer-events-none" />
+      <EnyeCorner className="hidden lg:block absolute bottom-0 right-10 text-[150px] pointer-events-none" />
+      <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
           className={cn('animate-on-scroll text-center mb-14', titleVisible && 'visible')}
@@ -44,7 +48,7 @@ export function WhySpanish() {
             One language, a whole world
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Spanish is one of the most spoken languages on the planet — and one voice carries you
+            Spanish is one of the most spoken languages on the planet, and one voice carries you
             through all of it.
           </p>
         </div>
