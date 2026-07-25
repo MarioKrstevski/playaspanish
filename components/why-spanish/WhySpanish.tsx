@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { ChatMock } from './ChatMock'
 
@@ -36,6 +37,28 @@ export function WhySpanish() {
 
   return (
     <section id="why-spanish" className="relative py-24 bg-sky-50 overflow-hidden">
+      {/* The Spanish-speaking world as a soft backdrop, desktop only */}
+      <Image
+        src="/images/map-spanish-world.jpg"
+        alt=""
+        aria-hidden
+        fill
+        sizes="100vw"
+        className="hidden lg:block object-cover object-[center_35%] pointer-events-none select-none"
+        style={{ filter: 'brightness(0.85) contrast(1.4) saturate(1.6)' }}
+      />
+      {/* Fade the map in from the section color at the top and out at the
+          bottom so both divider hand-offs stay seamless */}
+      <div
+        aria-hidden
+        className="hidden lg:block absolute inset-x-0 top-0 h-32 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, #f0f9ff, rgba(240, 249, 255, 0))' }}
+      />
+      <div
+        aria-hidden
+        className="hidden lg:block absolute inset-x-0 bottom-0 h-44 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, rgba(240, 249, 255, 0), #f0f9ff 90%)' }}
+      />
       {/* Decorative texting loop, peeking out from behind the content on the right */}
       <ChatMock className="hidden lg:block absolute right-14 top-1/2 -translate-y-1/2 opacity-85" />
       <div className="container mx-auto px-4 relative">
