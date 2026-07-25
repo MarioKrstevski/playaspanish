@@ -87,44 +87,39 @@ export function Hero() {
   const maskRadius = circleRadius - 2
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden bg-[#8879d6]">
-      {/* Dream-desk scene pinned to the bottom at natural proportions, so no
-          element is ever cropped as the viewport narrows. The section
-          background is the image's own sky color (#8879d6, sampled), and the
-          image top fades into it, so the sky simply extends upward. */}
-      {/* Full scene, never cropped: natural proportions on md+ (as on big
-          screens), and on mobile it stretches vertically to 60% of the section
-          so it does not end up as a tiny strip */}
+    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden bg-[#462a7e]">
+      {/* Dream-beach scene pinned to the bottom at natural proportions, never
+          cropped or stretched: landscape composition on md+, purpose-made
+          portrait recomposition on mobile. The section background is the
+          image's sampled sky color (#462a7e) and the image top fades into it,
+          so the sky simply extends upward. */}
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-[60%] md:h-auto pointer-events-none select-none"
+        className="absolute inset-x-0 bottom-0 pointer-events-none select-none"
       >
         <Image
-          src="/images/hero-dream-desk.jpg"
+          src="/images/hero-dream-beach-mobile.jpg"
+          alt=""
+          width={768}
+          height={1376}
+          priority
+          sizes="100vw"
+          className="w-full h-auto md:hidden"
+        />
+        <Image
+          src="/images/hero-dream-beach.jpg"
           alt=""
           width={1584}
           height={672}
           priority
           sizes="100vw"
-          className="w-full h-full object-fill md:h-auto"
+          className="w-full h-auto hidden md:block"
         />
         <div
-          className="absolute inset-x-0 top-0 h-28"
-          style={{ background: 'linear-gradient(to bottom, #8879d6, rgba(136, 121, 214, 0))' }}
+          className="absolute inset-x-0 top-0 h-36 md:h-28"
+          style={{ background: 'linear-gradient(to bottom, #462a7e, rgba(70, 42, 126, 0))' }}
         />
       </div>
-
-      {/* Soft radial scrim behind the text block: quiets the imagery where the
-          copy sits on desktop. On mobile the sky is already flat and empty, so
-          the scrim would read as a glowing blob — hidden there. */}
-      <div
-        aria-hidden
-        className="hidden md:block absolute inset-x-0 top-1/2 -translate-y-1/2 h-[75%] pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 52% 46% at 50% 48%, rgba(245, 243, 255, 0.6) 0%, rgba(245, 243, 255, 0.3) 52%, transparent 74%)'
-        }}
-      />
 
       <div className="container mx-auto px-4 relative">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -142,7 +137,7 @@ export function Hero() {
             >
               {/* Spanish layer: revealed only inside circle; clip-path only so edge is crisp and aligned to border */}
               <h1
-                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10"
+                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-white whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10"
                 style={{
                   opacity: cursorReveal.isHovering ? 1 : 0,
                   clipPath: cursorReveal.isHovering
@@ -158,7 +153,7 @@ export function Hero() {
               </h1>
               {/* English layer: always visible, with circular cutout on hover/touch */}
               <h1
-                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10 tracking-wider"
+                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-white whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10 tracking-wider"
                 style={{
                   WebkitMaskImage: cursorReveal.isHovering
                     ? `radial-gradient(circle ${maskRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${maskRadius}px, black ${maskRadius}px)`
@@ -173,7 +168,7 @@ export function Hero() {
               {/* Visible circle at cursor/touch with smoky inner rim and black border */}
               {cursorReveal.isHovering && (
                 <div
-                  className="pointer-events-none absolute rounded-full border-2 border-gray-900 -translate-x-1/2 -translate-y-1/2"
+                  className="pointer-events-none absolute rounded-full border-2 border-white/80 -translate-x-1/2 -translate-y-1/2"
                   style={{
                     left: circleCenterX,
                     top: circleCenterY,
@@ -187,9 +182,9 @@ export function Hero() {
               )}
             </div>
 
-            <p className="hero-slide-in hero-slide-in-delay-1 text-base sm:text-lg md:text-xl text-gray-700 mb-8" >
+            <p className="hero-slide-in hero-slide-in-delay-1 text-base sm:text-lg md:text-xl text-violet-100 mb-8" >
             You can understand more Spanish than you think.{' '} <br />
-              <span className="text-violet-700 font-semibold text-xl">Personalized lessons with native Mexican teachers</span>
+              <span className="text-violet-200 font-semibold text-xl">Personalized lessons with native Mexican teachers</span>
             </p>
             <Button
               size="lg"
