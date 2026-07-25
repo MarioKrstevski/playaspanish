@@ -90,7 +90,7 @@ export function WhySpanish() {
           <div
             ref={reasonsRef}
             className={cn(
-              'animate-slide-right space-y-6 relative pr-24 lg:pr-0',
+              'animate-slide-right space-y-6 relative pr-48 lg:pr-0',
               reasonsVisible && 'visible'
             )}
             style={{ transitionDelay: '200ms' }}
