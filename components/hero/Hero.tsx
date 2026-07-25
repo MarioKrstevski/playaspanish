@@ -87,27 +87,31 @@ export function Hero() {
   const maskRadius = circleRadius - 2
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden bg-gradient-to-b from-violet-100 via-violet-50 to-indigo-50">
-      {/* Dream-desk scene: student on a call bottom-left, Mexico visions in the
-          top corners, empty violet center reserved for the content */}
-      <Image
-        src="/images/hero-dream-desk.jpg"
-        alt=""
-        aria-hidden
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center pointer-events-none select-none"
-      />
-      {/* Readability wash on top, dissolving into the page color at the bottom
-          so the divider below connects seamlessly */}
+    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden bg-[#8879d6]">
+      {/* Dream-desk scene pinned to the bottom at natural proportions, so no
+          element is ever cropped as the viewport narrows. The section
+          background is the image's own sky color (#8879d6, sampled), and the
+          image top fades into it, so the sky simply extends upward. */}
+      <div aria-hidden className="absolute inset-x-0 bottom-0 pointer-events-none select-none">
+        <Image
+          src="/images/hero-dream-desk.jpg"
+          alt=""
+          width={1584}
+          height={672}
+          priority
+          sizes="100vw"
+          className="w-full h-auto"
+        />
+        <div
+          className="absolute inset-x-0 top-0 h-28"
+          style={{ background: 'linear-gradient(to bottom, #8879d6, rgba(136, 121, 214, 0))' }}
+        />
+      </div>
+      {/* Thin hand-off into the page color so the divider below connects */}
       <div
         aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(to bottom, rgba(237, 233, 254, 0.35) 0%, rgba(255, 255, 255, 0.05) 35%, rgba(238, 242, 255, 0.15) 90%, #eef2ff 100%)'
-        }}
+        className="absolute inset-x-0 bottom-0 h-14 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, rgba(238, 242, 255, 0), #eef2ff)' }}
       />
 
       {/* Soft radial scrim behind the text block: quiets the moon and its
@@ -117,7 +121,7 @@ export function Hero() {
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[75%] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 52% 46% at 50% 48%, rgba(245, 243, 255, 0.45) 0%, rgba(245, 243, 255, 0.2) 52%, transparent 74%)'
+            'radial-gradient(ellipse 52% 46% at 50% 48%, rgba(245, 243, 255, 0.6) 0%, rgba(245, 243, 255, 0.3) 52%, transparent 74%)'
         }}
       />
 
