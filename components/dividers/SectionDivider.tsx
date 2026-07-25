@@ -25,7 +25,9 @@ const paths: Record<SectionDividerProps['variant'], string> = {
 
 export function SectionDivider({ variant, from, to, accent }: SectionDividerProps) {
   return (
-    <div aria-hidden style={{ backgroundColor: from }} className="leading-[0]">
+    // -mb-px pulls the next section 1px up over the SVG's bottom edge, hiding
+    // the antialiased hairline that otherwise shows as a thin seam line
+    <div aria-hidden style={{ backgroundColor: from }} className="leading-[0] -mb-px">
       <div className="mx-auto max-w-4xl px-4">
         <svg
           viewBox="0 0 900 120"
