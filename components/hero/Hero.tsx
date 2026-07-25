@@ -108,11 +108,12 @@ export function Hero() {
         />
       </div>
 
-      {/* Soft radial scrim behind the text block: quiets the moon and its
-          reflection right where the copy sits, invisible at the edges */}
+      {/* Soft radial scrim behind the text block: quiets the imagery where the
+          copy sits on desktop. On mobile the sky is already flat and empty, so
+          the scrim would read as a glowing blob — hidden there. */}
       <div
         aria-hidden
-        className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[75%] pointer-events-none"
+        className="hidden md:block absolute inset-x-0 top-1/2 -translate-y-1/2 h-[75%] pointer-events-none"
         style={{
           background:
             'radial-gradient(ellipse 52% 46% at 50% 48%, rgba(245, 243, 255, 0.6) 0%, rgba(245, 243, 255, 0.3) 52%, transparent 74%)'
