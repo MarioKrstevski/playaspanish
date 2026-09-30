@@ -18,7 +18,7 @@ const navItems = [
 ]
 
 const navLinkClass =
-  'rounded-md px-2 py-1 text-gray-700 transition-colors hover:bg-primary-50 hover:text-primary-700'
+  'rounded-md px-2 py-1 text-indigo-950 transition-colors hover:bg-primary-50 hover:text-primary-700'
 
 function handleSmoothScroll(e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) {
   e.preventDefault()
@@ -120,7 +120,7 @@ export function Header() {
               Get Started
             </Button>
             <button
-              className="p-2"
+              className="p-2 text-indigo-950"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >

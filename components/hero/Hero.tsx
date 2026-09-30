@@ -167,7 +167,7 @@ export function Hero() {
             >
               {/* Spanish layer: revealed only inside circle; clip-path only so edge is crisp and aligned to border */}
               <h1
-                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-white whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10"
+                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-white [text-shadow:0_2px_18px_rgba(40,16,70,0.45)] whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10"
                 style={{
                   opacity: cursorReveal.isHovering ? 1 : 0,
                   clipPath: cursorReveal.isHovering
@@ -183,7 +183,7 @@ export function Hero() {
               </h1>
               {/* English layer: always visible, with circular cutout on hover/touch */}
               <h1
-                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-white whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10 tracking-wider"
+                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-white [text-shadow:0_2px_18px_rgba(40,16,70,0.45)] whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10 tracking-wider"
                 style={{
                   WebkitMaskImage: cursorReveal.isHovering
                     ? `radial-gradient(circle ${maskRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${maskRadius}px, black ${maskRadius}px)`
@@ -212,9 +212,16 @@ export function Hero() {
               )}
             </div>
 
-            <p className="hero-slide-in hero-slide-in-delay-1 text-base sm:text-lg md:text-xl text-violet-100 mb-8" >
-            You can understand more Spanish than you think.{' '} <br />
-              <span className="text-violet-200 font-semibold text-xl">Personalized lessons with native Mexican teachers</span>
+            {/* Warm cream and sunset gold pick up the scene instead of fighting
+                it; the soft purple halo keeps them legible over the sand */}
+            <p className="hero-slide-in hero-slide-in-delay-1 relative text-base sm:text-lg md:text-xl text-amber-50 mb-8 [text-shadow:0_1px_10px_rgba(40,16,70,0.7)]">
+              <span
+                aria-hidden
+                className="absolute -inset-x-10 -inset-y-6 -z-10 rounded-full blur-2xl"
+                style={{ background: 'radial-gradient(ellipse at center, rgba(55, 28, 100, 0.45), rgba(55, 28, 100, 0) 70%)' }}
+              />
+              You can understand more Spanish than you think.{' '} <br />
+              <span className="text-amber-200 font-semibold text-xl">Personalized lessons with native Mexican teachers</span>
             </p>
             <Button
               size="lg"

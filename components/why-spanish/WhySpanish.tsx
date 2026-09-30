@@ -59,8 +59,6 @@ export function WhySpanish() {
         className="hidden lg:block absolute inset-x-0 bottom-0 h-44 pointer-events-none"
         style={{ background: 'linear-gradient(to bottom, rgba(240, 249, 255, 0), #f0f9ff 90%)' }}
       />
-      {/* Decorative texting loop, peeking out from behind the content on the right */}
-      <ChatMock className="hidden lg:block absolute right-14 top-1/2 -translate-y-1/2 opacity-85" />
       <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}
@@ -75,12 +73,15 @@ export function WhySpanish() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
+        {/* xl+: stats | reasons | chat, the chat in its own column so it can
+            never sit on top of the text. Below xl the stats run in a row and
+            the chat peeks out beside the reasons. */}
+        <div className="grid xl:grid-cols-[1fr_1fr_280px] gap-12 items-start max-w-5xl xl:max-w-6xl mx-auto">
           {/* Left: the numbers */}
           <div
             ref={statsRef}
             className={cn(
-              'animate-slide-left grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 gap-6',
+              'animate-slide-left grid grid-cols-2 md:grid-cols-4 xl:grid-cols-2 gap-6',
               statsVisible && 'visible'
             )}
           >
@@ -99,14 +100,14 @@ export function WhySpanish() {
           <div
             ref={reasonsRef}
             className={cn(
-              'animate-slide-right space-y-6 relative pr-48 lg:pr-0',
+              'animate-slide-right space-y-6 relative pr-48 xl:pr-0',
               reasonsVisible && 'visible'
             )}
             style={{ transitionDelay: '200ms' }}
           >
-            {/* Mobile: the chat peeks out from behind the text, into the
+            {/* Below xl: the chat peeks out from behind the text, into the
                 right padding reserved above */}
-            <ChatMock className="lg:hidden absolute -right-4 top-0 opacity-75 scale-[0.7] origin-top-right" />
+            <ChatMock className="xl:hidden absolute -right-4 top-0 opacity-75 scale-[0.7] origin-top-right" />
             {reasons.map((reason) => (
               <div key={reason.title} className="relative">
                 <h3 className="text-xl font-semibold text-gray-900 mb-1">{reason.title}</h3>
@@ -114,6 +115,9 @@ export function WhySpanish() {
               </div>
             ))}
           </div>
+
+          {/* xl+: decorative texting loop in its own column */}
+          <ChatMock className="hidden xl:block self-center opacity-85" />
         </div>
       </div>
     </section>
