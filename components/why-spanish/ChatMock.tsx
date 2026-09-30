@@ -90,7 +90,7 @@ function Bubble({ message }: { message: ChatMessage }) {
   )
 }
 
-export function ChatMock({ className }: { className?: string }) {
+export function ChatMock({ className, compact }: { className?: string; compact?: boolean }) {
   const [convoIndex, setConvoIndex] = useState(0)
   const [visibleCount, setVisibleCount] = useState(0)
   const [isTyping, setIsTyping] = useState(false)
@@ -144,7 +144,7 @@ export function ChatMock({ className }: { className?: string }) {
       )}
     >
       {/* Fixed height so the loop reset never shifts layout */}
-      <div className="flex flex-col justify-end gap-2 h-[380px] overflow-hidden">
+      <div className={cn('flex flex-col justify-end gap-2 overflow-hidden', compact ? 'h-[240px]' : 'h-[380px]')}>
         {shown.map((message, index) => (
           <Bubble key={index} message={message} />
         ))}

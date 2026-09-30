@@ -74,8 +74,9 @@ export function WhySpanish() {
         </div>
 
         {/* xl+: stats | reasons | chat, the chat in its own column so it can
-            never sit on top of the text. Below xl the stats run in a row and
-            the chat peeks out beside the reasons. */}
+            never sit on top of the text. md to xl: the stats run in a row and
+            the chat peeks out beside the reasons. Phones: the reasons get the
+            full width and a compact chat follows them. */}
         <div className="grid xl:grid-cols-[1fr_1fr_280px] gap-12 items-start max-w-5xl xl:max-w-6xl mx-auto">
           {/* Left: the numbers */}
           <div
@@ -100,14 +101,14 @@ export function WhySpanish() {
           <div
             ref={reasonsRef}
             className={cn(
-              'animate-slide-right space-y-6 relative pr-48 xl:pr-0',
+              'animate-slide-right space-y-6 relative md:pr-48 xl:pr-0',
               reasonsVisible && 'visible'
             )}
             style={{ transitionDelay: '200ms' }}
           >
-            {/* Below xl: the chat peeks out from behind the text, into the
+            {/* md to xl: the chat peeks out from behind the text, into the
                 right padding reserved above */}
-            <ChatMock className="xl:hidden absolute -right-4 top-0 opacity-75 scale-[0.7] origin-top-right" />
+            <ChatMock className="hidden md:block xl:hidden absolute -right-4 top-0 opacity-75 scale-[0.7] origin-top-right" />
             {reasons.map((reason) => (
               <div key={reason.title} className="relative">
                 <h3 className="text-xl font-semibold text-gray-900 mb-1">{reason.title}</h3>
@@ -115,6 +116,9 @@ export function WhySpanish() {
               </div>
             ))}
           </div>
+
+          {/* Phones: a smaller chat after the reasons, never beside them */}
+          <ChatMock compact className="md:hidden mx-auto opacity-90" />
 
           {/* xl+: decorative texting loop in its own column */}
           <ChatMock className="hidden xl:block self-center opacity-85" />
