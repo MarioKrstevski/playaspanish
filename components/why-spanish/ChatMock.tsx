@@ -75,11 +75,12 @@ function TypingDots({ side }: { side: ChatMessage['side'] }) {
   )
 }
 
-function Bubble({ message }: { message: ChatMessage }) {
+function Bubble({ message, compact }: { message: ChatMessage; compact?: boolean }) {
   return (
     <div
       className={cn(
-        'max-w-[85%] rounded-2xl px-3.5 py-2 text-sm leading-snug w-fit',
+        'max-w-[85%] rounded-2xl leading-snug w-fit',
+        compact ? 'px-2.5 py-1.5 text-xs' : 'px-3.5 py-2 text-sm',
         message.side === 'sent'
           ? 'self-end bg-sky-500 text-white rounded-br-md'
           : 'self-start bg-white text-gray-700 shadow-sm rounded-bl-md'
@@ -148,7 +149,8 @@ export function ChatMock({
       aria-hidden
       className={cn(
         'w-[280px] pointer-events-none select-none',
-        'rounded-3xl bg-white/40 p-4',
+        'rounded-3xl bg-white/40',
+        compact ? 'p-2.5' : 'p-4',
         fill && 'flex flex-col',
         className
       )}
@@ -157,11 +159,11 @@ export function ChatMock({
       <div
         className={cn(
           'flex flex-col justify-end gap-2 overflow-hidden',
-          fill ? 'flex-1 min-h-[300px]' : compact ? 'h-[240px]' : 'h-[380px]'
+          fill ? (compact ? 'flex-1 min-h-[200px]' : 'flex-1 min-h-[300px]') : compact ? 'h-[240px]' : 'h-[380px]'
         )}
       >
         {shown.map((message, index) => (
-          <Bubble key={index} message={message} />
+          <Bubble key={index} message={message} compact={compact} />
         ))}
         {typingSide && <TypingDots side={typingSide} />}
       </div>

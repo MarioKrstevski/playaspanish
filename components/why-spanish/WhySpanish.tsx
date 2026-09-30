@@ -75,24 +75,24 @@ export function WhySpanish() {
 
         {/* xl+: stats | reasons | chat, the chat in its own column so it can
             never sit on top of the text. md to xl: the stats run in a row and
-            the chat peeks out beside the reasons. Phones: the reasons get the
-            full width and a compact chat follows them. */}
-        <div className="grid xl:grid-cols-[1fr_1fr_280px] gap-12 items-start xl:items-stretch max-w-5xl xl:max-w-6xl mx-auto">
+            the chat peeks out beside the reasons. Phones: compact stats and the
+            chat share the first row, the reasons get the full width below. */}
+        <div className="grid grid-cols-2 md:grid-cols-1 xl:grid-cols-[1fr_1fr_280px] gap-x-3 gap-y-10 md:gap-12 items-stretch md:items-start xl:items-stretch max-w-5xl xl:max-w-6xl mx-auto">
           {/* Left: the numbers */}
           <div
             ref={statsRef}
             className={cn(
-              'animate-slide-left grid grid-cols-2 md:grid-cols-4 xl:grid-cols-2 xl:auto-rows-fr gap-6',
+              'animate-slide-left grid grid-cols-1 md:grid-cols-4 xl:grid-cols-2 xl:auto-rows-fr gap-3 md:gap-6',
               statsVisible && 'visible'
             )}
           >
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="flex flex-col justify-center bg-white rounded-lg p-6 text-center shadow-sm border border-sky-100"
+                className="glass-panel flex flex-col justify-center px-2 py-3 md:p-6 text-center"
               >
-                <div className="text-4xl font-bold text-sky-700 mb-2">{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
+                <div className="text-2xl md:text-4xl font-bold text-sky-700 mb-0.5 md:mb-2">{stat.value}</div>
+                <div className="text-xs md:text-sm leading-snug text-gray-600">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -101,7 +101,7 @@ export function WhySpanish() {
           <div
             ref={reasonsRef}
             className={cn(
-              'animate-slide-right relative md:pr-48 xl:pr-0',
+              'animate-slide-right relative col-span-2 order-3 md:col-span-1 md:order-none md:pr-48 xl:pr-0',
               reasonsVisible && 'visible'
             )}
             style={{ transitionDelay: '200ms' }}
@@ -109,9 +109,9 @@ export function WhySpanish() {
             {/* md to xl: the chat peeks out from behind the text, into the
                 right padding reserved above */}
             <ChatMock className="hidden md:block xl:hidden absolute -right-4 top-0 opacity-75 scale-[0.7] origin-top-right" />
-            {/* lg+ (where the map shows): a frosted card like the stat cards,
-                so the text never sits directly on the map's lines */}
-            <div className="relative space-y-6 lg:h-full lg:rounded-lg lg:border lg:border-sky-100 lg:bg-white/85 lg:p-8 lg:shadow-sm lg:backdrop-blur-sm">
+            {/* lg+ (where the map shows): frosted like the stat cards, so the
+                text never sits directly on the map's lines */}
+            <div className="relative space-y-6 lg:glass-panel lg:h-full lg:p-8">
               {reasons.map((reason) => (
                 <div key={reason.title}>
                   <h3 className="text-xl font-semibold text-gray-900 mb-1">{reason.title}</h3>
@@ -121,8 +121,8 @@ export function WhySpanish() {
             </div>
           </div>
 
-          {/* Phones: a smaller chat after the reasons, never beside them */}
-          <ChatMock compact className="md:hidden mx-auto opacity-90" />
+          {/* Phones: a compact chat beside the stats, never beside the text */}
+          <ChatMock compact fill className="md:hidden order-2 w-full opacity-90" />
 
           {/* xl+: decorative texting loop in its own column */}
           <ChatMock fill className="hidden xl:flex opacity-85" />

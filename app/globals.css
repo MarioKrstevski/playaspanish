@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /* Frosted glass over the Why Spanish map: translucent like the chat panel,
+     with a blur so the map's lines never run sharp behind the text */
+  .glass-panel {
+    @apply rounded-2xl border border-white/70 bg-white/55 shadow-sm backdrop-blur-md;
+  }
+}
+
 /* ========== Font family (easy revert) ==========
  * To revert to browser default: comment out the "Custom fonts" block
  * and uncomment the "Default fonts" block below.
