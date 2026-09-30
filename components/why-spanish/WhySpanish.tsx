@@ -77,19 +77,19 @@ export function WhySpanish() {
             never sit on top of the text. md to xl: the stats run in a row and
             the chat peeks out beside the reasons. Phones: the reasons get the
             full width and a compact chat follows them. */}
-        <div className="grid xl:grid-cols-[1fr_1fr_280px] gap-12 items-start max-w-5xl xl:max-w-6xl mx-auto">
+        <div className="grid xl:grid-cols-[1fr_1fr_280px] gap-12 items-start xl:items-stretch max-w-5xl xl:max-w-6xl mx-auto">
           {/* Left: the numbers */}
           <div
             ref={statsRef}
             className={cn(
-              'animate-slide-left grid grid-cols-2 md:grid-cols-4 xl:grid-cols-2 gap-6',
+              'animate-slide-left grid grid-cols-2 md:grid-cols-4 xl:grid-cols-2 xl:auto-rows-fr gap-6',
               statsVisible && 'visible'
             )}
           >
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="bg-white rounded-lg p-6 text-center shadow-sm border border-sky-100"
+                className="flex flex-col justify-center bg-white rounded-lg p-6 text-center shadow-sm border border-sky-100"
               >
                 <div className="text-4xl font-bold text-sky-700 mb-2">{stat.value}</div>
                 <div className="text-sm text-gray-600">{stat.label}</div>
@@ -101,7 +101,7 @@ export function WhySpanish() {
           <div
             ref={reasonsRef}
             className={cn(
-              'animate-slide-right space-y-6 relative md:pr-48 xl:pr-0',
+              'animate-slide-right relative md:pr-48 xl:pr-0',
               reasonsVisible && 'visible'
             )}
             style={{ transitionDelay: '200ms' }}
@@ -109,19 +109,23 @@ export function WhySpanish() {
             {/* md to xl: the chat peeks out from behind the text, into the
                 right padding reserved above */}
             <ChatMock className="hidden md:block xl:hidden absolute -right-4 top-0 opacity-75 scale-[0.7] origin-top-right" />
-            {reasons.map((reason) => (
-              <div key={reason.title} className="relative">
-                <h3 className="text-xl font-semibold text-gray-900 mb-1">{reason.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{reason.description}</p>
-              </div>
-            ))}
+            {/* lg+ (where the map shows): a frosted card like the stat cards,
+                so the text never sits directly on the map's lines */}
+            <div className="relative space-y-6 lg:h-full lg:rounded-lg lg:border lg:border-sky-100 lg:bg-white/85 lg:p-8 lg:shadow-sm lg:backdrop-blur-sm">
+              {reasons.map((reason) => (
+                <div key={reason.title}>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-1">{reason.title}</h3>
+                  <p className="text-gray-700 leading-relaxed">{reason.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Phones: a smaller chat after the reasons, never beside them */}
           <ChatMock compact className="md:hidden mx-auto opacity-90" />
 
           {/* xl+: decorative texting loop in its own column */}
-          <ChatMock className="hidden xl:block self-center opacity-85" />
+          <ChatMock fill className="hidden xl:flex opacity-85" />
         </div>
       </div>
     </section>

@@ -43,13 +43,13 @@ const conversations: ChatMessage[][] = [
 ]
 
 // How long the typing dots show before a message appears
-const TYPING_MS = 1000
+const TYPING_MS = 650
 // Pause after a message lands before the next person starts typing
-const READ_MS = 1400
+const READ_MS = 850
 // Small beat before the very first message of a cycle
-const FIRST_DELAY_MS = 500
+const FIRST_DELAY_MS = 400
 // Pause on the finished conversation before it resets and loops
-const LOOP_PAUSE_MS = 4000
+const LOOP_PAUSE_MS = 3000
 
 function TypingDots({ side }: { side: ChatMessage['side'] }) {
   return (
@@ -90,7 +90,16 @@ function Bubble({ message }: { message: ChatMessage }) {
   )
 }
 
-export function ChatMock({ className, compact }: { className?: string; compact?: boolean }) {
+export function ChatMock({
+  className,
+  compact,
+  fill
+}: {
+  className?: string
+  compact?: boolean
+  /** Stretch to the parent's height instead of the fixed panel height */
+  fill?: boolean
+}) {
   const [convoIndex, setConvoIndex] = useState(0)
   const [visibleCount, setVisibleCount] = useState(0)
   const [isTyping, setIsTyping] = useState(false)
@@ -140,11 +149,17 @@ export function ChatMock({ className, compact }: { className?: string; compact?:
       className={cn(
         'w-[280px] pointer-events-none select-none',
         'rounded-3xl bg-white/40 p-4',
+        fill && 'flex flex-col',
         className
       )}
     >
       {/* Fixed height so the loop reset never shifts layout */}
-      <div className={cn('flex flex-col justify-end gap-2 overflow-hidden', compact ? 'h-[240px]' : 'h-[380px]')}>
+      <div
+        className={cn(
+          'flex flex-col justify-end gap-2 overflow-hidden',
+          fill ? 'flex-1 min-h-[300px]' : compact ? 'h-[240px]' : 'h-[380px]'
+        )}
+      >
         {shown.map((message, index) => (
           <Bubble key={index} message={message} />
         ))}
