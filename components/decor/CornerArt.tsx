@@ -123,10 +123,13 @@ export function StarsCorner({ className }: CornerProps) {
 export function SunCorner({ className }: CornerProps) {
   const rays = Array.from({ length: 12 }, (_, i) => {
     const angle = (i * 30 * Math.PI) / 180
-    const x1 = 90 + Math.cos(angle) * 58
-    const y1 = 90 + Math.sin(angle) * 58
-    const x2 = 90 + Math.cos(angle) * 80
-    const y2 = 90 + Math.sin(angle) * 80
+    // Rounded so server and client render identical attribute strings
+    // (raw trig output differs in the last digits and breaks hydration)
+    const r = (n: number) => Math.round(n * 100) / 100
+    const x1 = r(90 + Math.cos(angle) * 58)
+    const y1 = r(90 + Math.sin(angle) * 58)
+    const x2 = r(90 + Math.cos(angle) * 80)
+    const y2 = r(90 + Math.sin(angle) * 80)
     return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#fed7aa" strokeWidth="5" strokeLinecap="round" />
   })
   return (
