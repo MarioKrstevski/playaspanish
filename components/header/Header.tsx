@@ -17,6 +17,9 @@ const navItems = [
   { label: 'Contact', href: '#contact' }
 ]
 
+const navLinkClass =
+  'rounded-md px-2 py-1 text-gray-700 transition-colors hover:bg-primary-50 hover:text-primary-700'
+
 function handleSmoothScroll(e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) {
   e.preventDefault()
   // Check if it's an anchor link (starts with #)
@@ -76,7 +79,7 @@ export function Header() {
                         handleSmoothScroll(e, item.href)
                       }
                     }}
-                    className="text-gray-700 hover:text-primary-600 hover:bg-[#f1f1f1] rounded px-2 py-1 -mx-2 -my-1 transition-colors"
+                    className={cn(navLinkClass, '-mx-2 -my-1')}
                   >
                     {item.label}
                   </a>
@@ -87,8 +90,9 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'text-gray-700 hover:text-primary-600 hover:bg-[#f1f1f1] rounded px-2 py-1 -mx-2 -my-1 transition-colors',
-                    pathname === item.href && 'text-primary-600 font-semibold'
+                    navLinkClass,
+                    '-mx-2 -my-1',
+                    pathname === item.href && 'bg-primary-50 font-semibold text-primary-700'
                   )}
                 >
                   {item.label}
@@ -146,7 +150,7 @@ export function Header() {
                         }
                         setMobileMenuOpen(false)
                       }}
-                      className="text-gray-700 hover:text-primary-600 hover:bg-[#f1f1f1] rounded px-2 py-1 transition-colors"
+                      className={navLinkClass}
                     >
                       {item.label}
                     </a>
@@ -158,8 +162,8 @@ export function Header() {
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
-                      'text-gray-700 hover:text-primary-600 hover:bg-[#f1f1f1] rounded px-2 py-1 transition-colors',
-                      pathname === item.href && 'text-primary-600 font-semibold'
+                      navLinkClass,
+                      pathname === item.href && 'bg-primary-50 font-semibold text-primary-700'
                     )}
                   >
                     {item.label}
