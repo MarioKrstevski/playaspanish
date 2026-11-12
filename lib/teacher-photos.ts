@@ -14,7 +14,10 @@ export const teacherPhotos: Record<TeacherId, { src: string; label: string }[]> 
     // Generated from her own photo (Codex image generation, 2026-11-12)
     { src: '/teachers/angelica/codex-courtyard-blazer.jpg', label: 'From her photo: camel blazer, courtyard' },
     { src: '/teachers/angelica/codex-office-teal.jpg', label: 'From her photo: teal blouse, home office' },
-    { src: '/teachers/angelica/codex-cafe-terracotta.jpg', label: 'From her photo: terracotta jacket, café' }
+    { src: '/teachers/angelica/codex-cafe-terracotta.jpg', label: 'From her photo: terracotta jacket, café' },
+    // Same source photo, re-posed as a straight-on headshot
+    { src: '/teachers/angelica/codex-front-courtyard-blazer.jpg', label: 'From her photo, facing forward: camel blazer, courtyard' },
+    { src: '/teachers/angelica/codex-front-studio-blazer.jpg', label: 'From her photo, facing forward: charcoal blazer, studio' }
   ],
   neptali: [
     { src: '/teachers/neptali/courtyard.jpg', label: 'Courtyard, terracotta shirt' },
