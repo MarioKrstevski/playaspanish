@@ -5,6 +5,12 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "playaspanish",
   "compatibility_date": "2026-11-01",
+  // Both hostnames are attached to this Worker; Cloudflare creates the DNS
+  // records and certificates for them.
+  "routes": [
+    { "pattern": "playaspanish.com", "custom_domain": true },
+    { "pattern": "www.playaspanish.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./out",
     "html_handling": "auto-trailing-slash",
