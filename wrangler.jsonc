@@ -1,0 +1,13 @@
+{
+  // Cloudflare Worker that serves the static export in ./out (next build with
+  // output: 'export'). Deploy with `pnpm run deploy`, or let Cloudflare's Git
+  // integration run `pnpm build` then `npx wrangler deploy` on every push.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "playaspanish",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./out",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
