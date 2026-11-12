@@ -339,6 +339,11 @@
   color: var(--color-ink-2);
 }
 
+.heroSwitcher {
+  align-items: flex-start;
+  margin-top: var(--space-sm);
+}
+
 .caption strong {
   font-size: var(--text-md);
   font-weight: 600;

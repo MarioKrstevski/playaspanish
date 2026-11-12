@@ -63,6 +63,8 @@ export function Hero() {
             </p>
             {angelica.badge && <p className={styles.nameplateRole}>{angelica.badge.long}</p>}
           </div>
+          {/* TEMPORARY (PLA-18): try candidate headshots in the hero too */}
+          <TeacherPhotoSwitcher teacher="angelica" className={styles.heroSwitcher} />
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { Check } from 'lucide-react'
 import { hero, teachers } from '@/lib/content'
-import { TeacherPhoto } from '@/components/teachers/TeacherPhoto'
+import { TeacherPhoto, TeacherPhotoSwitcher } from '@/components/teachers/TeacherPhoto'
 import { cn } from '@/lib/utils'
 import { STATIONS } from './tones'
 import s from './c.module.css'
@@ -35,6 +35,8 @@ export function Hero() {
               <strong>{angelica.name}</strong>
               {angelica.badge?.long}
             </figcaption>
+            {/* TEMPORARY (PLA-18): try candidate headshots in the hero too */}
+            <TeacherPhotoSwitcher teacher="angelica" className={s.heroSwitcher} />
           </figure>
         </div>
 

@@ -18,8 +18,8 @@ export const VERSIONS = [
   { href: '/', label: 'Now', name: 'Current design, Ascension' },
   { href: '/v/a', label: 'A', name: 'Version A, Con Angelica' },
   { href: '/v/c', label: 'C', name: 'Version C, Ascension distilled' },
-  { href: '/v/d', label: 'D', name: 'Version D, Ascension with a moonrise hero' },
-  { href: '/v/e', label: 'E', name: 'Version E, Ascension with the chat up front' }
+  { href: '/v/d', label: 'D', name: 'Version D, Ascension redrawn' },
+  { href: '/v/e', label: 'E', name: 'Version E, Con Angelica with the Ascension ideas' }
 ]
 
 const PLACE_KEY = 'ps-version-place'

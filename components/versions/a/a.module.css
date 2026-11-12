@@ -460,6 +460,15 @@
   line-height: 1.3;
 }
 
+/* Photo picker floats in the wall beside the arch's shoulder */
+.heroSwitcher {
+  position: absolute;
+  top: 0.75rem;
+  right: var(--gutter);
+  z-index: 2;
+  align-items: flex-end;
+}
+
 .nameplateHola {
   font-family: var(--font-display);
   font-style: italic;

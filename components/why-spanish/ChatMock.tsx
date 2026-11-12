@@ -3,13 +3,14 @@
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 
-type ChatMessage = {
+export type ChatMessage = {
   text: string
   side: 'sent' | 'received'
 }
 
 // Three beginner-Spanglish conversations; each loop plays the next one.
-const conversations: ChatMessage[][] = [
+// Exported so other designs can draw their own chat around the same lines.
+export const conversations: ChatMessage[][] = [
   [
     { text: 'Hola Ana! Como estas?', side: 'sent' },
     { text: 'Muy bien!! Y tu? 😄', side: 'received' },
