@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Caveat } from 'next/font/google'
 import './globals.css'
+import { VersionBar } from '@/components/versions/VersionBar'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -33,7 +34,11 @@ export default function RootLayout({
           async
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* TEMPORARY (PLA-17): design switcher pinned under the header */}
+        <VersionBar />
+      </body>
     </html>
   )
 }
