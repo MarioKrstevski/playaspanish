@@ -92,20 +92,6 @@ export function AgaveFan({ className }: { className?: string }) {
   )
 }
 
-/** The top of a courtyard wall: a run of stepped merlons. */
-export function Parapet({ className }: { className?: string }) {
-  return (
-    <svg className={cn(s.parapet, className)} height="21" aria-hidden focusable="false">
-      <defs>
-        <pattern id="e-merlon" width="56" height="21" patternUnits="userSpaceOnUse">
-          <path d="M0 21V14H7V7H14V0H42V7H49V14H56V21Z" className={s.parapetFill} />
-        </pattern>
-      </defs>
-      <rect width="100%" height="21" fill="url(#e-merlon)" />
-    </svg>
-  )
-}
-
 /*
  * The Spanish-speaking world as a tiled wall: the 21 places where Spanish is
  * official, each a glazed tile at its own longitude and latitude (5 units per

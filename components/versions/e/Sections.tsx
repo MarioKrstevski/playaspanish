@@ -21,7 +21,7 @@ import {
 import { TeacherPhoto, TeacherPhotoSwitcher } from '@/components/teachers/TeacherPhoto'
 import { NAV_LINKS, PIGMENTS } from './pigments'
 import { PyramidArt } from './Pyramid'
-import { AgaveFan, DualityTile, Moon, Parapet, TileStrip, WorldThread, type Phase } from './Motifs'
+import { AgaveFan, DualityTile, Moon, TileStrip, WorldThread, type Phase } from './Motifs'
 import { MoonHeadline } from './MoonHeadline'
 import { Chat } from './Chat'
 import s from './e.module.css'
@@ -454,7 +454,6 @@ export function Reviews() {
 export function Contact() {
   return (
     <section id="contact" className={cn(s.section, s.contact, s.onRed, s.pRed)}>
-      <Parapet />
       <div className={cn(s.container, s.contactGrid)}>
         <div>
           <h2 className={s.h2}>{contact.title}</h2>

@@ -734,71 +734,25 @@
 }
 
 .portal {
-  --in: 4px;
-  --jamb: 8px;
-  --band: 22px;
-  --frame: calc(var(--in) + var(--jamb) + var(--band));
-  --portal-in: var(--plaster);
   --portal-wall: var(--terracotta);
-  --portal-step: var(--terracotta-deep);
-  --portal-step-2: var(--terracotta);
   position: relative;
   width: min(100% - 2.5rem, 23rem);
   margin-inline: auto;
-  padding: var(--frame) var(--frame) 0;
-  margin-bottom: 0.625rem;
+  margin-bottom: 1.25rem;
 }
 
-/* three courses around the cut photo, each the shape before it grown outward: a lining, the glazed jamb, the wall */
-.portalFrame {
-  filter: drop-shadow(var(--in) 0 0 var(--portal-in))
-    drop-shadow(calc(-1 * var(--in)) 0 0 var(--portal-in))
-    drop-shadow(0 calc(-1 * var(--in)) 0 var(--portal-in))
-    drop-shadow(var(--jamb) 0 0 var(--pig)) drop-shadow(calc(-1 * var(--jamb)) 0 0 var(--pig))
-    drop-shadow(0 calc(-1 * var(--jamb)) 0 var(--pig))
-    drop-shadow(var(--band) 0 0 var(--portal-wall))
-    drop-shadow(calc(-1 * var(--band)) 0 0 var(--portal-wall))
-    drop-shadow(0 calc(-1 * var(--band)) 0 var(--portal-wall));
-}
-
+/* An arched doorway with a block of the section's wall colour set behind it */
 .portalPhoto {
   position: relative;
   aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 999px 999px 0.75rem 0.75rem;
   background: var(--adobe);
-  clip-path: polygon(
-    24% 0,
-    76% 0,
-    76% 6.4%,
-    84% 6.4%,
-    84% 12.8%,
-    92% 12.8%,
-    92% 19.2%,
-    100% 19.2%,
-    100% 100%,
-    0 100%,
-    0 19.2%,
-    8% 19.2%,
-    8% 12.8%,
-    16% 12.8%,
-    16% 6.4%,
-    24% 6.4%
-  );
+  box-shadow: 0.875rem 0.875rem 0 var(--portal-wall);
 }
 
 .threshold {
-  position: relative;
-  height: 0.75rem;
-  margin-inline: calc(-1 * var(--frame) - 0.625rem);
-  background: var(--portal-step);
-}
-
-.threshold::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  inset-inline: -0.75rem;
-  height: 0.625rem;
-  background: var(--portal-step-2);
+  display: none;
 }
 
 .plaque {
@@ -1164,8 +1118,6 @@
   --soft: var(--sand);
   --focus: var(--gold);
   --portal-wall: var(--agave-leaf);
-  --portal-step: var(--agave-rule);
-  --portal-step-2: var(--agave-blade);
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -1224,8 +1176,6 @@
 
 .teacher {
   --portal-wall: var(--adobe);
-  --portal-step: var(--adobe-deep);
-  --portal-step-2: var(--adobe);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 2.5rem clamp(2.5rem, 6vw, 5rem);
@@ -1800,11 +1750,26 @@
     align-items: end;
   }
 
+  /* text and photo meet in the middle instead of sitting at the two edges */
   .heroGrid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 4.5rem;
     align-items: center;
     min-height: min(41rem, calc(100svh - var(--chrome)));
     padding-block: 2rem 3rem;
+  }
+
+  .heroText {
+    justify-self: end;
+  }
+
+  /* the photo stands in front, so the resting moon rises from behind it */
+  .heroFigure {
+    z-index: 1;
+  }
+
+  .heroFigure .portal {
+    margin-inline: 0 auto;
   }
 
   .plaque {
