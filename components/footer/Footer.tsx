@@ -28,6 +28,8 @@ function handleSmoothScroll(e: React.MouseEvent<HTMLAnchorElement>, href: string
 
 export function Footer() {
   const pathname = usePathname()
+  // The design versions under /v/* are homepages too (PLA-17)
+  const onHomepage = pathname === '/' || pathname.startsWith('/v/')
 
   return (
     <footer className="bg-[#450a0a] text-red-100/80 py-12">
@@ -51,9 +53,9 @@ export function Footer() {
                   return (
                     <li key={link.href}>
                       <a
-                        href={pathname === '/' ? link.href : `/${link.href}`}
+                        href={onHomepage ? link.href : `/${link.href}`}
                         onClick={(e) => {
-                          if (pathname === '/') {
+                          if (onHomepage) {
                             handleSmoothScroll(e, link.href)
                           }
                         }}

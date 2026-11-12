@@ -37,6 +37,8 @@ function handleSmoothScroll(e: React.MouseEvent<HTMLAnchorElement | HTMLButtonEl
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  // The design versions under /v/* are homepages too (PLA-17)
+  const onHomepage = pathname === '/' || pathname.startsWith('/v/')
 
   return (
     <>
@@ -55,7 +57,7 @@ export function Header() {
           <Link
             href="/#hero"
             onClick={(e) => {
-              if (pathname === '/') {
+              if (onHomepage) {
                 e.preventDefault()
                 handleSmoothScroll(e, '#hero')
               }
@@ -72,9 +74,9 @@ export function Header() {
                 return (
                   <a
                     key={item.href}
-                    href={pathname === '/' ? item.href : `/${item.href}`}
+                    href={onHomepage ? item.href : `/${item.href}`}
                     onClick={(e) => {
-                      if (pathname === '/') {
+                      if (onHomepage) {
                         e.preventDefault()
                         handleSmoothScroll(e, item.href)
                       }
@@ -142,9 +144,9 @@ export function Header() {
                   return (
                     <a
                       key={item.href}
-                      href={pathname === '/' ? item.href : `/${item.href}`}
+                      href={onHomepage ? item.href : `/${item.href}`}
                       onClick={(e) => {
-                        if (pathname === '/') {
+                        if (onHomepage) {
                           e.preventDefault()
                           handleSmoothScroll(e, item.href)
                         }

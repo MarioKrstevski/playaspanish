@@ -17,14 +17,16 @@ const SECTIONS = [
 
 const DOT_PITCH = 30 // 10px dot + 20px gap
 
-export function ChakraRail() {
+type RailSection = { id: string; color: string; label: string }
+
+export function ChakraRail({ sections = SECTIONS }: { sections?: RailSection[] } = {}) {
   const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
     const onScroll = () => {
       const threshold = window.innerHeight * 0.5
       let current = 0
-      SECTIONS.forEach((section, index) => {
+      sections.forEach((section, index) => {
         const el = document.getElementById(section.id)
         if (el && el.getBoundingClientRect().top <= threshold) {
           current = index
@@ -35,9 +37,9 @@ export function ChakraRail() {
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [sections])
 
-  const activeColor = SECTIONS[activeIndex].color
+  const activeColor = sections[activeIndex].color
 
   return (
     <nav
@@ -59,7 +61,7 @@ export function ChakraRail() {
             boxShadow: `0 0 10px 1px ${activeColor}59`
           }}
         />
-        {SECTIONS.map((section, index) => (
+        {sections.map((section, index) => (
           <button
             key={section.id}
             type="button"
