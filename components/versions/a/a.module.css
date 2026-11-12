@@ -1,0 +1,1256 @@
+/* Hallmark · v2.0.0 · theme: custom · idea: "You are met at the door of Angelica's courtyard: her archway, her walls, her greeting, Spanish said first" · vibe: "boutique, sunlit, personal, bilingual, unhurried" · job: enquire by email, the action in the hero, the plans and the close · posture: committed (terracotta, agave and adobe walls carry the page; bougainvillea pink is the one signal) · paper: plaster · accent: bougainvillea · faces: Alegreya 500 + Alegreya Sans 400/700 · hero: headline left, Angelica in an arched doorway set into a terracotta wall that bleeds right · nav: logo, four anchors, one action · footer: light, logo over the blurb, two short lists · copy: verbatim (lib/content.ts) · axes: light/roman-serif/warm */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: S, a split hero is the expected shape; kept because the brief asks for her photo beside the headline, and made hers with the doorway, the wall and her own greeting */
+/* waive 65: plaster, terracotta and olive are the client's brief, taken from her courtyard headshots; carried as full walls, not a cream page with a clay accent */
+/* waive 46a: the reviews come from lib/content.ts, where they are marked as placeholders to replace before launch (PLA-7) */
+/* waive 4 (floor 4): html and body belong to the shared layout; the clip sits on this version's root wrapper */
+/* waive 48: the token block is .root, not :root. This version shares the app with three other designs, so its tokens are scoped to its own wrapper; no colour or face is set past that block */
+
+.root {
+  /* colour */
+  --color-plaster: oklch(96.5% 0.016 82);
+  --color-sand: oklch(92.5% 0.03 80);
+  --color-adobe: oklch(85% 0.068 75);
+  --color-terracotta: oklch(50% 0.13 40);
+  --color-terracotta-deep: oklch(42% 0.115 38);
+  --color-clay-ink: oklch(45% 0.125 38);
+  --color-agave: oklch(31% 0.04 145);
+  --color-agave-rule: oklch(45% 0.04 145);
+  --color-olive: oklch(48% 0.06 118);
+  --color-pink: oklch(50% 0.2 352);
+  --color-pink-soft: oklch(86% 0.075 350);
+  --color-pink-wash: oklch(93.5% 0.035 350);
+  --color-ink: oklch(24% 0.025 55);
+  --color-muted: oklch(41% 0.03 60);
+  --color-rule-light: oklch(84% 0.03 78);
+  --color-rule-adobe: oklch(71% 0.07 72);
+  --color-rule-terracotta: oklch(63% 0.11 42);
+  --color-on-terracotta-soft: oklch(91% 0.045 70);
+
+  /* type */
+  --font-display: var(--font-a-display), Georgia, 'Times New Roman', serif;
+  --font-body: var(--font-a-body), 'Gill Sans', 'Trebuchet MS', ui-sans-serif, sans-serif;
+  --text-display: clamp(2.75rem, 1rem + 5vw, 5.5rem);
+  --text-h2: clamp(2.125rem, 1.3rem + 2.6vw, 3.5rem);
+  --text-statement: clamp(1.5rem, 1.15rem + 1.3vw, 2.25rem);
+  --text-h3: clamp(1.5rem, 1.3rem + 0.7vw, 1.875rem);
+  --text-body: clamp(1.1875rem, 1.13rem + 0.25vw, 1.3125rem);
+  --text-small: 1.0625rem;
+
+  /* space and shape */
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --container: 76rem;
+  --section: clamp(4rem, 9vw, 7.5rem);
+  --radius-frame: 0.75rem;
+  --radius-panel: 1.25rem;
+  --chrome: 6.75rem; /* 64px header + the 44px design switcher */
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+
+  /* roles, re-pointed by each wall */
+  --rule: var(--color-rule-light);
+  --focus: var(--color-pink);
+  --es: var(--color-clay-ink);
+  --soft: var(--color-muted);
+
+  min-height: 100vh;
+  /* the header is fixed (the shared html/body overflow rule breaks sticky), so the page starts below it */
+  padding-top: 4rem;
+  overflow-x: clip;
+  background: var(--color-plaster);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.55;
+  font-synthesis: none;
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  caret-color: var(--color-pink);
+  scrollbar-color: var(--color-terracotta) var(--color-sand);
+}
+
+.root ::selection {
+  background: var(--color-pink);
+  color: var(--color-plaster);
+}
+
+.root a:focus-visible,
+.root button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+}
+
+.root p {
+  text-wrap: pretty;
+}
+
+/* ---------- walls ---------- */
+
+.onSand {
+  background: var(--color-sand);
+}
+
+.onAdobe {
+  --rule: var(--color-rule-adobe);
+  --soft: var(--color-ink);
+  background: var(--color-adobe);
+}
+
+.onAgave {
+  --rule: var(--color-agave-rule);
+  --focus: var(--color-pink-soft);
+  --es: var(--color-adobe);
+  --soft: var(--color-sand);
+  background: var(--color-agave);
+  color: var(--color-plaster);
+}
+
+.onTerracotta {
+  --rule: var(--color-rule-terracotta);
+  --focus: var(--color-plaster);
+  --es: var(--color-on-terracotta-soft);
+  --soft: var(--color-on-terracotta-soft);
+  background: var(--color-terracotta);
+  color: var(--color-plaster);
+}
+
+/* ---------- frame ---------- */
+
+.container {
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section);
+  scroll-margin-top: var(--chrome);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+}
+
+/* ---------- type ---------- */
+
+.display,
+.h2,
+.h3,
+.statement,
+.es,
+.figure {
+  font-family: var(--font-display);
+  font-weight: 500;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.display {
+  font-size: var(--text-display);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  max-width: 13ch;
+}
+
+.h2 {
+  font-size: var(--text-h2);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  max-width: 18ch;
+}
+
+.h3 {
+  font-size: var(--text-h3);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.statement {
+  font-size: var(--text-statement);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* The Spanish line: a whole line of its own under the English, never a word inside it */
+.es {
+  font-style: italic;
+  color: var(--es);
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 2rem);
+  line-height: 1.2;
+  margin-top: 0.5rem;
+}
+
+.lead {
+  font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  line-height: 1.4;
+  max-width: 34ch;
+}
+
+.copy {
+  max-width: 60ch;
+}
+
+.soft {
+  color: var(--soft);
+}
+
+.small {
+  font-size: var(--text-small);
+}
+
+.strong {
+  font-weight: 700;
+}
+
+.sectionHead {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.sectionHead .copy,
+.sectionHead .lead {
+  margin-top: 1.25rem;
+}
+
+/* ---------- controls ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 3.25rem;
+  padding: 0.5rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.1875rem;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-short) var(--ease-out),
+    color var(--dur-short) var(--ease-out),
+    transform var(--dur-micro) var(--ease-out);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.root a.btn:focus-visible {
+  border-radius: 999px;
+}
+
+.btnSmall {
+  min-height: 2.75rem;
+  padding-inline: 1.125rem;
+  font-size: 1.125rem;
+}
+
+.btnPrimary {
+  background: var(--color-terracotta);
+  color: var(--color-plaster);
+}
+
+.btnPrimary:hover {
+  background: var(--color-terracotta-deep);
+}
+
+.btnLight {
+  background: var(--color-plaster);
+  color: var(--color-ink);
+}
+
+.btnLight:hover {
+  background: var(--color-adobe);
+}
+
+.btnIcon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.link {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: var(--color-terracotta);
+  transition: text-decoration-color var(--dur-short) var(--ease-out);
+}
+
+.link:hover {
+  text-decoration-color: var(--color-pink);
+}
+
+.onAgave .link,
+.onTerracotta .link {
+  text-decoration-color: currentColor;
+}
+
+/* ---------- header ---------- */
+
+.header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+  background: var(--color-plaster);
+  border-bottom: 1px solid var(--color-rule-light);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 4rem;
+}
+
+.logo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.logo img {
+  height: 1.5rem;
+  width: auto;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: clamp(1.25rem, 2.2vw, 2.25rem);
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: 1.1875rem;
+  transition: color var(--dur-short) var(--ease-out);
+}
+
+.navLink:hover {
+  color: var(--color-clay-ink);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  color: var(--color-ink);
+  transition: background-color var(--dur-short) var(--ease-out);
+}
+
+.menuButton:hover {
+  background: var(--color-sand);
+}
+
+.root button.menuButton:focus-visible {
+  border-radius: 999px;
+}
+
+.mobileMenu {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  background: var(--color-plaster);
+  border-bottom: 1px solid var(--color-rule-light);
+  padding: 0.5rem var(--gutter) 1.25rem;
+}
+
+.mobileMenu a {
+  display: flex;
+  align-items: center;
+  min-height: 3.25rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  border-bottom: 1px solid var(--color-rule-light);
+}
+
+.mobileMenu li:last-child a {
+  border-bottom: 0;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  scroll-margin-top: var(--chrome);
+}
+
+.heroWall {
+  display: none;
+}
+
+.heroGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.heroText {
+  /* clears the 44px design switcher that sits under the header */
+  padding-block: calc(2.75rem + 2rem) 2.5rem;
+}
+
+.heroText .lead {
+  margin-top: 1.5rem;
+}
+
+.promise {
+  margin-top: 0.375rem;
+  color: var(--color-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+  margin-top: 1.75rem;
+}
+
+.heroFigure {
+  position: relative;
+  margin-inline: calc(-1 * var(--gutter));
+  padding: 2.5rem var(--gutter) 0;
+  background: var(--color-terracotta);
+}
+
+.arch {
+  position: relative;
+  width: min(78%, 20rem);
+  aspect-ratio: 4 / 5;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 999px 999px 0 0;
+  background: var(--color-adobe);
+}
+
+.nameplate {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 1.5rem;
+  max-width: min(17rem, 70%);
+  padding: 0.875rem 1.25rem 1rem;
+  border-radius: var(--radius-frame);
+  background: var(--color-agave);
+  color: var(--color-plaster);
+  line-height: 1.3;
+}
+
+.nameplateHola {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--color-pink-soft);
+}
+
+.nameplateName {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.375rem;
+}
+
+.nameplateRole {
+  margin-top: 0.125rem;
+  font-size: 1.0625rem;
+  color: var(--color-sand);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise 560ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* ---------- buffet ---------- */
+
+.audiences {
+  border-bottom: 1px solid var(--rule);
+}
+
+.audience {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem 2rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.board {
+  align-self: start;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  border-radius: var(--radius-panel);
+}
+
+.boardLabel {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+  color: var(--soft);
+}
+
+.dish {
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.dish:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.dishEs {
+  margin-top: 0;
+  font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
+  line-height: 1.1;
+}
+
+.dishName {
+  margin-top: 0.375rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-body);
+}
+
+.dish p {
+  margin-top: 0.5rem;
+  color: var(--soft);
+}
+
+/* ---------- teachers ---------- */
+
+.teacher {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem clamp(2.5rem, 6vw, 5.5rem);
+  align-items: start;
+}
+
+.teacher + .teacher {
+  margin-top: clamp(4rem, 8vw, 7rem);
+  padding-top: clamp(4rem, 8vw, 7rem);
+  border-top: 1px solid var(--rule);
+}
+
+.portraitColumn {
+  width: min(100%, 24rem);
+  margin-inline: auto;
+}
+
+.portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  margin: 0 0 0.875rem 0.875rem;
+  overflow: hidden;
+  border-radius: var(--radius-frame);
+  background: var(--color-sand);
+  box-shadow: -0.875rem 0.875rem 0 var(--color-terracotta);
+}
+
+.portraitOlive {
+  box-shadow: -0.875rem 0.875rem 0 var(--color-olive);
+}
+
+.switcher {
+  margin-top: 1.5rem;
+}
+
+.teacherName {
+  font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+  line-height: 1.05;
+}
+
+.teacherMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.875rem;
+  margin-top: 0.75rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.875rem;
+  padding: 0.125rem 0.875rem;
+  border-radius: 999px;
+  background: var(--color-agave);
+  color: var(--color-plaster);
+  font-size: var(--text-small);
+  font-weight: 700;
+}
+
+.teacherIntro {
+  margin-top: 1.75rem;
+  font-style: italic;
+  max-width: 26ch;
+}
+
+.teacherIntroLong {
+  max-width: 36ch;
+}
+
+.credentials {
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.credentials li {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  padding-block: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+
+.tick {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2em;
+  color: var(--color-olive);
+}
+
+.teacherNotes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  margin-top: 2.25rem;
+}
+
+.teacherNotes h4 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.teacherNotes p {
+  color: var(--color-muted);
+  max-width: 62ch;
+}
+
+/* ---------- in class ---------- */
+
+.inClassLead {
+  margin-top: 2rem;
+  max-width: 24ch;
+}
+
+.inClassBody {
+  margin-top: 1.5rem;
+  color: var(--soft);
+}
+
+.topicsLabel {
+  padding-bottom: 1rem;
+  color: var(--soft);
+}
+
+.topics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.5rem;
+}
+
+.topic {
+  padding-block: 1.125rem 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+.topicEs {
+  margin-top: 0;
+  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.125rem);
+  line-height: 1.1;
+}
+
+.topicEn {
+  margin-top: 0.25rem;
+  font-size: var(--text-small);
+  color: var(--soft);
+}
+
+/* ---------- course ---------- */
+
+.courseSub {
+  margin-top: 1.5rem;
+  max-width: 22ch;
+  color: var(--color-clay-ink);
+}
+
+.pillars {
+  border-bottom: 1px solid var(--rule);
+}
+
+.pillar {
+  padding-block: 1.75rem;
+  border-top: 1px solid var(--rule);
+}
+
+.pillar p {
+  margin-top: 0.625rem;
+  color: var(--color-muted);
+  max-width: 56ch;
+}
+
+/* ---------- why spanish ---------- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.stat {
+  padding-block: 1.25rem 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.figure {
+  font-size: clamp(3rem, 2rem + 4vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.statLabel {
+  margin-top: 0.5rem;
+  max-width: 22ch;
+}
+
+.whySub {
+  margin-top: 1.25rem;
+  max-width: 40ch;
+}
+
+/* ---------- how it works ---------- */
+
+.steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  counter-reset: step;
+}
+
+.step {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  column-gap: 0.75rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--color-ink);
+}
+
+.step::before {
+  content: counter(step);
+  grid-row: span 2;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 3.25rem;
+  line-height: 0.9;
+  color: var(--color-clay-ink);
+  font-variant-numeric: lining-nums;
+}
+
+.step p {
+  grid-column: 2;
+  margin-top: 0.5rem;
+  color: var(--color-muted);
+}
+
+/* ---------- pricing ---------- */
+
+.priceLead {
+  margin-top: 1.5rem;
+  font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+  line-height: 1.1;
+  max-width: 20ch;
+  color: var(--color-clay-ink);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.plans {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-block: 1px solid var(--color-ink);
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.plan:first-child {
+  border-top: 0;
+}
+
+.planFeatured {
+  margin-inline: calc(-1 * var(--gutter));
+  padding-inline: var(--gutter);
+  background: var(--color-sand);
+}
+
+.planTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem 0.75rem;
+  min-height: 1.875rem;
+  color: var(--color-muted);
+  font-size: var(--text-small);
+}
+
+.planBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.875rem;
+  padding: 0.125rem 0.75rem;
+  border-radius: 999px;
+  background: var(--color-pink-wash);
+  color: var(--color-pink);
+  font-weight: 700;
+}
+
+.planName {
+  margin-top: 1rem;
+}
+
+.planPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  margin-top: 0.75rem;
+}
+
+.planPrice .figure {
+  font-size: clamp(3.5rem, 2.8rem + 2.4vw, 4.75rem);
+}
+
+.planUpfront {
+  margin-top: 0.25rem;
+  color: var(--color-muted);
+}
+
+.planTagline {
+  margin-top: 1.25rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.375rem;
+  line-height: 1.25;
+  color: var(--color-clay-ink);
+}
+
+.planFeatures {
+  margin-top: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.planFeatures li {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: 0.625rem;
+  padding-block: 0.375rem;
+}
+
+.planAction {
+  margin-top: auto;
+}
+
+.priceNote {
+  margin-top: 2rem;
+  color: var(--color-muted);
+  max-width: 68ch;
+}
+
+.profession {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem clamp(2rem, 5vw, 5rem);
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding: clamp(2rem, 5vw, 4rem);
+  border-radius: var(--radius-panel);
+}
+
+.profession p {
+  color: var(--soft);
+  max-width: 56ch;
+}
+
+.profession .btn {
+  margin-top: 1.75rem;
+}
+
+/* ---------- reviews ---------- */
+
+.reviews {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: clamp(2.5rem, 6vw, 5.5rem);
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  padding-block: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.review blockquote {
+  flex: 1;
+}
+
+.reviewQuote {
+  font-style: italic;
+  text-indent: -0.42em;
+  color: var(--color-ink);
+}
+
+.reviewBody {
+  margin-top: 1rem;
+  color: var(--color-muted);
+  max-width: 52ch;
+}
+
+.review figcaption {
+  margin-top: 1.25rem;
+  font-weight: 700;
+}
+
+/* ---------- contact ---------- */
+
+.contact {
+  position: relative;
+  padding-bottom: 0;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+}
+
+.contactText {
+  padding-bottom: 0;
+}
+
+.contactText .lead {
+  margin-top: 1.5rem;
+  max-width: 40ch;
+}
+
+.contactText .btn {
+  margin-top: 2rem;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.contactNote {
+  margin-top: 1.5rem;
+  color: var(--soft);
+  max-width: 44ch;
+}
+
+.contactFigure {
+  position: relative;
+  align-self: end;
+}
+
+.contactFigure .arch {
+  width: min(70%, 17rem);
+}
+
+.contactFigure .nameplate {
+  left: 0;
+}
+
+/* ---------- footer ---------- */
+
+.footer {
+  padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+  background: var(--color-plaster);
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+}
+
+.footerLogo img {
+  height: 2rem;
+  width: auto;
+}
+
+.footerBlurb {
+  margin-top: 1.25rem;
+  max-width: 44ch;
+  color: var(--color-muted);
+}
+
+.footerHeading {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.footerList a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+}
+
+.footerList a:hover {
+  color: var(--color-clay-ink);
+}
+
+.footerBase {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-rule-light);
+  color: var(--color-muted);
+  font-size: var(--text-small);
+}
+
+/* ---------- from 40rem: two-up details ---------- */
+
+@media (min-width: 40rem) {
+  .audience {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: baseline;
+  }
+
+  .teacherNotes {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+
+  .reviews {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footerGrid {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .logo img {
+    height: 1.875rem;
+  }
+}
+
+/* ---------- from 56rem: the page opens out ---------- */
+
+@media (min-width: 56rem) {
+  .split {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+
+  .splitHeadLeft {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .top {
+    align-self: start;
+  }
+
+  /* hero: the terracotta wall runs from just right of centre to the edge of the screen */
+  .heroWall {
+    display: block;
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    left: calc(50% + 4.5rem);
+    background: var(--color-terracotta);
+  }
+
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: min(44rem, calc(100svh - 4rem));
+  }
+
+  .heroText {
+    align-self: center;
+    padding-block: calc(2.75rem + 2.5rem) 3rem;
+    padding-right: 2rem;
+  }
+
+  .heroFigure {
+    align-self: end;
+    margin-inline: 0;
+    padding: calc(2.75rem + 2.5rem) 0 0 6rem;
+    background: none;
+  }
+
+  .heroFigure .arch {
+    width: min(100%, 27rem);
+    margin-inline: auto 0;
+  }
+
+  .heroFigure .nameplate {
+    left: 0;
+    bottom: 2.5rem;
+    max-width: 15rem;
+  }
+
+  .teacher {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .teacherFlip {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  }
+
+  .teacherFlip .portraitColumn {
+    order: 2;
+  }
+
+  .portraitColumn {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .step {
+    display: block;
+    padding-block: 1.5rem 0;
+  }
+
+  .step::before {
+    display: block;
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 1.25rem;
+  }
+
+  .plans {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .plan {
+    padding: 2.25rem clamp(1.25rem, 2.4vw, 2.25rem) 2.5rem;
+    border-top: 0;
+    border-left: 1px solid var(--rule);
+  }
+
+  .plan:first-child {
+    border-left: 0;
+  }
+
+  .planFeatured {
+    margin-inline: 0;
+  }
+
+  .profession {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .contactGrid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+  }
+
+  .contactText {
+    padding-bottom: var(--section);
+  }
+
+  .contactFigure .arch {
+    width: min(100%, 25rem);
+    margin-inline: auto 0;
+  }
+
+  .contactFigure .nameplate {
+    left: auto;
+    right: min(19rem, 62%);
+    bottom: 2.5rem;
+    max-width: none;
+  }
+
+  /* on the paragraphs themselves: text-wrap on .root p would otherwise switch wrapping back on */
+  .contactFigure .nameplate p {
+    white-space: nowrap;
+  }
+}
+
+/* ---------- from 60rem: the full header ---------- */
+
+@media (min-width: 60rem) {
+  .nav {
+    display: flex;
+  }
+
+  .menuButton {
+    display: none;
+  }
+
+  .mobileMenu {
+    display: none;
+  }
+
+  .logo img {
+    height: 2rem;
+  }
+}
+
+@media (min-width: 72rem) {
+  .heroFigure {
+    padding-left: 8.5rem;
+  }
+
+  .heroFigure .nameplate {
+    max-width: 19rem;
+    padding: 1.125rem 1.5rem 1.25rem;
+  }
+
+  .heroFigure .nameplateHola {
+    font-size: 1.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+
+  .btn,
+  .link,
+  .navLink,
+  .menuButton {
+    transition: none;
+  }
+}

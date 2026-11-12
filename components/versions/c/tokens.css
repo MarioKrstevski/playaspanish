@@ -1,0 +1,71 @@
+/* Version C tokens. A plain stylesheet, because a theme block cannot live in a
+   CSS module; everything here is scoped to the page's root wrapper. */
+[data-theme="playa-c"] {
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.875rem; --text-sm: 0.9375rem; --text-md: 1.0625rem;
+  --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.3125rem);
+  --text-title: clamp(1.375rem, 0.7vw + 1.05rem, 1.75rem);
+  --text-statement: clamp(1.5rem, 1.3vw + 1.05rem, 2.25rem);
+  --text-section: clamp(2.125rem, 2.4vw + 1.2rem, 3.375rem);
+  --text-display: clamp(2.625rem, 4.4vw + 0.9rem, 4.75rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-micro: 120ms; --dur-short: 220ms;
+  --container: 1280px; --gutter: 64px; --gap-columns: 32px;
+  --sec-top: var(--space-3xl); --sec-bottom: var(--space-2xl);
+  --bar: 44px; --head: 67px;
+  --z-raised: 10; --z-sticky-nav: 300; --z-toast: 500;
+  --radius-card: 6px; --radius-pill: 999px;
+
+  --color-paper: oklch(98.6% 0.004 230);
+  --color-paper-2: oklch(96.3% 0.008 230);
+  --color-paper-3: oklch(92.5% 0.012 230);
+  --color-ink: oklch(25% 0.04 225);
+  --color-ink-2: oklch(41% 0.035 225);
+  --color-muted: oklch(50% 0.03 225);
+  --color-rule: oklch(88% 0.012 230);
+  --color-accent: oklch(55% 0.21 300);
+  --color-accent-ink: oklch(98.6% 0.004 230);
+  --color-focus: oklch(52% 0.21 300);
+  --color-shade: oklch(25% 0.04 225 / 0.08);
+
+  --color-violet: oklch(55% 0.21 300); --color-violet-ink: oklch(45% 0.2 300);
+  --color-indigo: oklch(48% 0.2 275); --color-indigo-ink: oklch(42% 0.19 275);
+  --color-blue: oklch(60% 0.15 242); --color-blue-ink: oklch(46% 0.14 245);
+  --color-green: oklch(62% 0.15 155); --color-green-ink: oklch(43% 0.12 155);
+  --color-yellow: oklch(83% 0.16 92); --color-yellow-ink: oklch(47% 0.1 85);
+  --color-orange: oklch(70% 0.17 55); --color-orange-ink: oklch(49% 0.15 48);
+  --color-red: oklch(58% 0.21 27); --color-red-ink: oklch(48% 0.19 27);
+
+  --font-display: var(--font-c-display), ui-serif, Georgia, serif;
+  --font-body: var(--font-c-body), ui-sans-serif, system-ui, sans-serif;
+
+  --c: var(--color-accent);
+  --c-ink: var(--color-violet-ink);
+}
+
+/* The responsive steps live here too, so they always follow the base values */
+@media (max-width: 60rem) {
+  [data-theme="playa-c"] {
+    --gutter: 24px;
+    --sec-top: var(--space-2xl);
+    --sec-bottom: var(--space-xl);
+  }
+}
+
+@media (max-width: 40rem) {
+  [data-theme="playa-c"] {
+    --gutter: 16px;
+    --gap-columns: 16px;
+  }
+}
+
+html:has([data-theme="playa-c"]),
+body:has([data-theme="playa-c"]) {
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has([data-theme="playa-c"]) {
+    scroll-behavior: smooth;
+  }
+}
