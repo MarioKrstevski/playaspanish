@@ -1,0 +1,2129 @@
+/* Hallmark · v2.0.0 · theme: custom · idea: "Angelica's courtyard, walked from the crown to the root: seven natural pigments glaze one tile each down the page, every wall hands over to the next as a pyramid capped in the coming pigment, and the moon keeps the time" · vibe: "sunlit, handmade, bilingual, unhurried, tiled, lunar" · job: enquire by email, the action in the header, the hero, the first price step and the close · posture: full palette (plaster, sand and adobe walls carry the page; seven pigments each own one section's objects; terracotta is the one action colour) · paper: plaster · accent: seven pigments, violet to cochineal red · faces: Alegreya 500 + Alegreya Sans 400/700 (version A's) · hero: a three-line headline a violet moon crosses to show its Spanish, beside Angelica in a stepped pyramid doorway · nav: logo, four anchors, one action, a rail of seven tiles at the page edge · footer: light, logo over the blurb, two short lists, the seven tiles · copy: verbatim (lib/content.ts) · axes: light/roman-serif/chromatic-seven */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: R, ten sections of fixed copy make a long page; held together by one pigment and one drawn object per section rather than by trimming what the client wrote */
+/* waive 65: plaster, sand and terracotta are the brief (version A's courtyard, taken from the teachers' own photos); they are walls here, and the seven pigments do the colour work */
+/* waive 46a: the reviews come from lib/content.ts, where they are marked as placeholders to replace before launch (PLA-7) */
+/* waive 4 (floor 4): html and body belong to the shared layout; the clip sits on this version's root wrapper */
+/* waive 48: the token block is .root, not :root. This version shares the app with the other designs, so its tokens are scoped to its own wrapper; no colour or face is set past that block */
+/* waive 80: the pyramids, the moon phases, the stepped tile, the agave fan and the thread of 21 places are the developer's ten concepts, asked for by name and drawn as flat structure in the page's own pigments */
+
+/* The moon's place over the headline. Registered so it can travel instead of jump. */
+@property --mx {
+  syntax: '<length-percentage>';
+  inherits: true;
+  initial-value: 100%;
+}
+
+@property --my {
+  syntax: '<length-percentage>';
+  inherits: true;
+  initial-value: 0%;
+}
+
+.root {
+  /* walls */
+  --plaster: oklch(96.5% 0.016 82);
+  --sand: oklch(92.5% 0.03 80);
+  --adobe: oklch(85% 0.068 75);
+  --adobe-deep: oklch(74% 0.09 66);
+  --terracotta: oklch(48% 0.13 40);
+  --terracotta-deep: oklch(41% 0.115 38);
+  --agave: oklch(31% 0.04 145);
+  --agave-leaf: oklch(36% 0.046 145);
+  --agave-blade: oklch(40% 0.052 145);
+  --agave-rule: oklch(47% 0.045 145);
+  --night: oklch(25% 0.028 62);
+  --night-rise: oklch(32% 0.034 64);
+  --night-rule: oklch(43% 0.04 68);
+  --on-night-soft: oklch(87% 0.03 80);
+  --ink: oklch(24% 0.025 55);
+  --muted: oklch(41% 0.03 60);
+  --rule-light: oklch(84% 0.03 78);
+  --rule-sand: oklch(78% 0.045 76);
+  --tile-empty: oklch(72% 0.045 74);
+
+  /* the seven pigments, crown to root: a glaze, an ink for type on plaster, a limewash */
+  --violet: oklch(46% 0.13 305);
+  --violet-ink: oklch(40% 0.12 305);
+  --violet-wash: oklch(92% 0.03 305);
+  --indigo: oklch(35% 0.11 272);
+  --indigo-ink: oklch(34% 0.11 272);
+  --indigo-wash: oklch(91% 0.026 272);
+  --indigo-light: oklch(42% 0.105 270);
+  --on-indigo-soft: oklch(87% 0.04 272);
+  --blue: oklch(57% 0.1 222);
+  --blue-ink: oklch(39% 0.085 230);
+  --blue-wash: oklch(92% 0.032 215);
+  --blue-line: oklch(84% 0.045 215);
+  --on-blue-soft: oklch(90% 0.03 215);
+  --green: oklch(57% 0.1 150);
+  --green-ink: oklch(38% 0.07 150);
+  --green-wash: oklch(92% 0.035 145);
+  --gold: oklch(80% 0.14 82);
+  --gold-ink: oklch(47% 0.1 75);
+  --gold-wash: oklch(94% 0.05 88);
+  --gold-dim: oklch(62% 0.1 78);
+  --orange: oklch(66% 0.15 52);
+  --orange-ink: oklch(46% 0.13 44);
+  --orange-wash: oklch(92.5% 0.045 62);
+  --on-orange-soft: oklch(92% 0.045 70);
+  --cheer: oklch(62% 0.12 52);
+  --red: oklch(47% 0.16 24);
+  --red-ink: oklch(42% 0.15 24);
+  --red-wash: oklch(93.5% 0.028 24);
+  --red-shadow: oklch(85% 0.055 24);
+  --red-wall: oklch(43% 0.14 28);
+  --red-rule: oklch(58% 0.13 30);
+  --on-red-soft: oklch(92% 0.04 60);
+
+  /* light and shade on built things (alpha is for overlays only) */
+  --shade: oklch(24% 0.025 55 / 0.1);
+  --joint: oklch(24% 0.025 55 / 0.16);
+  --door: oklch(24% 0.025 55 / 0.55);
+  --glint: oklch(99% 0.01 82 / 0.24);
+
+  /* type */
+  --font-display: var(--font-a-display), Georgia, 'Times New Roman', serif;
+  --font-body: var(--font-a-body), 'Gill Sans', 'Trebuchet MS', ui-sans-serif, sans-serif;
+  --text-display: clamp(2.75rem, 1rem + 5vw, 5.5rem);
+  --text-h2: clamp(2.125rem, 1.3rem + 2.6vw, 3.5rem);
+  --text-statement: clamp(1.5rem, 1.15rem + 1.3vw, 2.25rem);
+  --text-h3: clamp(1.5rem, 1.3rem + 0.7vw, 1.875rem);
+  --text-body: clamp(1.1875rem, 1.13rem + 0.25vw, 1.3125rem);
+  --text-small: 1.0625rem;
+
+  /* space and shape */
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --container: 76rem;
+  --section: clamp(4rem, 9vw, 7.5rem);
+  --radius-tile: 0.375rem;
+  --radius-panel: 1.25rem;
+  --chrome: 6.75rem; /* 64px header + the 44px design switcher */
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  /* roles, re-pointed by each wall and each pigment */
+  --rule: var(--rule-light);
+  --soft: var(--muted);
+  --focus: var(--violet);
+  --pig: var(--violet);
+  --pig-ink: var(--violet-ink);
+  --pig-wash: var(--violet-wash);
+  --es: var(--pig-ink);
+  --empty: var(--tile-empty);
+
+  min-height: 100vh;
+  /* the header is fixed (the shared html/body overflow rule breaks sticky), so the page starts below it */
+  padding-top: 4rem;
+  overflow-x: clip;
+  background: var(--plaster);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.55;
+  font-synthesis: none;
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  caret-color: var(--violet);
+  scrollbar-color: var(--terracotta) var(--sand);
+}
+
+.root ::selection {
+  background: var(--violet);
+  color: var(--plaster);
+}
+
+.root a:focus-visible,
+.root button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+}
+
+.root p {
+  text-wrap: pretty;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- pigments ---------- */
+
+.pViolet {
+  --pig: var(--violet);
+  --pig-ink: var(--violet-ink);
+  --pig-wash: var(--violet-wash);
+}
+
+.pIndigo {
+  --pig: var(--indigo);
+  --pig-ink: var(--indigo-ink);
+  --pig-wash: var(--indigo-wash);
+}
+
+.pBlue {
+  --pig: var(--blue);
+  --pig-ink: var(--blue-ink);
+  --pig-wash: var(--blue-wash);
+}
+
+.pGreen {
+  --pig: var(--green);
+  --pig-ink: var(--green-ink);
+  --pig-wash: var(--green-wash);
+}
+
+.pGold {
+  --pig: var(--gold);
+  --pig-ink: var(--gold-ink);
+  --pig-wash: var(--gold-wash);
+}
+
+.pOrange {
+  --pig: var(--orange);
+  --pig-ink: var(--orange-ink);
+  --pig-wash: var(--orange-wash);
+}
+
+.pRed {
+  --pig: var(--red);
+  --pig-ink: var(--red-ink);
+  --pig-wash: var(--red-wash);
+}
+
+/* ---------- walls ---------- */
+
+.onSand {
+  --rule: var(--rule-sand);
+  background: var(--sand);
+}
+
+.onRedWash {
+  --rule: var(--red-shadow);
+  background: var(--red-wash);
+}
+
+.onNight {
+  --rule: var(--night-rule);
+  --soft: var(--on-night-soft);
+  --focus: var(--gold);
+  --es: var(--gold);
+  --empty: var(--night-rule);
+  background: var(--night);
+  color: var(--plaster);
+}
+
+.onRed {
+  --rule: var(--red-rule);
+  --soft: var(--on-red-soft);
+  --focus: var(--plaster);
+  --es: var(--on-red-soft);
+  background: var(--red-wall);
+  color: var(--plaster);
+}
+
+/* ---------- frame ---------- */
+
+.container {
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section);
+  scroll-margin-top: var(--chrome);
+}
+
+/* a section that continues the pigment of the one above it */
+.sectionJoined {
+  padding-top: 0;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+}
+
+.sectionHead {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.sectionHead .lead,
+.sectionHead .copy {
+  margin-top: 1.25rem;
+}
+
+.ruled {
+  padding-top: clamp(3rem, 6vw, 5rem);
+  border-top: 1px solid var(--rule);
+}
+
+/* ---------- type ---------- */
+
+.display,
+.h2,
+.h3,
+.statement,
+.es,
+.figure {
+  font-family: var(--font-display);
+  font-weight: 500;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.display {
+  font-size: var(--text-display);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.displayLine {
+  display: block;
+  white-space: nowrap;
+}
+
+.h2 {
+  font-size: var(--text-h2);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  max-width: 18ch;
+}
+
+.h3 {
+  font-size: var(--text-h3);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.statement {
+  font-size: var(--text-statement);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* a Spanish line: always a whole line of its own, never a word inside an English one */
+.es {
+  font-style: italic;
+  color: var(--es);
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 2rem);
+  line-height: 1.2;
+  margin-top: 0.5rem;
+}
+
+.lead {
+  font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  line-height: 1.4;
+  max-width: 36ch;
+}
+
+.copy {
+  max-width: 60ch;
+}
+
+.soft {
+  color: var(--soft);
+}
+
+.pigText {
+  color: var(--pig-ink);
+}
+
+.figure {
+  font-size: clamp(3rem, 2rem + 4vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* ---------- controls ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 3.25rem;
+  padding: 0.5rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.1875rem;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-short) var(--ease-out),
+    color var(--dur-short) var(--ease-out),
+    transform var(--dur-micro) var(--ease-out);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.root a.btn:focus-visible {
+  border-radius: 999px;
+}
+
+.btnSmall {
+  min-height: 2.75rem;
+  padding-inline: 1.125rem;
+  font-size: 1.125rem;
+}
+
+.btnPrimary {
+  background: var(--terracotta);
+  color: var(--plaster);
+}
+
+.btnPrimary:hover {
+  background: var(--terracotta-deep);
+}
+
+.btnLight {
+  background: var(--plaster);
+  color: var(--ink);
+}
+
+.btnLight:hover {
+  background: var(--adobe);
+}
+
+.btnOutline {
+  box-shadow: inset 0 0 0 2px var(--pig-ink);
+  color: var(--pig-ink);
+}
+
+.btnOutline:hover {
+  background: var(--pig-ink);
+  color: var(--plaster);
+}
+
+.btnIcon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.link {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: var(--pig);
+  transition: text-decoration-color var(--dur-short) var(--ease-out);
+}
+
+.link:hover {
+  text-decoration-color: var(--terracotta);
+}
+
+/* ---------- header ---------- */
+
+.header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+  background: var(--plaster);
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 4rem;
+}
+
+.logo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.logo img {
+  height: 1.5rem;
+  width: auto;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: clamp(1.25rem, 2.2vw, 2.25rem);
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: 1.1875rem;
+  transition: color var(--dur-short) var(--ease-out);
+}
+
+.navLink:hover {
+  color: var(--terracotta);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  color: var(--ink);
+  transition: background-color var(--dur-short) var(--ease-out);
+}
+
+.menuButton:hover {
+  background: var(--sand);
+}
+
+.root button.menuButton:focus-visible {
+  border-radius: 999px;
+}
+
+.mobileMenu {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  background: var(--plaster);
+  border-bottom: 1px solid var(--rule-light);
+  padding: 0.5rem var(--gutter) 1.25rem;
+}
+
+.mobileMenu a {
+  display: flex;
+  align-items: center;
+  min-height: 3.25rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.mobileMenu li:last-child a {
+  border-bottom: 0;
+}
+
+/* ---------- the descent: tiles ---------- */
+
+/* in each section head: seven tiles set in the wall, glazed as far as you have come */
+.strip {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.3125rem;
+  margin-bottom: 1.25rem;
+}
+
+.stripTile {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1.5px var(--empty);
+}
+
+.stripTileDone,
+.stripTileOn {
+  background: var(--tile);
+  box-shadow: inset 1.5px 1.5px 0 var(--glint);
+}
+
+.stripTileOn {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 3px;
+  box-shadow: inset 2px 2px 0 var(--glint);
+}
+
+/* at the page edge on wide screens: the same seven, as a way around */
+.rail {
+  display: none;
+}
+
+/* ---------- the hand-off: pyramids ---------- */
+
+.seam {
+  position: relative;
+  margin-bottom: -1px;
+  background: var(--from);
+  line-height: 0;
+}
+
+.seam + .section {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.pyramid {
+  display: block;
+  width: min(100%, 30rem);
+  height: auto;
+}
+
+.seamCenter .pyramid {
+  margin-inline: auto;
+}
+
+.seamRight .pyramid {
+  margin-left: auto;
+}
+
+.seamGrand .pyramid {
+  width: min(100%, 40rem);
+}
+
+.seamDark {
+  --shade: oklch(12% 0.02 62 / 0.4);
+  --joint: oklch(96.5% 0.016 82 / 0.16);
+}
+
+.pyFace {
+  fill: var(--to);
+}
+
+.pyCap {
+  fill: var(--cap);
+}
+
+.pyShade {
+  fill: var(--shade);
+}
+
+.pyDoor {
+  fill: var(--door);
+}
+
+.pyJoint {
+  fill: none;
+  stroke: var(--joint);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---------- the moon ---------- */
+
+.moon {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  flex-shrink: 0;
+}
+
+.moonDark {
+  fill: var(--moon-dark);
+}
+
+.moonLit {
+  fill: var(--moon-lit);
+}
+
+.moonRim {
+  fill: none;
+  stroke: var(--moon-rim);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  /* clears the 44px design switcher that sits under the header */
+  padding-top: 2.75rem;
+  scroll-margin-top: 4rem;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+  padding-block: 2.25rem 3.5rem;
+}
+
+.heroText .lead {
+  margin-top: 1.75rem;
+  max-width: 24ch;
+}
+
+.promise {
+  margin-top: 0.5rem;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+  margin-top: 1.75rem;
+}
+
+/* the headline and its moon */
+.reveal {
+  --mr: clamp(3rem, 2.2rem + 3.4vw, 5.25rem);
+  position: relative;
+  width: fit-content;
+}
+
+.lens {
+  /* where the moon rests: beside the first line, clear of the words */
+  --mx: calc(100% - var(--mr) * 1.6);
+  --my: calc(var(--mr) * 1.2);
+  position: absolute;
+  top: calc(-1 * var(--mr));
+  bottom: calc(-1 * var(--mr));
+  left: -1.5rem;
+  /* wide enough on the right that the resting moon clears the longer Spanish line */
+  right: calc(-3 * var(--mr));
+  padding: var(--mr) calc(3 * var(--mr)) var(--mr) 1.5rem;
+  background: var(--pig);
+  color: var(--plaster);
+  clip-path: circle(var(--mr) at var(--mx) var(--my));
+  pointer-events: none;
+  animation: moonrise 2.6s var(--ease-in-out) 0.5s backwards;
+}
+
+.reveal[data-moon] .lens {
+  animation: none;
+}
+
+.reveal[data-moon='held'] .lens {
+  transition:
+    --mx var(--dur-micro) linear,
+    --my var(--dur-micro) linear;
+}
+
+.reveal[data-moon='parked'] .lens {
+  transition:
+    --mx 700ms var(--ease-out),
+    --my 700ms var(--ease-out);
+}
+
+@keyframes moonrise {
+  from {
+    --mx: 0%;
+    --my: 100%;
+  }
+}
+
+/* Angelica in the doorway */
+.heroFigure {
+  position: relative;
+}
+
+.portal {
+  --in: 4px;
+  --jamb: 8px;
+  --band: 22px;
+  --frame: calc(var(--in) + var(--jamb) + var(--band));
+  --portal-in: var(--plaster);
+  --portal-wall: var(--terracotta);
+  --portal-step: var(--terracotta-deep);
+  --portal-step-2: var(--terracotta);
+  position: relative;
+  width: min(100% - 2.5rem, 23rem);
+  margin-inline: auto;
+  padding: var(--frame) var(--frame) 0;
+  margin-bottom: 0.625rem;
+}
+
+/* three courses around the cut photo, each the shape before it grown outward: a lining, the glazed jamb, the wall */
+.portalFrame {
+  filter: drop-shadow(var(--in) 0 0 var(--portal-in))
+    drop-shadow(calc(-1 * var(--in)) 0 0 var(--portal-in))
+    drop-shadow(0 calc(-1 * var(--in)) 0 var(--portal-in))
+    drop-shadow(var(--jamb) 0 0 var(--pig)) drop-shadow(calc(-1 * var(--jamb)) 0 0 var(--pig))
+    drop-shadow(0 calc(-1 * var(--jamb)) 0 var(--pig))
+    drop-shadow(var(--band) 0 0 var(--portal-wall))
+    drop-shadow(calc(-1 * var(--band)) 0 0 var(--portal-wall))
+    drop-shadow(0 calc(-1 * var(--band)) 0 var(--portal-wall));
+}
+
+.portalPhoto {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--adobe);
+  clip-path: polygon(
+    24% 0,
+    76% 0,
+    76% 6.4%,
+    84% 6.4%,
+    84% 12.8%,
+    92% 12.8%,
+    92% 19.2%,
+    100% 19.2%,
+    100% 100%,
+    0 100%,
+    0 19.2%,
+    8% 19.2%,
+    8% 12.8%,
+    16% 12.8%,
+    16% 6.4%,
+    24% 6.4%
+  );
+}
+
+.threshold {
+  position: relative;
+  height: 0.75rem;
+  margin-inline: calc(-1 * var(--frame) - 0.625rem);
+  background: var(--portal-step);
+}
+
+.threshold::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  inset-inline: -0.75rem;
+  height: 0.625rem;
+  background: var(--portal-step-2);
+}
+
+.plaque {
+  position: absolute;
+  z-index: 2;
+  left: -0.75rem;
+  bottom: 2.25rem;
+  max-width: min(16.5rem, 78%);
+  padding: 0.75rem 1.125rem 0.875rem;
+  border-radius: var(--radius-tile);
+  background: var(--pig);
+  box-shadow: inset 2px 2px 0 var(--glint);
+  color: var(--plaster);
+  line-height: 1.3;
+}
+
+.plaqueHola {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.plaqueRole {
+  margin-top: 0.125rem;
+  font-size: var(--text-small);
+}
+
+.switcher {
+  margin-top: 1.5rem;
+}
+
+/* ---------- course ---------- */
+
+.courseSub {
+  margin-top: 1.25rem;
+  max-width: 24ch;
+}
+
+.pillars {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--rule);
+}
+
+.pillar {
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.pillar p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+.duality {
+  align-self: center;
+  width: min(100%, 26rem);
+  margin-inline: auto;
+}
+
+.dualityArt {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dualityDark {
+  fill: var(--pig);
+}
+
+.dualityLight {
+  fill: var(--plaster);
+}
+
+.dualityLabel {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+  line-height: 1.3;
+  color: var(--pig-ink);
+}
+
+.dualityLabelEnd {
+  text-align: right;
+}
+
+/* ---------- in class ---------- */
+
+.classLead {
+  margin-top: 2rem;
+  max-width: 22ch;
+}
+
+.classBody {
+  margin-top: 1.5rem;
+  color: var(--muted);
+}
+
+.wallLabel {
+  margin-bottom: 0.875rem;
+  color: var(--muted);
+}
+
+/* six topics, six glazed tiles */
+.tileWall {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.3125rem;
+}
+
+.wallTile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: clamp(7.5rem, 16vw, 10.5rem);
+  padding: 1rem clamp(0.875rem, 2vw, 1.375rem) 1.125rem;
+  border-radius: var(--radius-tile);
+  background: var(--indigo);
+  box-shadow: inset 2px 2px 0 var(--glint);
+  color: var(--plaster);
+}
+
+.wallTile:nth-child(4n + 2),
+.wallTile:nth-child(4n + 3) {
+  background: var(--indigo-light);
+}
+
+.wallTileEs {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.375rem, 1.1rem + 1.1vw, 2rem);
+  line-height: 1.1;
+  overflow-wrap: break-word;
+}
+
+.wallTileEn {
+  margin-top: 0.25rem;
+  font-size: var(--text-small);
+  color: var(--on-indigo-soft);
+}
+
+/* ---------- one language, a whole world ---------- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  padding-block: 1.25rem 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.statLabel {
+  margin-top: 0.5rem;
+  max-width: 22ch;
+}
+
+.worldRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.world {
+  padding: clamp(0.5rem, 2vw, 1.5rem);
+  border-radius: var(--radius-panel);
+  background: var(--pig-wash);
+}
+
+.worldArt {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.worldGrid {
+  fill: none;
+  stroke: var(--blue-line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.worldEquator {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+  vector-effect: non-scaling-stroke;
+}
+
+.worldThread {
+  fill: none;
+  stroke: var(--blue-ink);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.worldTile {
+  fill: var(--blue);
+  stroke: var(--blue-ink);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.worldLabels {
+  display: none;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 15px;
+  fill: var(--blue-ink);
+}
+
+/* the conversation */
+.chat {
+  position: relative;
+  min-height: 23rem;
+  overflow: hidden;
+  border-radius: var(--radius-panel);
+  background: var(--sand);
+}
+
+.chatThread {
+  position: absolute;
+  inset: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.bubble {
+  width: fit-content;
+  max-width: 86%;
+  padding: 0.5rem 0.9375rem 0.5625rem;
+  border-radius: 1.125rem;
+  font-size: var(--text-small);
+  line-height: 1.3;
+  animation: note var(--dur-short) var(--ease-out);
+}
+
+.bubbleSent {
+  align-self: flex-end;
+  border-bottom-right-radius: 0.3125rem;
+  background: var(--blue-ink);
+  color: var(--plaster);
+}
+
+.bubbleReceived {
+  align-self: flex-start;
+  border-bottom-left-radius: 0.3125rem;
+  background: var(--plaster);
+  color: var(--ink);
+}
+
+.typing {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding-block: 0.875rem;
+}
+
+.typing i {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: currentColor;
+  animation: typing 1.1s var(--ease-in-out) infinite;
+}
+
+.typing i:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.typing i:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+@keyframes note {
+  from {
+    opacity: 0.4;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes typing {
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* ---------- the buffet ---------- */
+
+.audiences {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.audience {
+  padding-top: 1.25rem;
+  border-top: 0.25rem solid var(--pig);
+}
+
+.audience p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  max-width: 34ch;
+}
+
+.dishes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.dish {
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border-radius: var(--radius-panel);
+  background: var(--pig-ink);
+  color: var(--plaster);
+}
+
+.dishEs {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2rem, 1.4rem + 2.2vw, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.dishEn {
+  display: block;
+  margin-top: 0.625rem;
+  font-weight: 700;
+}
+
+.dish p {
+  margin-top: 0.5rem;
+  color: var(--on-blue-soft);
+  max-width: 40ch;
+}
+
+/* ---------- teachers ---------- */
+
+.owner {
+  --rule: var(--agave-rule);
+  --soft: var(--sand);
+  --focus: var(--gold);
+  --portal-wall: var(--agave-leaf);
+  --portal-step: var(--agave-rule);
+  --portal-step-2: var(--agave-blade);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem clamp(2.5rem, 6vw, 5rem);
+  overflow: hidden;
+  padding: clamp(1.75rem, 5vw, 4rem) clamp(1.25rem, 5vw, 4rem);
+  border-radius: var(--radius-panel);
+  background: var(--agave);
+  color: var(--plaster);
+}
+
+.agave {
+  display: block;
+  height: auto;
+}
+
+.ownerAgave {
+  position: absolute;
+  right: -4rem;
+  bottom: 0;
+  width: min(85%, 34rem);
+}
+
+.agaveBack {
+  fill: var(--agave-leaf);
+}
+
+.agaveFront {
+  fill: var(--agave-blade);
+}
+
+.teacherFigure,
+.teacherText {
+  position: relative;
+}
+
+.owner .portal {
+  width: min(100% - 2.5rem, 22rem);
+}
+
+.ownerPlaque {
+  position: absolute;
+  z-index: 2;
+  left: -0.5rem;
+  bottom: 2rem;
+  max-width: min(15rem, 76%);
+  padding: 0.5rem 1rem 0.5625rem;
+  border-radius: var(--radius-tile);
+  background: var(--gold);
+  box-shadow: inset 2px 2px 0 var(--glint);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: var(--text-small);
+  line-height: 1.3;
+}
+
+.teacher {
+  --portal-wall: var(--adobe);
+  --portal-step: var(--adobe-deep);
+  --portal-step-2: var(--adobe);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem clamp(2.5rem, 6vw, 5rem);
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+}
+
+.teacher .portal {
+  width: min(100% - 2.5rem, 18rem);
+}
+
+.teacher .teacherFigure {
+  order: -1;
+}
+
+.teacherName {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.ownerRole,
+.teacherRole {
+  margin-top: 0.5rem;
+  font-weight: 700;
+}
+
+.ownerRole {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--gold);
+}
+
+.ownerRole::before {
+  content: '';
+  flex-shrink: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+  background: var(--gold);
+}
+
+.teacherRole {
+  color: var(--pig-ink);
+}
+
+.teacherIntro {
+  margin-top: 1.75rem;
+  font-style: italic;
+  max-width: 30ch;
+}
+
+.credentials {
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.credentials li {
+  display: grid;
+  grid-template-columns: 0.5rem minmax(0, 1fr);
+  gap: 0.875rem;
+  align-items: baseline;
+  padding-block: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* a small tile set on its point */
+.credentials li::before,
+.stepFeatures li::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 1px;
+  background: var(--pig);
+  transform: translateY(-0.12em) rotate(45deg);
+}
+
+.teacherNotes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: 2.5rem;
+}
+
+.teacherNote {
+  margin-top: 2rem;
+}
+
+.teacherNote h4 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.teacherNote p {
+  color: var(--soft);
+  max-width: 62ch;
+}
+
+/* ---------- how it works ---------- */
+
+.sky {
+  --moon-lit: var(--gold);
+  --moon-dark: var(--night-rise);
+  --moon-rim: var(--gold-dim);
+  --g: clamp(1.5rem, 3vw, 2.5rem);
+  position: relative;
+}
+
+.arc,
+.skyPyramid {
+  display: none;
+}
+
+.phases {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.25rem;
+}
+
+/* on a phone the moon's path runs straight down through the four phases */
+.phases::before {
+  content: '';
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  bottom: 4rem;
+  border-left: 1px dashed var(--gold-dim);
+}
+
+.phase {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  column-gap: 1.25rem;
+  align-items: start;
+}
+
+.moonSlot {
+  grid-row: span 2;
+}
+
+.phase h3 {
+  align-self: end;
+  padding-top: 0.25rem;
+}
+
+.phase p {
+  grid-column: 2;
+  margin-top: 0.5rem;
+  color: var(--soft);
+}
+
+/* ---------- pricing ---------- */
+
+.priceLead {
+  margin-top: 1.25rem;
+}
+
+.climb {
+  --rise: 4.75rem;
+  position: relative;
+}
+
+.cheers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.125rem 1.25rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.375rem;
+  color: var(--cheer);
+}
+
+.cheer:nth-child(odd) {
+  font-size: 1.625rem;
+}
+
+.stairs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 2.6vw, 2.25rem);
+  border-top: 0.5rem solid var(--pig);
+  background: var(--sand);
+}
+
+/* on a phone the climb is a stair turned on its side: each step reaches further */
+.step:nth-child(1) {
+  margin-right: 2rem;
+}
+
+.step:nth-child(2) {
+  margin-right: 1rem;
+  background: var(--adobe);
+}
+
+.stepSummit {
+  --soft: var(--on-orange-soft);
+  background: var(--pig-ink);
+  color: var(--plaster);
+}
+
+.stepLabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem 0.75rem;
+  min-height: 1.875rem;
+  margin-bottom: 0.75rem;
+  font-size: var(--text-small);
+}
+
+.stepBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.875rem;
+  padding: 0.125rem 0.75rem;
+  border-radius: 999px;
+  background: var(--pig-ink);
+  color: var(--plaster);
+  font-weight: 700;
+}
+
+.stepPrice {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 0.75rem;
+  margin-top: 0.5rem;
+  line-height: 1.3;
+}
+
+.stepPrice .figure {
+  font-size: clamp(3.5rem, 2.8rem + 2.4vw, 4.75rem);
+}
+
+.stepUpfront {
+  display: block;
+  color: var(--soft);
+}
+
+.stepTagline {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.375rem;
+  line-height: 1.25;
+  color: var(--pig-ink);
+}
+
+.stepSummit .stepTagline {
+  color: var(--on-orange-soft);
+}
+
+.stepFeatures {
+  margin-top: 1rem;
+}
+
+.stepFeatures li {
+  display: grid;
+  grid-template-columns: 0.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding-block: 0.3125rem;
+}
+
+.step:nth-child(2) .stepFeatures li::before {
+  background: var(--pig-ink);
+}
+
+.stepSummit .stepFeatures li::before {
+  background: var(--pig);
+}
+
+.stepAction {
+  align-self: flex-start;
+  margin-top: 1.5rem;
+  max-width: 100%;
+  white-space: normal;
+}
+
+.priceNote {
+  margin-top: 2rem;
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+.profession {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem clamp(2rem, 5vw, 5rem);
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding: clamp(1.75rem, 5vw, 4rem) clamp(1.25rem, 5vw, 4rem);
+  border-radius: var(--radius-panel);
+  background: var(--pig-wash);
+}
+
+.profession p {
+  max-width: 56ch;
+}
+
+.profession .btn {
+  margin-top: 1.75rem;
+  max-width: 100%;
+  white-space: normal;
+}
+
+/* ---------- reviews ---------- */
+
+.reviewGrid {
+  --moon-lit: var(--red);
+  --moon-dark: var(--red-shadow);
+  --moon-rim: var(--red);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 5rem clamp(2.5rem, 6vw, 5.5rem);
+  padding-top: 2.25rem;
+}
+
+.review {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.75rem;
+  border-top: 2px solid var(--pig);
+}
+
+/* half a moon above the line: it is rising */
+.moonrise {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  width: 4.5rem;
+  height: 2.25rem;
+  overflow: hidden;
+}
+
+.moonrise .moon {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.review blockquote {
+  flex: 1;
+}
+
+.reviewQuote {
+  font-style: italic;
+  text-indent: -0.42em;
+  max-width: 24ch;
+}
+
+.reviewBody {
+  margin-top: 1rem;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+.review figcaption {
+  margin-top: 1.25rem;
+  font-weight: 700;
+}
+
+/* ---------- contact ---------- */
+
+.contact {
+  position: relative;
+}
+
+/* the top of the last wall */
+.parapet {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% - 1px);
+  display: block;
+  width: 100%;
+}
+
+.parapetFill {
+  fill: var(--red-wall);
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem clamp(2.5rem, 6vw, 5.5rem);
+}
+
+.contactLead {
+  margin-top: 1.5rem;
+  max-width: 40ch;
+}
+
+.contactButton {
+  margin-top: 2rem;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.contactNote {
+  margin-top: 1.5rem;
+  color: var(--soft);
+  max-width: 44ch;
+}
+
+.contactFigure {
+  text-align: center;
+}
+
+/* Angelica as the full moon, a gold crescent behind her */
+.fullMoon {
+  position: relative;
+  width: min(68%, 17rem);
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+
+.fullMoon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--gold);
+  transform: translate(-0.875rem, 0.5rem);
+}
+
+.fullMoonPhoto {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--adobe);
+  box-shadow: 0 0 0 0.3125rem var(--red-wall);
+}
+
+.contactHola {
+  margin-top: 1.75rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.875rem;
+  line-height: 1.2;
+}
+
+.contactRole {
+  margin-top: 0.25rem;
+  color: var(--soft);
+}
+
+/* ---------- footer ---------- */
+
+.footer {
+  padding-block: clamp(2.5rem, 5vw, 4rem) 2rem;
+  background: var(--plaster);
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+}
+
+.footerLogo {
+  display: inline-block;
+}
+
+.footerLogo img {
+  height: 2rem;
+  width: auto;
+}
+
+.footerBlurb {
+  margin-top: 1.25rem;
+  max-width: 44ch;
+  color: var(--muted);
+}
+
+.footerHeading {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.footerList a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+}
+
+.footerList a:hover {
+  color: var(--terracotta);
+}
+
+.footerBase {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule-light);
+  color: var(--muted);
+  font-size: var(--text-small);
+}
+
+.footerTiles {
+  display: flex;
+  gap: 0.3125rem;
+}
+
+.footerTiles span {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 2px;
+  background: var(--tile);
+  box-shadow: inset 1.5px 1.5px 0 var(--glint);
+}
+
+/* ---------- from 40rem: two-up details ---------- */
+
+@media (min-width: 40rem) {
+  .logo img {
+    height: 1.875rem;
+  }
+
+  .worldLabels {
+    display: block;
+  }
+
+  .audiences {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dishes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .teacherNotes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reviewGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footerGrid {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* ---------- from 56rem: the page opens out ---------- */
+
+@media (min-width: 56rem) {
+  .split {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+
+  .splitEven {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: end;
+  }
+
+  .heroGrid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: center;
+    min-height: min(41rem, calc(100svh - var(--chrome)));
+    padding-block: 2rem 3rem;
+  }
+
+  .plaque {
+    left: -3.25rem;
+    bottom: 3rem;
+  }
+
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .worldRow {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .owner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+  }
+
+  .ownerAgave {
+    right: -5rem;
+    width: 36rem;
+  }
+
+  .teacher {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    align-items: start;
+    padding-inline: clamp(0rem, 3vw, 4rem);
+  }
+
+  .teacher .teacherFigure {
+    order: 0;
+  }
+
+  .teacher .portal {
+    width: 100%;
+  }
+
+  /* how it works: the moon crosses the sky over a pyramid */
+  .arc {
+    display: block;
+    position: absolute;
+    top: 0;
+    /* four moons, 48px in from the left of each column: the arc is four column pitches wide, moons at its eighths */
+    left: calc(48px - (100% + var(--g)) / 8);
+    width: calc(100% + var(--g));
+    height: 170px;
+    overflow: visible;
+  }
+
+  .arc path {
+    fill: none;
+    stroke: var(--gold-dim);
+    stroke-width: 1;
+    stroke-dasharray: 2 7;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .skyPyramid {
+    --to: var(--night-rise);
+    --cap: var(--night-rule);
+    --shade: oklch(12% 0.02 62 / 0.35);
+    --joint: oklch(96.5% 0.016 82 / 0.1);
+    display: block;
+    position: absolute;
+    top: 170px;
+    left: calc(48px + (100% + var(--g)) * 0.375);
+    width: clamp(5rem, (100% + var(--g)) / 4 - 8.5rem, 11rem);
+    transform: translate(-50%, -100%);
+  }
+
+  .phases {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--g);
+  }
+
+  .phases::before {
+    left: -50vw;
+    right: -50vw;
+    top: 170px;
+    bottom: auto;
+    border-left: 0;
+    border-top: 1px solid var(--night-rule);
+  }
+
+  .phase {
+    display: block;
+  }
+
+  .moonSlot {
+    height: 170px;
+    margin-bottom: 1.75rem;
+    padding-top: 64px;
+  }
+
+  .phase:nth-child(2) .moonSlot,
+  .phase:nth-child(3) .moonSlot {
+    padding-top: 8px;
+  }
+
+  .moonSlot .moon {
+    width: 96px;
+    height: 96px;
+  }
+
+  .phase h3 {
+    padding-top: 0;
+  }
+
+  /* pricing: three steps up to the price everyone pays */
+  .climb {
+    padding-top: 3.75rem;
+  }
+
+  .cheers {
+    position: absolute;
+    inset: 0;
+    display: block;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  .cheer {
+    position: absolute;
+    rotate: var(--tilt, 0deg);
+    animation: drift 9s var(--ease-in-out) infinite;
+    animation-delay: calc(var(--i) * -1.7s);
+  }
+
+  .cheer:nth-child(1) {
+    --tilt: -6deg;
+    left: 3%;
+    top: 6.25rem;
+    font-size: 2.25rem;
+  }
+
+  .cheer:nth-child(2) {
+    --tilt: 4deg;
+    left: 15%;
+    top: 9.75rem;
+    font-size: 1.5rem;
+  }
+
+  .cheer:nth-child(3) {
+    --tilt: 3deg;
+    left: 20%;
+    top: 3rem;
+    font-size: 1.375rem;
+  }
+
+  .cheer:nth-child(4) {
+    --tilt: -3deg;
+    left: 39%;
+    top: 4.75rem;
+    font-size: 1.75rem;
+  }
+
+  .cheer:nth-child(5) {
+    --tilt: 5deg;
+    left: 55%;
+    top: 0.75rem;
+    font-size: 1.375rem;
+  }
+
+  .cheer:nth-child(6) {
+    --tilt: -5deg;
+    right: 4%;
+    top: 0.25rem;
+    font-size: 2rem;
+  }
+
+  .stairs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: var(--rise) var(--rise) auto;
+  }
+
+  .step:nth-child(1) {
+    grid-column: 1;
+    grid-row: 3;
+    margin-right: 0;
+  }
+
+  .step:nth-child(2) {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    margin-right: 0;
+  }
+
+  .step:nth-child(3) {
+    grid-column: 3;
+    grid-row: 1 / 4;
+  }
+
+  .profession {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .contactGrid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: center;
+  }
+}
+
+/* ---------- from 60rem: the full header ---------- */
+
+@media (min-width: 60rem) {
+  .nav {
+    display: flex;
+  }
+
+  .menuButton,
+  .mobileMenu {
+    display: none;
+  }
+
+  .logo img {
+    height: 2rem;
+  }
+}
+
+/* ---------- from 80rem: the rail of tiles at the page edge ---------- */
+
+@media (min-width: 80rem) {
+  .rail {
+    display: block;
+    position: fixed;
+    z-index: 30;
+    left: 0.625rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .rail ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .railLink {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .railTile {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 2px;
+    background: var(--tile);
+    box-shadow:
+      inset 1.5px 1.5px 0 var(--glint),
+      0 0 0 2px var(--plaster);
+    transition: transform var(--dur-long) var(--ease-out);
+  }
+
+  .railLink[aria-current] .railTile {
+    transform: rotate(45deg) scale(1.5);
+  }
+
+  .railLabel {
+    position: absolute;
+    left: calc(100% + 0.5rem);
+    top: 50%;
+    padding: 0.125rem 0.75rem 0.1875rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--plaster);
+    font-size: 1rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-50%);
+    transition:
+      opacity var(--dur-short) var(--ease-out),
+      visibility 0s linear var(--dur-short);
+  }
+
+  .railLink:hover .railLabel,
+  .railLink:focus-visible .railLabel {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+  }
+}
+
+@media (min-width: 90rem) {
+  .rail {
+    left: 2.25rem;
+  }
+}
+
+@keyframes drift {
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lens,
+  .cheer,
+  .bubble,
+  .typing i {
+    animation: none;
+  }
+
+  .reveal[data-moon] .lens,
+  .btn,
+  .link,
+  .navLink,
+  .menuButton,
+  .railTile,
+  .railLabel {
+    transition: none;
+  }
+}
