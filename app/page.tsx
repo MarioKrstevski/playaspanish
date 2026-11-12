@@ -1,6 +1,8 @@
 import { Header } from '@/components/header/Header'
 import { Hero } from '@/components/hero/Hero'
 import { Experience } from '@/components/experience/Experience'
+import { InClass } from '@/components/in-class/InClass'
+import { LanguageBuffet } from '@/components/buffet/LanguageBuffet'
 import { WhySpanish } from '@/components/why-spanish/WhySpanish'
 import { AboutTeacher } from '@/components/about-teacher/AboutTeacher'
 import { MoonJourney } from '@/components/journey/MoonJourney'
@@ -37,8 +39,10 @@ export default function Home() {
           <SectionDivider variant="egyptian" from="transparent" to={colors.experience} />
         </div>
         <Experience />
+        <InClass />
         <SectionDivider variant="ziggurat" from={colors.experience} to={colors.whySpanish} />
         <WhySpanish />
+        <LanguageBuffet />
         <SectionDivider variant="shikhara" from={colors.whySpanish} to={colors.about} accent="#6ee7b7" />
         <AboutTeacher />
         <SectionDivider variant="egyptian" from={colors.about} to={colors.journey} />
