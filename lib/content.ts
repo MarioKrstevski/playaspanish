@@ -116,7 +116,7 @@ export type Teacher = {
 
 export const teachersIntro = {
   title: 'Meet Your Teachers',
-  sub: 'Every teacher at Playa Spanish is Mexican. Angelica is your first contact, and she matches you with the teacher who fits you best.'
+  sub: 'Every teacher at Playa Spanish is Mexican, so you learn the language the way it is really spoken, straight from the source.'
 }
 
 export const teachers: Teacher[] = [
