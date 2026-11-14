@@ -21,6 +21,10 @@ export const teacherPhotos: Record<TeacherId, { src: string; label: string }[]> 
   ],
   neptali: [
     { src: '/teachers/neptali/courtyard.jpg', label: 'Courtyard, terracotta shirt' },
-    { src: '/teachers/neptali/original.jpg', label: 'His own photo' }
+    { src: '/teachers/neptali/original.jpg', label: 'His own photo' },
+    // Generated from his own photo, centred and facing forward (Codex image generation)
+    { src: '/teachers/neptali/codex-courtyard-blazer.jpg', label: 'From his photo: navy blazer, courtyard' },
+    { src: '/teachers/neptali/codex-office-linen.jpg', label: 'From his photo: white linen shirt, home office' },
+    { src: '/teachers/neptali/codex-cafe-sweater.jpg', label: 'From his photo: charcoal sweater, café' }
   ]
 }
