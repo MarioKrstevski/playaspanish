@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { whySpanish } from '@/lib/content'
 import { Chat } from './Chat'
-import { CAPITALS, GLOBE, GRATICULE, LAND } from './globe-data'
+import { CAPITALS, GLOBE, GRATICULE, LAND } from '@/components/globe/globe-data'
 import s from './d.module.css'
 
 // Where each country label sits relative to its capital.

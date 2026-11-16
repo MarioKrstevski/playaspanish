@@ -195,49 +195,34 @@ export const howItWorks = {
 }
 
 export const pricing = {
-  title: 'One price, one path',
-  lead: 'A lesson is $30. That never changes.',
-  sub: 'Each lesson is a one-hour session: 45 minutes of focused Spanish, with breathing room built in. New students climb in from a lower step.',
+  title: 'Simple, honest pricing',
+  lead: 'A lesson is $25. Take ten and pay $24 each.',
+  sub: 'Each lesson is a one-hour session: 45 minutes of focused Spanish, with breathing room built in.',
   plans: [
     {
-      label: 'New students',
-      badge: 'The way most students start',
+      label: 'The pack',
+      badge: 'Best value',
       name: '10 Lessons',
-      price: '$28',
-      unit: 'per lesson · $280 upfront',
-      tagline: 'The full first climb',
+      price: '$24',
+      unit: 'per lesson · $240 for the pack',
+      tagline: 'Commit to ten, save $10',
       features: [
-        'Save $20 on your first ten lessons',
+        'Save $10 on ten lessons',
         'Schedule them whenever you like',
-        '50% money-back if it is not for you'
+        '50% money back if it is not for you'
       ],
       cta: 'Start with 10 lessons',
       recommended: true
     },
     {
-      label: 'New students',
-      badge: null,
-      name: '5 Lessons',
-      price: '$29',
-      unit: 'per lesson · $145 upfront',
-      tagline: 'A gentle start',
-      features: [
-        'Save $5 on your first five lessons',
-        'Schedule them whenever you like',
-        '50% money-back if it is not for you'
-      ],
-      cta: null,
-      recommended: false
-    },
-    {
-      label: 'Everyone',
+      label: 'Pay as you go',
       badge: null,
       name: 'The Lesson',
-      price: '$30',
+      price: '$25',
       unit: 'per lesson · pay as you go',
-      tagline: 'The rhythm, where everyone arrives',
+      tagline: 'One class at a time',
       features: [
-        'Pay per class or per month, as you like',
+        'Pay per class, no commitment',
         'Lessons at your own pace, no expiry',
         'Same price for as long as you learn'
       ],
@@ -245,7 +230,7 @@ export const pricing = {
       recommended: false
     }
   ],
-  note: "Starter steps are for first-time students, paid upfront and yours to schedule freely. If a pack truly isn't for you, half your money comes back. No questions, no hard feelings.",
+  note: "Both start the same way: send Angelica an email and she will send you a payment link for a single lesson or the pack. If the pack truly isn't for you, half your money comes back. No questions, no hard feelings.",
   professional: {
     title: 'Spanish for your profession',
     body: 'Lawyers, doctors, job interviews, business negotiations. When you need Spanish for something specific, we start with a conversation. Angelica listens to what you need, then builds a course that fits it exactly. Custom scope, custom quote.',

@@ -57,10 +57,10 @@ function Terrace({ plan, className }: { plan: Plan; className: string }) {
   )
 }
 
-// Orange day. The price list is the pyramid: $30 is the summit everyone
-// arrives at, and new students climb in from the two terraces below it.
+// Orange day. The price list is the pyramid: the single lesson on top, the
+// ten-lesson pack as the wide terrace below it.
 export function Climb() {
-  const [ten, five, lesson] = pricing.plans
+  const [ten, lesson] = pricing.plans
   return (
     <section id="pricing" data-zone="orange" data-tone="light" className={cn(s.zone, 'overflow-hidden')}>
       <div className={cn(s.wrap, 'pb-20 pt-12 md:pb-28 md:pt-16')}>
@@ -98,7 +98,6 @@ export function Climb() {
           ))}
           <ol>
             <Terrace plan={lesson} className={s.terraceTop} />
-            <Terrace plan={five} className={s.terraceMid} />
             <Terrace plan={ten} className={s.terraceBase} />
           </ol>
         </div>

@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from 'react'
 
-// Fixed rail of seven chakra dots, one per section of the descent.
+// Fixed rail of seven chakra dots, one per section of the descent, crown to
+// root: pink, purple, blue, green, yellow, orange, red.
 // A soft halo travels down the rail and takes on the color of the
 // section currently in view. Dots scroll to their section on click.
 const SECTIONS = [
-  { id: 'hero', color: '#8b5cf6', label: 'Top' },
-  { id: 'course', color: '#6366f1', label: 'The Course' },
+  { id: 'hero', color: '#ec4899', label: 'Top' },
+  { id: 'course', color: '#a855f7', label: 'The Course' },
   { id: 'why-spanish', color: '#0ea5e9', label: 'Why Spanish' },
   { id: 'about', color: '#10b981', label: 'Teachers' },
-  { id: 'how-it-works', color: '#f59e0b', label: 'How it works' },
+  { id: 'how-it-works', color: '#eab308', label: 'How it works' },
   { id: 'pricing', color: '#f97316', label: 'Pricing' },
   { id: 'reviews', color: '#ef4444', label: 'Reviews' }
 ]
@@ -47,7 +48,7 @@ export function ChakraRail({ sections = SECTIONS }: { sections?: RailSection[] }
       className="fixed left-6 xl:left-10 top-1/2 -translate-y-1/2 z-40 hidden xl:block"
     >
       <div className="relative flex flex-col items-center gap-5 px-2 py-3">
-        <div className="absolute inset-y-3 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-violet-300 via-emerald-300 to-red-300 opacity-40" />
+        <div className="absolute inset-y-3 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-pink-300 via-emerald-300 to-red-300 opacity-40" />
         {/* Traveling halo: slides to the active dot, adopts its color */}
         <div
           aria-hidden

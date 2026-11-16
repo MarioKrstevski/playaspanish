@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import s from './c.module.css'
 
 // The one pyramid on the page: the plans stacked as three steps. $30 is the
-// top, where everyone arrives; new students climb in from the wider steps below.
+// top, the ten-lesson pack as the wider step below.
 const TIER_CLASS = [s.tier1, s.tier2, s.tier3]
 
 export function Pricing() {

@@ -1,16 +1,10 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { ChatMock } from './ChatMock'
-
-const stats = [
-  { value: '600M+', label: 'speakers worldwide' },
-  { value: '21', label: 'countries with Spanish as an official language' },
-  { value: '#2', label: 'most spoken native language on Earth' },
-  { value: '#4', label: 'most spoken language overall' }
-]
+import { whySpanish } from '@/lib/content'
+import { Globe } from './Globe'
+import { GlobeChat } from './GlobeChat'
 
 const reasons = [
   {
@@ -30,102 +24,65 @@ const reasons = [
   }
 ]
 
+// The blue zone: the numbers on the left, the Spanish-speaking world on a
+// globe on the right with a texting chat rising over it (from version D),
+// the reasons underneath.
 export function WhySpanish() {
-  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation()
-  const { ref: statsRef, isVisible: statsVisible } = useScrollAnimation()
+  const { ref: textRef, isVisible: textVisible } = useScrollAnimation()
+  const { ref: globeRef, isVisible: globeVisible } = useScrollAnimation()
   const { ref: reasonsRef, isVisible: reasonsVisible } = useScrollAnimation()
 
   return (
     <section id="why-spanish" className="relative py-24 bg-sky-50 overflow-hidden">
-      {/* The Spanish-speaking world as a soft backdrop, desktop only */}
-      <Image
-        src="/images/map-spanish-world.jpg"
-        alt=""
-        aria-hidden
-        fill
-        sizes="100vw"
-        className="hidden lg:block object-cover object-[center_35%] pointer-events-none select-none"
-        style={{ filter: 'brightness(0.85) contrast(1.4) saturate(1.6)' }}
-      />
-      {/* Fade the map in from the section color at the top and out at the
-          bottom so both divider hand-offs stay seamless */}
-      <div
-        aria-hidden
-        className="hidden lg:block absolute inset-x-0 top-0 h-32 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, #f0f9ff, rgba(240, 249, 255, 0))' }}
-      />
-      <div
-        aria-hidden
-        className="hidden lg:block absolute inset-x-0 bottom-0 h-44 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, rgba(240, 249, 255, 0), #f0f9ff 90%)' }}
-      />
       <div className="container mx-auto px-4 relative">
-        <div
-          ref={titleRef}
-          className={cn('animate-on-scroll text-center mb-14', titleVisible && 'visible')}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            One language, a whole world
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Spanish is one of the most spoken languages on the planet, and one voice carries you
-            through all of it.
-          </p>
-        </div>
-
-        {/* xl+: stats | reasons | chat, the chat in its own column so it can
-            never sit on top of the text. md to xl: the stats run in a row and
-            the chat peeks out beside the reasons. Phones: compact stats and the
-            chat share the first row, the reasons get the full width below. */}
-        <div className="grid grid-cols-2 md:grid-cols-1 xl:grid-cols-[1fr_1fr_280px] gap-x-3 gap-y-10 md:gap-12 items-stretch md:items-start xl:items-stretch max-w-5xl xl:max-w-6xl mx-auto">
-          {/* Left: the numbers */}
+        <div className="grid items-center gap-x-10 gap-y-12 lg:grid-cols-12 max-w-6xl mx-auto">
           <div
-            ref={statsRef}
-            className={cn(
-              'animate-slide-left grid grid-cols-1 md:grid-cols-4 xl:grid-cols-2 xl:auto-rows-fr gap-3 md:gap-6',
-              statsVisible && 'visible'
-            )}
+            ref={textRef}
+            className={cn('animate-slide-left lg:col-span-5', textVisible && 'visible')}
           >
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="glass-panel flex flex-col justify-center px-2 py-3 md:p-6 text-center"
-              >
-                <div className="text-2xl md:text-4xl font-bold text-sky-700 mb-0.5 md:mb-2">{stat.value}</div>
-                <div className="text-xs md:text-sm leading-snug text-gray-600">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Right: the reasons */}
-          <div
-            ref={reasonsRef}
-            className={cn(
-              'animate-slide-right relative col-span-2 order-3 md:col-span-1 md:order-none md:pr-48 xl:pr-0',
-              reasonsVisible && 'visible'
-            )}
-            style={{ transitionDelay: '200ms' }}
-          >
-            {/* md to xl: the chat peeks out from behind the text, into the
-                right padding reserved above */}
-            <ChatMock className="hidden md:block xl:hidden absolute -right-4 top-0 opacity-75 scale-[0.7] origin-top-right" />
-            {/* lg+ (where the map shows): frosted like the stat cards, so the
-                text never sits directly on the map's lines */}
-            <div className="relative space-y-6 lg:glass-panel lg:h-full lg:p-8">
-              {reasons.map((reason) => (
-                <div key={reason.title}>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-1">{reason.title}</h3>
-                  <p className="text-gray-700 leading-relaxed">{reason.description}</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center lg:text-left">
+              {whySpanish.title}
+            </h2>
+            <p className="text-xl text-gray-600 max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
+              {whySpanish.sub}
+            </p>
+            <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-sky-200 pt-8">
+              {whySpanish.stats.map((stat) => (
+                <div key={stat.label} className="flex flex-col-reverse">
+                  <dt className="mt-1.5 max-w-[20ch] text-[0.9375rem] leading-snug text-gray-600">
+                    {stat.label}
+                  </dt>
+                  <dd className="text-4xl md:text-5xl font-bold leading-none text-sky-700">
+                    {stat.value}
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </div>
 
-          {/* Phones: a compact chat beside the stats, never beside the text */}
-          <ChatMock compact fill className="md:hidden order-2 w-full opacity-90" />
+          <div
+            ref={globeRef}
+            className={cn('animate-slide-right relative lg:col-span-7', globeVisible && 'visible')}
+            style={{ transitionDelay: '150ms' }}
+          >
+            <Globe className="mx-auto block h-auto w-full max-w-[540px] drop-shadow-[0_18px_30px_rgba(12,49,86,0.25)]" />
+            <GlobeChat className="relative -mt-28 ml-auto w-[min(100%,280px)] sm:absolute sm:-bottom-8 sm:right-0 sm:mt-0 sm:w-[270px]" />
+          </div>
+        </div>
 
-          {/* xl+: decorative texting loop in its own column */}
-          <ChatMock fill className="hidden xl:flex opacity-85" />
+        <div
+          ref={reasonsRef}
+          className={cn(
+            'animate-on-scroll grid gap-8 md:grid-cols-3 max-w-6xl mx-auto mt-20 border-t border-sky-200 pt-12',
+            reasonsVisible && 'visible'
+          )}
+        >
+          {reasons.map((reason) => (
+            <div key={reason.title}>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{reason.title}</h3>
+              <p className="text-gray-700 leading-relaxed">{reason.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

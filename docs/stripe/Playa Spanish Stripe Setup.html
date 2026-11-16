@@ -1,0 +1,422 @@
+<!doctype html><html data-theme="light"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Playa Spanish Stripe Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  /* Layout: one reading column; a sticky "where you are" timeline on wide screens.
+     Palette borrows Playa Spanish's sunset orange and deep indigo, on sand. */
+  :root {
+    --bg: #fbf7f1;
+    --surface: #ffffff;
+    --ink: #1f1a33;
+    --muted: #5d5670;
+    --line: #e9e1d4;
+    --accent: #d9530f;
+    --accent-soft: #fff0e4;
+    --indigo: #2e2366;
+    --indigo-soft: #eeebfa;
+    --good: #0f7a55;
+    --good-soft: #e6f5ee;
+    --warn: #9a5b00;
+    --warn-soft: #fff5dc;
+    --font-display: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-hand: "Caveat", "Comic Sans MS", cursive;
+    --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16131f; --surface: #1f1b2b; --ink: #f1edf8; --muted: #b3abc6; --line: #332d45;
+      --accent: #ff8a4c; --accent-soft: #3a2418; --indigo: #c9c0ff; --indigo-soft: #2a2447;
+      --good: #5fd3a2; --good-soft: #15302a; --warn: #f3c26a; --warn-soft: #34290f;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16131f; --surface: #1f1b2b; --ink: #f1edf8; --muted: #b3abc6; --line: #332d45;
+    --accent: #ff8a4c; --accent-soft: #3a2418; --indigo: #c9c0ff; --indigo-soft: #2a2447;
+    --good: #5fd3a2; --good-soft: #15302a; --warn: #f3c26a; --warn-soft: #34290f;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+    padding-inline: 16px; padding-block: 0 64px;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  @media (min-width: 960px) { .wrap { grid-template-columns: 220px minmax(0, 1fr); } }
+
+  header.hero { padding-block: 48px 8px; max-width: 1060px; margin: 0 auto; }
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 6vw, 52px); line-height: 1.05; margin: 8px 0 14px; text-wrap: balance; letter-spacing: -0.02em; }
+  .hand { font-family: var(--font-hand); font-weight: 600; color: var(--accent); font-size: 1.15em; }
+  .lede { font-size: 19px; color: var(--muted); max-width: 62ch; margin: 0; }
+
+  /* Money flow strip */
+  .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; margin-top: 28px; }
+  .flow .node { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; flex: 1 1 150px; min-width: 0; }
+  .flow .node b { display: block; font-size: 15px; }
+  .flow .node span { font-size: 14px; color: var(--muted); }
+  .flow .arrow { align-self: center; color: var(--accent); font-weight: 800; }
+  @media (max-width: 640px) { .flow .arrow { display: none; } }
+
+  /* Side timeline */
+  nav.toc { display: none; }
+  @media (min-width: 960px) {
+    nav.toc { display: block; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; padding-top: 8px; }
+  }
+  nav.toc ol { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--line); display: grid; gap: 14px; }
+  nav.toc a { color: var(--muted); text-decoration: none; font-size: 15px; display: block; line-height: 1.3; }
+  nav.toc a:hover, nav.toc a:focus-visible { color: var(--accent); }
+  nav.toc small { display: block; color: var(--accent); font-weight: 700; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+
+  main { min-width: 0; display: grid; gap: 56px; }
+  section { min-width: 0; scroll-margin-top: 24px; }
+  h2 { font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1.15; margin: 0 0 6px; text-wrap: balance; letter-spacing: -0.01em; }
+  .when { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--indigo); margin-bottom: 6px; }
+  h3 { font-size: 19px; margin: 24px 0 6px; }
+  p { margin: 0 0 12px; max-width: 68ch; }
+  .muted { color: var(--muted); }
+  a { color: var(--accent); }
+  code, .mono { font-family: var(--font-mono); font-size: .88em; }
+
+  /* Callouts */
+  .note { border-radius: 12px; padding: 14px 16px; margin: 16px 0; max-width: 72ch; }
+  .note.key { background: var(--accent-soft); }
+  .note.good { background: var(--good-soft); }
+  .note.warn { background: var(--warn-soft); }
+  .note b:first-child { display: block; margin-bottom: 2px; }
+
+  /* Checklist */
+  ul.check { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; max-width: 72ch; }
+  ul.check li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+  ul.check label { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; padding: 12px 14px; cursor: pointer; }
+  ul.check input { width: 20px; height: 20px; margin: 3px 0 0; accent-color: var(--good); }
+  ul.check input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  ul.check b { display: block; }
+  ul.check span { color: var(--muted); font-size: 15px; }
+  ul.check li:has(input:checked) { border-color: var(--good); }
+  ul.check li:has(input:checked) b { text-decoration: line-through; text-decoration-color: var(--good); }
+  .progress { font-size: 14px; color: var(--good); font-weight: 700; margin-top: 10px; }
+
+  /* Numbered steps: real sequence, so numbers carry meaning */
+  ol.steps { counter-reset: step; list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 14px; max-width: 72ch; }
+  ol.steps > li { counter-increment: step; display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; }
+  ol.steps > li::before {
+    content: counter(step); width: 32px; height: 32px; border-radius: 50%;
+    display: grid; place-items: center; font-weight: 800; font-size: 15px;
+    background: var(--indigo-soft); color: var(--indigo);
+  }
+  ol.steps b { display: block; }
+  .field { display: inline-block; background: var(--indigo-soft); color: var(--indigo); border-radius: 6px; padding: 0 6px; font-weight: 600; font-size: .92em; }
+
+  /* Copy box */
+  .copy { position: relative; background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 14px 16px 14px; margin: 8px 0; max-width: 72ch; }
+  .copy p { margin: 0; padding-right: 72px; }
+  .copy button { position: absolute; top: 10px; right: 10px; }
+  button {
+    font: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
+    background: var(--ink); color: var(--bg); border: 0; border-radius: 8px; padding: 6px 12px;
+  }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin: 12px 0; max-width: 100%; }
+  table { border-collapse: collapse; width: 100%; min-width: 520px; font-variant-numeric: tabular-nums; background: var(--surface); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  td.num, th.num { text-align: right; }
+  tr:last-child td { border-bottom: 0; }
+
+  /* Fee calculator */
+  .calc { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; display: grid; gap: 16px; }
+  .calc .inputs { display: flex; flex-wrap: wrap; gap: 14px; }
+  .calc label.in { display: grid; gap: 4px; font-size: 14px; font-weight: 600; color: var(--muted); flex: 1 1 160px; min-width: 0; }
+  .calc input[type=number], .calc select {
+    font: inherit; font-size: 17px; color: var(--ink); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; width: 100%;
+  }
+  .calc input:focus-visible, .calc select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .keep { font-weight: 800; color: var(--good); }
+  .cost { color: var(--accent); font-weight: 700; }
+
+  /* Questions for the accountant */
+  ol.qs { padding-left: 22px; margin: 8px 0 0; display: grid; gap: 8px; max-width: 72ch; }
+
+  footer { max-width: 1060px; margin: 64px auto 0; border-top: 1px solid var(--line); padding-top: 18px; font-size: 14px; color: var(--muted); }
+  footer ul { padding-left: 18px; }
+
+  @media print {
+    @page { size: A4; margin: 14mm 14mm 16mm; }
+    :root { color-scheme: light; }
+    body { font-size: 12.5px; padding: 0; background: #fff; }
+    .wrap { display: block; }
+    nav.toc, .copy button, .progress { display: none !important; }
+    header.hero { padding-top: 0; }
+    main { gap: 26px; }
+    ol.steps > li, ul.check li, .note, table, .flow, .calc, ol.qs { break-inside: avoid; }
+    .flow { flex-wrap: nowrap; gap: 6px; }
+    .flow .node { flex: 1 1 0; padding: 10px 10px; }
+    .flow .node b { font-size: 13px; }
+    .flow .node span { font-size: 12px; line-height: 1.4; display: block; overflow-wrap: anywhere; }
+    .when { break-after: avoid; }
+    #rfc { break-before: page; }
+    h2 { break-after: avoid; }
+    .copy p { padding-right: 0; }
+    .calc input, .calc select { border: 0; padding: 0; background: none; appearance: none; font-weight: 700; }
+    a { color: inherit; text-decoration: none; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<header class="hero">
+  <div class="eyebrow">For Angelica · Playa Spanish</div>
+  <h1>Getting paid for classes with <span class="hand">Stripe</span></h1>
+  <p class="lede">A step-by-step guide for setting up Stripe in Mexico as one person, with your own bank account, and charging students with two simple payment links: one for a single lesson ($25) and one for the 10-lesson pack ($240).</p>
+
+  <div class="flow" aria-label="How the money moves">
+    <div class="node"><b>Student emails you</b><span>Every student starts with an email to info@playaspanish.com</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="node"><b>You send a link</b><span>$25 for one lesson, or $240 for the 10-lesson pack</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="node"><b>Stripe</b><span>Student pays by card; Stripe keeps its fee, converts to pesos</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="node"><b>Your bank</b><span>Pesos arrive 3 business days later</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="node"><b>You pay teachers</b><span>From your bank, outside Stripe</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="toc" aria-label="Guide sections">
+    <ol>
+      <li><a href="#when"><small>First</small>When to do this</a></li>
+      <li><a href="#rfc"><small>Step 1</small>Your RFC and your contador</a></li>
+      <li><a href="#gather"><small>Step 2</small>What to have ready</a></li>
+      <li><a href="#signup"><small>Step 3</small>Create the account</a></li>
+      <li><a href="#links"><small>Step 4</small>Make your payment links</a></li>
+      <li><a href="#fees"><small>Good to know</small>What Stripe keeps</a></li>
+      <li><a href="#refunds"><small>Good to know</small>Refunds</a></li>
+      <li><a href="#teachers"><small>Good to know</small>Paying teachers</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <section id="when">
+      <div class="when">Start now</div>
+      <h2>When to do this</h2>
+      <p>Start <b>now</b>, before the first paying student. Nothing here is hard, but some of it takes waiting: the SAT step can take a visit, Stripe checks your details before it lets you receive money, and your very first payout takes longer than the rest.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>When</th><th>What</th><th>Time it takes</th></tr></thead>
+          <tbody>
+            <tr><td>This week</td><td>Check your RFC with your contador (Step 1)</td><td>One conversation, maybe one SAT appointment</td></tr>
+            <tr><td>Right after</td><td>Create the Stripe account (Steps 2–3)</td><td>About 30 minutes, then a few days of review</td></tr>
+            <tr><td>Before the first class</td><td>Create your payment links (Step 4)</td><td>15 minutes</td></tr>
+            <tr><td>After the first payment</td><td>First money reaches your bank</td><td>Usually 7–14 days the first time, then about 3 business days</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="rfc">
+      <div class="when">Step 1 · before Stripe</div>
+      <h2>Your RFC and your contador</h2>
+      <div class="note key">
+        <b>This is the one step that can stop you.</b>
+        In Mexico, Stripe signs up a single person as <b>Persona Física con Actividad Empresarial</b> (sole proprietor). There is no plain "individual" option. So your RFC must be registered with the SAT for self-employed income, not only as an employee. Your name in Stripe must match your RFC exactly.
+      </div>
+      <p>Ask your contador to confirm your RFC is set up for this, and which regime fits you best (many teachers use RESICO or Actividad Empresarial y Profesional). Bring these questions:</p>
+      <ol class="qs">
+        <li>Is my RFC registered for self-employed income, so I can sign up to Stripe as <i>Persona Física con Actividad Empresarial</i>? If not, can we update it?</li>
+        <li>Which regime is best for me: RESICO or Actividad Empresarial y Profesional?</li>
+        <li>My students live outside Mexico and pay in US dollars. How is that taxed? Does IVA apply?</li>
+        <li>Do I need to issue a factura (CFDI) for each payment? If the student is abroad, do I use the generic foreign RFC?</li>
+        <li>I will pay another teacher from this money. What does he need to give me (a factura?) so I am not taxed on money that goes to him?</li>
+        <li>Stripe charges IVA on its fees and gives me invoices for them. Can I deduct those?</li>
+      </ol>
+    </section>
+
+    <section id="gather">
+      <div class="when">Step 2 · 10 minutes</div>
+      <h2>What to have ready</h2>
+      <p>Tick these off as you go.</p>
+      <ul class="check" id="checklist">
+        <li><label><input type="checkbox" id="c-rfc"><div><b>RFC (13 characters)</b><span>Registered for self-employed income (Step 1). Your legal name must match it exactly, accents included.</span></div></label></li>
+        <li><label><input type="checkbox" id="c-curp"><div><b>CURP and INE</b><span>Stripe may ask for a photo of your ID to confirm it is you.</span></div></label></li>
+        <li><label><input type="checkbox" id="c-clabe"><div><b>Your bank's CLABE (18 digits)</b><span>Your personal account is fine, as long as it is in pesos (MXN) and in your own name. It does not need to be a business account.</span></div></label></li>
+        <li><label><input type="checkbox" id="c-address"><div><b>Your address and date of birth</b><span>Stripe needs a Mexican address. Use the one on your RFC if you can.</span></div></label></li>
+        <li><label><input type="checkbox" id="c-phone"><div><b>A phone number</b><span>For the security code, and shown to students as your support number.</span></div></label></li>
+        <li><label><input type="checkbox" id="c-site"><div><b>The website: playaspanish.com</b><span>Stripe looks at it. It already shows the two prices ($25 a lesson, $240 for ten), how classes work, the 50% money-back promise on the pack and the contact email, which is what they check.</span></div></label></li>
+        <li><label><input type="checkbox" id="c-email"><div><b>An email you check daily</b><span>info@playaspanish.com works well. Payment receipts and alerts go here.</span></div></label></li>
+      </ul>
+      <div class="progress" id="progress" aria-live="polite"></div>
+    </section>
+
+    <section id="signup">
+      <div class="when">Step 3 · about 30 minutes</div>
+      <h2>Create the account</h2>
+      <p class="muted">You can switch the Stripe dashboard to Spanish at any time from your profile settings. The labels below are in English.</p>
+      <ol class="steps">
+        <li><div><b>Go to <a href="https://dashboard.stripe.com/register" target="_blank" rel="noopener">dashboard.stripe.com/register</a></b>Choose <span class="field">Mexico</span> as the country. Sign up with your email, your full name and a strong password. Confirm the email Stripe sends you.</div></li>
+        <li><div><b>Turn on two-step login</b>Stripe will ask for it. Use an authenticator app or SMS. This protects the money, so do not skip it.</div></li>
+        <li><div><b>Click "Activate payments"</b>This opens the form that lets you receive real money. Until you finish it, you can only use test mode.</div></li>
+        <li><div><b>Type of business</b>Choose <span class="field">Sole proprietorship</span> (Persona Física con Actividad Empresarial). Leave the <i>company</i> RFC empty; your <i>personal</i> RFC goes in the personal section. Putting your personal RFC in the company box causes an error.</div></li>
+        <li><div><b>Your personal details</b>Legal name exactly as on your RFC, personal RFC, date of birth, address and phone.</div></li>
+        <li><div><b>Business details</b>Industry: <span class="field">Education</span> (tutoring or educational services). Website: <span class="mono">https://playaspanish.com</span>. For the description, you can paste this:
+          <div class="copy"><p id="desc">Online one-on-one Spanish lessons with native Mexican teachers over Zoom or Teams. Students pay per lesson (USD 25, about 45 minutes of instruction) or buy a pack of 10 lessons in advance (USD 240).</p><button type="button" data-copy="desc">Copy</button></div>
+        </div></li>
+        <li><div><b>Statement descriptor</b>This is what students see on their card statement. Use <span class="mono">PLAYA SPANISH</span>, so nobody disputes a charge they do not recognize.</div></li>
+        <li><div><b>Bank account</b>Enter your 18-digit CLABE. Check it twice; money sent to a wrong CLABE is slow to recover.</div></li>
+        <li><div><b>Submit and wait</b>Stripe usually reviews in a few days. It may email you asking for a photo of your INE or a proof of address. Answer quickly, since payouts stay on hold until they are satisfied.</div></li>
+      </ol>
+      <div class="note good"><b>While you wait</b>Everything in Step 4 works in test mode already. You can build the links now and they will be ready the day the account is approved.</div>
+    </section>
+
+    <section id="links">
+      <div class="when">Step 4 · 15 minutes, once</div>
+      <h2>Make your payment links</h2>
+      <p>A payment link is a web address you send by email or WhatsApp. The student opens it, pays by card, and gets a receipt. They do not need an account. You only need <b>two links</b>. <b>Make each link once and reuse it</b>; you do not need a new link for every class.</p>
+      <p>The website never sends anyone to Stripe directly. Every student writes to you first. After your first conversation, you reply with the link that fits what they chose.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Link</th><th class="num">Price</th><th>When to send it</th></tr></thead>
+          <tbody>
+            <tr><td>One lesson (pay as you go)</td><td class="num">$25 USD</td><td>For each class, to students who pay one lesson at a time</td></tr>
+            <tr><td>10-lesson pack</td><td class="num">$240 USD</td><td>Once, when a student chooses the pack ($24 a lesson, $10 off). Includes the 50% money-back promise.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">These are the prices on the website today. If they change, edit the price in the link or make a new link.</p>
+      <ol class="steps">
+        <li><div><b>Open Payment Links</b>In the Stripe dashboard, search for <span class="field">Payment Links</span> and click <span class="field">+ New</span>.</div></li>
+        <li><div><b>Add the product</b>Name it the way students should see it, for example <i>Spanish lesson with Playa Spanish</i>. Set the price to <span class="mono">25.00</span>, the currency to <span class="field">USD</span>, and choose <span class="field">One time</span>.</div></li>
+        <li><div><b>Collect the student's name and email</b>Turn on the options to collect them, so every payment in your list has a name next to it.</div></li>
+        <li><div><b>After payment</b>Choose to show a confirmation message, for example <i>¡Gracias! See you in class.</i></div></li>
+        <li><div><b>Create the link and save it</b>Copy the link and keep it somewhere easy, like a pinned WhatsApp note. Then make the second link the same way: name it <i>10 Spanish lessons with Playa Spanish</i>, price <span class="mono">240.00</span> USD.</div></li>
+        <li><div><b>Watch payments arrive</b>The <span class="field">Payments</span> page shows who paid and when. The Stripe phone app sends you a notification for each one.</div></li>
+      </ol>
+      <div class="note key"><b>Tip: packs cost you less in fees</b>Stripe charges a small fixed amount on every payment, so one $240 pack payment costs less in fees than ten separate $25 payments.</div>
+    </section>
+
+    <section id="fees">
+      <div class="when">Good to know</div>
+      <h2>What Stripe keeps</h2>
+      <p>Stripe Mexico charges <b>3.6% + MX$3</b> per card payment, plus <b>0.5%</b> for foreign cards and <b>2%</b> when it converts dollars to pesos. IVA (16%) is added on top of Stripe's fee. For students in the US paying in dollars, that is about <b>7–8%</b> of each payment. Try your own numbers:</p>
+      <div class="calc">
+        <div class="inputs">
+          <label class="in" for="f-price">Price (USD)<input type="number" id="f-price" min="1" step="1" value="25"></label>
+          <label class="in" for="f-card">Student's card<select id="f-card"><option value="intl" selected>From outside Mexico</option><option value="mx">Mexican card</option></select></label>
+          <label class="in" for="f-rate">Pesos per dollar (example)<input type="number" id="f-rate" min="1" step="0.1" value="18.5"></label>
+        </div>
+        <div class="table-wrap" style="margin:0">
+          <table>
+            <thead><tr><th>Payment</th><th class="num">Student pays</th><th class="num">Stripe keeps</th><th class="num">You receive</th></tr></thead>
+            <tbody id="fee-rows"></tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin:0;font-size:14px">An estimate. Stripe converts at its own daily rate, so your exact pesos will differ a little. The pesos-per-dollar box is only an example; change it to today's rate.</p>
+      </div>
+    </section>
+
+    <section id="refunds">
+      <div class="when">Good to know</div>
+      <h2>Refunds and the 50% promise</h2>
+      <p>The website promises half the money back on the 10-lesson pack if it is not for the student. To do that, open the payment in Stripe, click <span class="field">Refund</span>, and enter <b>half</b> the amount ($120 of a $240 pack). The money goes back to the student's card in about 5–10 days.</p>
+      <div class="note warn"><b>Stripe keeps its original fee on refunds</b>If you refund half of a $240 pack, you still paid the fee on the full $240. Worth knowing, but not a reason to change the promise.</div>
+      <p>If a student ever disputes a charge with their bank, Stripe charges MX$150 and emails you. Reply with the class dates; that is usually enough.</p>
+    </section>
+
+    <section id="teachers">
+      <div class="when">Good to know</div>
+      <h2>Paying the other teachers</h2>
+      <p>All student payments go to <b>you</b>, into your own account. Stripe does not split money between teachers. When you pay Neptalí or any other teacher, do it from your bank as a normal transfer.</p>
+      <p>For taxes, the SAT sees all of it as your income unless you can show what you paid out. Keep a simple list of which classes each teacher gave and what you paid them. Ask your contador (question 5 in Step 1) what the teachers should give you so those payments count as your expense.</p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>Stripe's fees, requirements and payout times are from its public pages as of November 2026 and can change. This guide explains the setup; for taxes, your contador has the final word.</p>
+  <ul>
+    <li><a href="https://stripe.com/mx/pricing" target="_blank" rel="noopener">Stripe Mexico pricing</a></li>
+    <li><a href="https://support.stripe.com/questions/required-information-to-open-your-stripe-account-in-mexico" target="_blank" rel="noopener">What Stripe needs to open an account in Mexico</a></li>
+    <li><a href="https://docs.stripe.com/payment-links" target="_blank" rel="noopener">Stripe Payment Links</a></li>
+    <li><a href="https://support.stripe.com/questions/understanding-daily-automatic-and-manual-payout-schedules" target="_blank" rel="noopener">Stripe payout schedules</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Checklist: remember ticks in this browser only
+  (function () {
+    const boxes = [...document.querySelectorAll('#checklist input')];
+    const progress = document.getElementById('progress');
+    const KEY = 'ps-stripe-checklist';
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+    const render = () => {
+      const done = boxes.filter(b => b.checked).length;
+      progress.textContent = done === boxes.length ? 'All set. On to Step 3.' : done + ' of ' + boxes.length + ' ready';
+    };
+    boxes.forEach(b => {
+      b.checked = !!saved[b.id];
+      b.addEventListener('change', () => {
+        saved[b.id] = b.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+        render();
+      });
+    });
+    render();
+  })();
+
+  // Copy buttons
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const el = document.getElementById(btn.dataset.copy);
+      const done = () => { btn.textContent = 'Copied'; setTimeout(() => (btn.textContent = 'Copy'), 1600); };
+      const fallback = () => {
+        const range = document.createRange(); range.selectNodeContents(el);
+        const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        btn.textContent = 'Press ⌘C';
+      };
+      try { navigator.clipboard.writeText(el.textContent.trim()).then(done, fallback); } catch (e) { fallback(); }
+    });
+  });
+
+  // Fee estimate, Stripe Mexico card pricing (fees exclude IVA)
+  function stripeFee(priceUsd, card, rate) {
+    const pct = 0.036 + (card === 'intl' ? 0.005 : 0) + 0.02; // charging in USD always converts to MXN
+    const fixedUsd = 3 / rate;                                  // MX$3 per payment
+    const fee = (priceUsd * pct + fixedUsd) * 1.16;             // + 16% IVA on the fee
+    return { fee, net: priceUsd - fee };
+  }
+  (function () {
+    const price = document.getElementById('f-price');
+    const card = document.getElementById('f-card');
+    const rate = document.getElementById('f-rate');
+    const rows = document.getElementById('fee-rows');
+    const usd = n => '$' + n.toFixed(2);
+    const mxn = n => 'MX$' + Math.round(n).toLocaleString('en-US');
+    const row = (label, p, c, r) => {
+      const { fee, net } = stripeFee(p, c, r);
+      return '<tr><td>' + label + '</td><td class="num">' + usd(p) + '</td>' +
+        '<td class="num cost">' + usd(fee) + ' <span class="muted">(' + (fee / p * 100).toFixed(1) + '%)</span></td>' +
+        '<td class="num"><span class="keep">' + usd(net) + '</span><br><span class="muted">≈ ' + mxn(net * r) + '</span></td></tr>';
+    };
+    const render = () => {
+      const p = Math.max(1, parseFloat(price.value) || 25);
+      const r = Math.max(1, parseFloat(rate.value) || 18.5);
+      const c = card.value;
+      rows.innerHTML = row('One lesson', p, c, r) + row('10-lesson pack', 240, c, r);
+    };
+    [price, card, rate].forEach(el => el.addEventListener('input', render));
+    render();
+  })();
+</script>
+
+</body></html>

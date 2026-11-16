@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import { Check, Crown } from 'lucide-react'
 import { AgaveCorner } from '@/components/decor/CornerArt'
 import { teachers, teachersIntro, type Teacher } from '@/lib/content'
-import { TeacherPhoto, TeacherPhotoSwitcher } from '@/components/teachers/TeacherPhoto'
+import { TeacherPhoto } from '@/components/teachers/TeacherPhoto'
 
 function TeacherProfile({ teacher, reverse }: { teacher: Teacher; reverse?: boolean }) {
   const { ref: imageRef, isVisible: imageVisible } = useScrollAnimation()
@@ -30,8 +30,6 @@ function TeacherProfile({ teacher, reverse }: { teacher: Teacher; reverse?: bool
             </div>
           )}
         </div>
-        {/* TEMPORARY (PLA-18): try candidate headshots */}
-        <TeacherPhotoSwitcher teacher={teacher.id} className="mt-4" />
       </div>
 
       {/* Bio */}

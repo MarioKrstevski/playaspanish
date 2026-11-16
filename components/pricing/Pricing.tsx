@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Briefcase, Check, Mic, Scale, Stethoscope } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { SunCorner } from '@/components/decor/CornerArt'
+import { pricing } from '@/lib/content'
 
 function handleContactScroll(e: React.MouseEvent<HTMLButtonElement>) {
   e.preventDefault()
@@ -14,61 +15,11 @@ function handleContactScroll(e: React.MouseEvent<HTMLButtonElement>) {
   }
 }
 
-// Laid out as an ascending staircase: new students enter on the lower
-// steps, everyone arrives at the same $30 summit. The 10-lesson step is
-// the recommended entrance; the summit is the anchor.
-const steps = [
-  {
-    label: 'New students',
-    badge: 'The way most students start',
-    name: '10 Lessons',
-    price: '$28',
-    unit: 'per lesson · $280 upfront',
-    tagline: 'The full first climb',
-    features: [
-      'Save $20 on your first ten lessons',
-      'Schedule them whenever you like',
-      '50% money-back if it is not for you'
-    ],
-    offset: 'md:mt-32',
-    summit: false,
-    recommended: true
-  },
-  {
-    label: 'New students',
-    badge: null,
-    name: '5 Lessons',
-    price: '$29',
-    unit: 'per lesson · $145 upfront',
-    tagline: 'A gentle start',
-    features: [
-      'Save $5 on your first five lessons',
-      'Schedule them whenever you like',
-      '50% money-back if it is not for you'
-    ],
-    offset: 'md:mt-16',
-    summit: false,
-    recommended: false
-  },
-  {
-    label: 'Everyone',
-    badge: null,
-    name: 'The Lesson',
-    price: '$30',
-    unit: 'per lesson · pay as you go',
-    tagline: 'The rhythm, where everyone arrives',
-    features: [
-      'Pay per class or per month, as you like',
-      'Lessons at your own pace, no expiry',
-      'Same price for as long as you learn'
-    ],
-    offset: 'mt-0',
-    summit: true,
-    recommended: false
-  }
-]
+// Two ways to pay, side by side: the ten-lesson pack (recommended) and the
+// single lesson. Copy lives in lib/content.ts.
+const steps = pricing.plans
 
-// Quiet Spanish cheers floating in the margins around the staircase.
+// Quiet Spanish cheers floating in the margins around the two cards.
 const floatingWords = [
   {
     text: '¡Vamos!',
@@ -123,7 +74,7 @@ const floatingWords = [
 ]
 
 // On mobile a tilted cheer sits in each card's empty top-right corner.
-const mobileWords = ['¡Vamos!', '¡Tú puedes!', '¡Empieza hoy!']
+const mobileWords = ['¡Vamos!', '¡Tú puedes!']
 
 // Profession icons tucked behind the custom-course card, peeking past its edges.
 const professionIcons = [
@@ -159,20 +110,16 @@ export function Pricing() {
           ref={titleRef}
           className={cn('animate-on-scroll text-center mb-4', titleVisible && 'visible')}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            One price, one path
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{pricing.title}</h2>
           <p className="text-2xl text-gray-800 max-w-2xl mx-auto">
-            A lesson is <span className="font-bold text-orange-600">$30</span>. That never changes.
+            A lesson is <span className="font-bold text-orange-600">$25</span>. Take ten and pay{' '}
+            <span className="font-bold text-orange-600">$24</span> each.
           </p>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-3">
-            Each lesson is a one-hour session: 45 minutes of focused Spanish, with breathing
-            room built in. New students climb in from a lower step.
-          </p>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-3">{pricing.sub}</p>
         </div>
 
-        {/* The staircase: bottom-aligned cards with stepped tops */}
-        <div className="relative max-w-5xl mx-auto mt-16">
+        {/* The two options */}
+        <div className="relative max-w-3xl mx-auto mt-16">
           {/* Floating Spanish cheers in the margins, background flavor only */}
           {floatingWords.map((word) => (
             <span
@@ -190,12 +137,12 @@ export function Pricing() {
           <div
             ref={cardsRef}
             className={cn(
-              'animate-on-scroll grid md:grid-cols-3 gap-6 md:gap-0 items-stretch',
+              'animate-on-scroll grid md:grid-cols-2 gap-6 items-stretch',
               cardsVisible && 'visible'
             )}
           >
             {steps.map((step, index) => (
-              <div key={step.name} className={cn('relative flex flex-col', step.offset)}>
+              <div key={step.name} className="relative flex flex-col">
                 <span
                   aria-hidden
                   className="md:hidden absolute top-7 right-6 z-[2] rotate-6 italic font-medium text-lg text-orange-300/80 pointer-events-none select-none"
@@ -212,20 +159,16 @@ export function Pricing() {
                 )}
                 <div
                   className={cn(
-                    'flex flex-col flex-1 p-8 bg-white shadow-sm',
-                    'rounded-lg md:rounded-none',
-                    index === 0 && 'md:rounded-l-lg',
-                    step.recommended &&
-                      'ring-2 ring-orange-500 shadow-lg bg-gradient-to-b from-orange-50 to-white z-[1]',
-                    step.summit &&
-                      'md:rounded-tr-lg md:rounded-br-lg border-2 border-orange-300',
-                    !step.recommended && !step.summit && 'border border-orange-100'
+                    'flex flex-col flex-1 p-8 bg-white shadow-sm rounded-lg',
+                    step.recommended
+                      ? 'ring-2 ring-orange-500 shadow-lg bg-gradient-to-b from-orange-50 to-white z-[1]'
+                      : 'border-2 border-orange-200'
                   )}
                 >
                   <p
                     className={cn(
                       'text-xs uppercase tracking-[0.2em] mb-1',
-                      step.summit ? 'text-orange-700 font-semibold' : 'text-orange-500'
+                      step.recommended ? 'text-orange-700 font-semibold' : 'text-orange-500'
                     )}
                   >
                     {step.label}
@@ -246,22 +189,21 @@ export function Pricing() {
                     ))}
                   </ul>
 
-                  {step.recommended && (
-                    <Button className="mt-6" size="lg" onClick={handleContactScroll}>
-                      Start with 10 lessons
-                    </Button>
-                  )}
+                  <Button
+                    className="mt-6"
+                    size="lg"
+                    variant={step.recommended ? 'default' : 'outline'}
+                    onClick={handleContactScroll}
+                  >
+                    {step.cta ?? 'Start with one lesson'}
+                  </Button>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="text-center text-gray-600 max-w-2xl mx-auto mt-10">
-          Starter steps are for first-time students, paid upfront and yours to schedule freely.
-          If a pack truly isn&apos;t for you, half your money comes back. No questions, no hard
-          feelings.
-        </p>
+        <p className="text-center text-gray-600 max-w-2xl mx-auto mt-10">{pricing.note}</p>
 
         {/* Custom professional courses: profession icons tucked behind the card */}
         <div

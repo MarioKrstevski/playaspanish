@@ -5,9 +5,9 @@ import { Star } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { QuoteCorner } from '@/components/decor/CornerArt'
 
-const MOON_LIGHT = '#fecdd3'
-const MOON_DARK = '#4c0519'
-const MOON_RIM = '#9f1239'
+const MOON_LIGHT = '#fecaca'
+const MOON_DARK = '#450a0a'
+const MOON_RIM = '#991b1b'
 
 type Phase = 'new' | 'waxing' | 'full' | 'waning'
 
@@ -74,7 +74,7 @@ function Stars() {
   return (
     <div className="flex gap-1" aria-label="5 out of 5 stars">
       {Array.from({ length: 5 }, (_, i) => (
-        <Star key={i} className="w-4 h-4 text-rose-400 fill-rose-400" />
+        <Star key={i} className="w-4 h-4 text-red-400 fill-red-400" />
       ))}
     </div>
   )
@@ -84,7 +84,7 @@ export function Reviews() {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
-    <section id="reviews" className="relative pt-24 pb-10 bg-rose-50 overflow-hidden">
+    <section id="reviews" className="relative pt-24 pb-10 bg-red-50 overflow-hidden">
       {/* A large quiet quote mark, bottom-left */}
       <QuoteCorner className="hidden lg:block absolute -bottom-24 left-6 text-[240px] pointer-events-none" />
       <div className="container mx-auto px-4 relative">
@@ -165,7 +165,7 @@ function ReviewRow({
             isLeft && 'md:justify-end'
           )}
         >
-          <span className="font-semibold text-rose-700">{review.name}</span>
+          <span className="font-semibold text-red-700">{review.name}</span>
           <span className="hidden md:block">
             <Stars />
           </span>
@@ -175,7 +175,7 @@ function ReviewRow({
       {/* Center rail: moon phase on a thin line */}
       <div className="hidden md:flex flex-col items-center md:col-start-2 md:row-start-1">
         <MoonPhase phase={review.phase} />
-        {!isLast && <div className="w-px flex-1 bg-rose-200 mt-2" />}
+        {!isLast && <div className="w-px flex-1 bg-red-200 mt-2" />}
       </div>
     </div>
   )
