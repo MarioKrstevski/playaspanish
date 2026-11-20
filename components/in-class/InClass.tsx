@@ -36,6 +36,10 @@ const TOPIC_LOOKS = [
   }
 ]
 
+// Each topic drops in on its own as the list scrolls into view, in a loose
+// order rather than left to right (Mario, 2026-11-21)
+const TOPIC_DELAYS_MS = [0, 420, 180, 620, 300, 820]
+
 // Spanish a newcomer can't guess gets its English underneath
 const GLOSSED = new Set(['Customs', 'And more'])
 
@@ -47,7 +51,10 @@ export function InClass() {
   const { ref: topicsRef, isVisible: topicsVisible } = useScrollAnimation()
 
   return (
-    <section id="in-class" className={cn(display.variable, 'relative pb-24 bg-purple-950 text-purple-50')}>
+    <section
+      id="in-class"
+      className={cn(display.variable, 'relative pb-12 md:pb-24 bg-purple-950 text-purple-50')}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto border-t border-purple-800 pt-16">
           {/* The head runs the full width; under it the class (about 70%)
@@ -78,12 +85,14 @@ export function InClass() {
               <p className="mt-6 max-w-[60ch] text-lg text-purple-200 leading-relaxed">{inClass.body}</p>
             </div>
 
-            <div
-              ref={topicsRef}
-              className={cn('animate-slide-right lg:col-span-4', topicsVisible && 'visible')}
-              style={{ transitionDelay: '200ms' }}
-            >
-              <h3 className={cn(DISPLAY, 'text-xl md:text-2xl font-bold text-white mb-6')}>
+            <div ref={topicsRef} className="lg:col-span-4">
+              <h3
+                className={cn(
+                  DISPLAY,
+                  'text-xl md:text-2xl font-bold text-white mb-6 transition-opacity duration-500',
+                  topicsVisible ? 'opacity-100' : 'opacity-0'
+                )}
+              >
                 {inClass.topicsLabel}
               </h3>
               <ul className="flex flex-wrap items-center gap-x-8 gap-y-4 md:gap-x-10">
@@ -92,23 +101,32 @@ export function InClass() {
                   return (
                     <li
                       key={topic.title}
-                      className={cn('text-center', look.className)}
-                      style={{ animation: look.animation }}
-                    >
-                      <span
-                        lang="es"
-                        className="block [font-family:var(--font-caveat)] font-semibold leading-none"
-                      >
-                        {topic.titleEs}
-                      </span>
-                      {/* The Spanish says it on its own, except where it doesn't */}
-                      {GLOSSED.has(topic.title) ? (
-                        <span className="block mt-1 text-sm font-medium tracking-wide text-purple-300/90">
-                          {topic.title.toLowerCase()}
-                        </span>
-                      ) : (
-                        <span className="sr-only">{topic.title}</span>
+                      className={cn(
+                        'text-center transition-[opacity,transform] duration-700 ease-out',
+                        topicsVisible
+                          ? 'opacity-100 translate-y-0 scale-100'
+                          : 'opacity-0 translate-y-4 scale-90'
                       )}
+                      style={{ transitionDelay: `${TOPIC_DELAYS_MS[index % TOPIC_DELAYS_MS.length]}ms` }}
+                    >
+                      {/* entrance on the li, the endless drift on this span,
+                          so the two transforms never fight */}
+                      <span className={cn('block', look.className)} style={{ animation: look.animation }}>
+                        <span
+                          lang="es"
+                          className="block [font-family:var(--font-caveat)] font-semibold leading-none"
+                        >
+                          {topic.titleEs}
+                        </span>
+                        {/* The Spanish says it on its own, except where it doesn't */}
+                        {GLOSSED.has(topic.title) ? (
+                          <span className="block mt-1 text-sm font-medium tracking-wide text-purple-300/90">
+                            {topic.title.toLowerCase()}
+                          </span>
+                        ) : (
+                          <span className="sr-only">{topic.title}</span>
+                        )}
+                      </span>
                     </li>
                   )
                 })}

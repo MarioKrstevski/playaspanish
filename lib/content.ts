@@ -125,8 +125,8 @@ export const teachers: Teacher[] = [
     name: 'Angelica Torres',
     firstName: 'Angelica',
     role: 'Founder, owner & CEO',
-    imageAlt: 'Angelica Torres, Spanish teacher, founder and CEO of Playa Spanish',
-    badge: { short: 'Founder & CEO', long: 'Proud owner & CEO of Playa Spanish' },
+    imageAlt: 'Angelica Torres, Spanish teacher, owner and CEO of Playa Spanish',
+    badge: { short: 'Owner & CEO', long: 'Proud owner & CEO of Playa Spanish' },
     intro: 'Real connection, real conversations, and lessons shaped around your life and goals.',
     credentials: [
       'Lic. in English Language',

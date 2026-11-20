@@ -17,6 +17,9 @@ const CROSS_MS = 9000 // one pass across
 const REST_MS = 3000 // dark sky between passes
 const START_DELAY_MS = 1200 // let the headline slide in first
 
+// Smaller on phones so it doesn't swallow half the line (Mario, 2026-11-21)
+const moonRadius = (width: number) => (width < 640 ? 48 : 88)
+
 const TYPE = 'text-3xl md:text-4xl lg:text-5xl font-bold tracking-wide'
 
 // The English sets the line with its normal spacing. Each Spanish word is
@@ -101,7 +104,8 @@ export function MoonReveal({ en, es }: { en: string; es: string }) {
       })
     }
 
-    const set = (x: number, y: number, r: number) => {
+    const set = (x: number, y: number, r: number, shown: boolean) => {
+      wrap.style.setProperty('--mo', shown ? '1' : '0')
       wrap.style.setProperty('--mx', `${x}px`)
       wrap.style.setProperty('--my', `${y}px`)
       wrap.style.setProperty('--mr', `${r}px`)
@@ -110,7 +114,8 @@ export function MoonReveal({ en, es }: { en: string; es: string }) {
     const tick = (now: number) => {
       const w = wrap.clientWidth
       const h = wrap.clientHeight
-      const r = w < 640 ? 64 : 88
+      const r = moonRadius(w)
+      let shown = true
       if (pointer) {
         // ease toward the mouse so the moon drifts rather than snaps
         pos.x += (pointer.x - pos.x) * 0.22
@@ -122,6 +127,7 @@ export function MoonReveal({ en, es }: { en: string; es: string }) {
         const t = elapsed < 0 ? -1 : (elapsed % cycle) / CROSS_MS
         if (t < 0 || t > 1) {
           pos.x = -r * 1.5 // resting below the horizon, out of sight
+          shown = false
         } else {
           pos.x = -r * 1.2 + t * span
           // a real arch: rises from well below the line, crests just above
@@ -130,9 +136,10 @@ export function MoonReveal({ en, es }: { en: string; es: string }) {
         }
       } else {
         pos.x = -r * 1.5
+        shown = false
       }
       if (pos.y === 0) pos.y = h / 2
-      set(pos.x, pos.y, r)
+      set(pos.x, pos.y, r, shown)
       fadeWords(pos.x, pos.y, r)
       frame = requestAnimationFrame(tick)
     }
@@ -153,7 +160,7 @@ export function MoonReveal({ en, es }: { en: string; es: string }) {
       pointer = null
       // carry on along the path from roughly where it was let go
       const w = wrap.clientWidth
-      const r = w < 640 ? 64 : 88
+      const r = moonRadius(w)
       const t = Math.min(Math.max((pos.x + r * 1.2) / (w + r * 2.4), 0), 1)
       start = performance.now() - t * CROSS_MS
     }
@@ -201,6 +208,7 @@ export function MoonReveal({ en, es }: { en: string; es: string }) {
           width: 'calc(var(--mr) * 2)',
           height: 'calc(var(--mr) * 2)',
           transform: 'translate(-50%, -50%)',
+          opacity: 'var(--mo, 0)',
           background: 'radial-gradient(circle at 38% 34%, #fffaf0 0%, #fff3d1 55%, #f3dca2 100%)',
           boxShadow: '0 0 46px 14px rgba(255, 233, 180, 0.32)'
         }}

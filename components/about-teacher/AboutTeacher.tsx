@@ -48,12 +48,7 @@ function TeacherProfile({ teacher, reverse }: { teacher: Teacher; reverse?: bool
               {teacher.name}
             </span>
           </h3>
-          {teacher.badge && (
-            <p className="mb-4 flex items-center justify-center md:justify-start gap-2 text-lg font-semibold text-emerald-800">
-              <Crown className="h-5 w-5 text-amber-500 flex-shrink-0" />
-              {teacher.badge.long}
-            </p>
-          )}
+          {/* Her title lives on the photo badge only (Angelica, 2026-11-21) */}
           <p className="text-base text-gray-600">{teacher.intro}</p>
         </div>
 

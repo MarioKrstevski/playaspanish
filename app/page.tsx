@@ -11,7 +11,6 @@ import { Reviews } from '@/components/reviews/Reviews'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { Footer } from '@/components/footer/Footer'
 import { PyramidThreshold } from '@/components/dividers/PyramidThreshold'
-import { SarapeBand } from '@/components/dividers/SarapeBand'
 import { ChakraRail } from '@/components/chakra-rail/ChakraRail'
 
 // Section background colors, descending through the seven chakras:
@@ -34,7 +33,6 @@ export default function Home() {
       <ChakraRail />
       <main>
         <Hero />
-        <SarapeBand />
         <Experience />
         <InClass />
         {/* Three thresholds only. Moons stay at four on the whole page: the

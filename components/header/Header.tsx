@@ -51,8 +51,8 @@ export function Header() {
       {/* Solid warm white: see-through never sat right over the page's
           many colours */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#fffcf7] border-b border-black/5 shadow-sm">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+      <nav className="container mx-auto px-4 py-3 md:py-4">
+        <div className="flex items-center justify-between gap-3">
           <Link
             href="/#hero"
             onClick={(e) => {
@@ -61,13 +61,19 @@ export function Header() {
                 handleSmoothScroll(e, '#hero')
               }
             }}
-            className="text-2xl font-bold text-primary-600"
+            className="min-w-0 shrink text-2xl font-bold text-primary-600"
           >
             {/* A 560px copy of the 2399px logo: crisp at 2x, a tenth of the weight */}
             <picture>
               <source type="image/webp" srcSet="/playaspanish-logo-560.webp" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/playaspanish-logo-560.png" width={300} height={43} alt="Playa Spanish" />
+              <img
+                src="/playaspanish-logo-560.png"
+                width={300}
+                height={43}
+                alt="Playa Spanish"
+                className="h-auto w-[186px] min-[400px]:w-[204px] md:w-[300px]"
+              />
             </picture>
           </Link>
 
@@ -115,9 +121,12 @@ export function Header() {
             </Button>
           </div>
 
-          {/* Mobile: CTA + hamburger */}
-          <div className="md:hidden flex items-center gap-2">
+          {/* Mobile: CTA + hamburger, kept compact so the logo has room to
+              breathe (Mario, 2026-11-21) */}
+          <div className="md:hidden flex shrink-0 items-center gap-1">
             <Button
+              size="sm"
+              className="h-8 px-3 text-[0.8125rem] font-semibold"
               onClick={(e) => {
                 e.preventDefault()
                 handleSmoothScroll(e, '#contact')
@@ -126,11 +135,11 @@ export function Header() {
               Get Started
             </Button>
             <button
-              className="p-2 text-indigo-950"
+              className="-mr-1.5 p-1.5 text-indigo-950"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>

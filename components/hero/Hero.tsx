@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { ArrowDown } from 'lucide-react'
 import { MoonReveal } from './MoonReveal'
+import { DreamBeachScene } from './DreamBeachScene'
 
 const HEADLINE_EN = 'Your path to Spanish starts here'
 const HEADLINE_ES = 'Tu camino al español empieza aquí'
@@ -21,46 +22,10 @@ export function Hero() {
       id="hero"
       className="relative min-h-screen flex items-start pt-[max(9.5rem,17vh)] pb-16 overflow-hidden bg-[#462a7e]"
     >
-      {/* The beach scene, drawn three times for three screen shapes (PLA-26):
-          very wide, standard landscape and phone portrait. The browser picks
-          by the hero's shape, so the art is cropped a little, never squashed.
-          Bottom-anchored so the woman at her laptop always shows; the sky
-          gives way at the top. */}
+      {/* The dream-beach painting (PLA-26): see DreamBeachScene for how it
+          fits phones, upright tablets and wide screens */}
       <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
-        {/* WebP first (a fifth of the JPG weight), sized by how wide the
-            cover crop really is: max(width, height × the art's ratio) */}
-        <picture>
-          <source media="(min-aspect-ratio: 2/1)" type="image/webp" srcSet="/images/hero-flat-beach.webp" />
-          <source media="(min-aspect-ratio: 2/1)" srcSet="/images/hero-flat-beach.jpg" />
-          <source
-            media="(max-aspect-ratio: 9/10)"
-            type="image/webp"
-            srcSet="/images/hero-flat-beach-portrait-720.webp 720w, /images/hero-flat-beach-portrait.webp 1024w"
-            sizes="max(100vw, 67vh)"
-          />
-          <source media="(max-aspect-ratio: 9/10)" srcSet="/images/hero-flat-beach-portrait.jpg" />
-          <source
-            type="image/webp"
-            srcSet="/images/hero-flat-beach-3x2-1024.webp 1024w, /images/hero-flat-beach-3x2.webp 1536w"
-            sizes="max(100vw, 150vh)"
-          />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/hero-flat-beach-3x2.jpg"
-            alt=""
-            fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover object-bottom"
-          />
-        </picture>
-        {/* Deepens the sky behind the copy so it reads over the sunset, and
-            hides any crop seam against the section colour at the top */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(to bottom, #462a7e 0%, rgba(70, 42, 126, 0.55) 30%, rgba(70, 42, 126, 0.25) 48%, rgba(70, 42, 126, 0) 62%)'
-          }}
-        />
+        <DreamBeachScene />
       </div>
 
       <div className="container mx-auto px-4 relative">
@@ -77,10 +42,15 @@ export function Hero() {
               <span
                 aria-hidden
                 className="absolute -inset-x-10 -inset-y-6 -z-10 rounded-full blur-2xl"
-                style={{ background: 'radial-gradient(ellipse at center, rgba(55, 28, 100, 0.45), rgba(55, 28, 100, 0) 70%)' }}
+                style={{
+                  background:
+                    'radial-gradient(ellipse at center, rgba(55, 28, 100, 0.45), rgba(55, 28, 100, 0) 70%)'
+                }}
               />
-              You can understand more Spanish than you think.{' '} <br />
-              <span className="text-amber-200 font-semibold text-xl">Personalized lessons with native Mexican teachers</span>
+              You can understand more Spanish than you think. <br />
+              <span className="text-amber-200 font-semibold text-xl">
+                Personalized lessons with native Mexican teachers
+              </span>
             </p>
             <Button
               size="lg"
