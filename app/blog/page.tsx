@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button'
 
 export const metadata = {
   title: 'Blog - Playa Spanish',
-  description: 'Read about student success stories and Spanish learning experiences'
+  description: 'Read about student success stories and Spanish learning experiences',
+  alternates: { canonical: '/blog' }
 }
 
 const blogPosts = [

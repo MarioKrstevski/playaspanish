@@ -1,4 +1,6 @@
+import type { Metadata } from 'next'
 import { Header } from '@/components/header/Header'
+import { homeStructuredData } from '@/lib/structured-data'
 import { Hero } from '@/components/hero/Hero'
 import { Experience } from '@/components/experience/Experience'
 import { InClass } from '@/components/in-class/InClass'
@@ -26,9 +28,19 @@ const colors = {
   footer: '#450a0a' // deep red root
 }
 
+// The homepage's own address, so www., ?query and the old /v/ copies all
+// count as this one page (PLA-31)
+export const metadata: Metadata = {
+  alternates: { canonical: '/' }
+}
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData()) }}
+      />
       <Header />
       <ChakraRail />
       <main>

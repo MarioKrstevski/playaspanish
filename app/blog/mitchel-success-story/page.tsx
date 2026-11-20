@@ -5,7 +5,8 @@ import Image from 'next/image'
 
 export const metadata = {
   title: 'Mitchel\'s Success Story - Playa Spanish Blog',
-  description: 'Discover how Mitchel transformed his Spanish skills through personalized lessons with Playa Spanish'
+  description: 'Discover how Mitchel transformed his Spanish skills through personalized lessons with Playa Spanish',
+  alternates: { canonical: '/blog/mitchel-success-story' }
 }
 
 export default function MitchelBlogPost() {

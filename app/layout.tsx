@@ -14,18 +14,23 @@ const caveat = Caveat({
   display: 'swap'
 })
 
+// Search snippet (PLA-31): what people type, then what makes us different,
+// under ~160 characters so Google shows it whole
+const title = 'Online Spanish Lessons with Native Mexican Teachers | Playa Spanish'
 const description =
-  'Learn Spanish as it is lived: language, culture, and people. Native Mexican teachers, an unlimited course that moves at your pace, plus custom courses for professionals.'
+  'Learn Spanish online with native Mexican teachers. 1:1 video lessons around your goals, with Mexican culture and real conversation from day one. $25 a lesson.'
 
 // The link preview in chats and social apps (Instagram, WhatsApp, iMessage…):
 // public/og-image.jpg, 1200x630.
 export const metadata: Metadata = {
   metadataBase: new URL('https://playaspanish.com'),
-  title: 'Playa Spanish - Online Spanish School',
+  title,
   description,
+  applicationName: 'Playa Spanish',
+  robots: { index: true, follow: true, 'max-image-preview': 'large' },
   openGraph: {
     type: 'website',
-    url: '/',
+    locale: 'en_US',
     siteName: 'Playa Spanish',
     title: 'Start your Spanish classes | Playa Spanish',
     description: '1:1 online Spanish lessons with native Mexican teachers.',

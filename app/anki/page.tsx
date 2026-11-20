@@ -10,7 +10,8 @@ import { ArrowRight } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Anki Deck - Playa Spanish',
   description:
-    'Spanish flashcard decks made by your Playa Spanish teacher, built to match your course. Learn a few minutes a day with Anki and spaced repetition. Coming soon.'
+    'Spanish flashcard decks made by your Playa Spanish teacher, built to match your course. Learn a few minutes a day with Anki and spaced repetition. Coming soon.',
+  alternates: { canonical: '/anki' }
 }
 
 const DISPLAY = '[font-family:var(--font-d-display),var(--font-inter),sans-serif] tracking-[-0.02em]'

@@ -64,7 +64,7 @@ export function DreamBeachScene() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/hero-dream-beach-mobile.jpg"
-            alt=""
+            alt="A student learning Spanish online with a Mexican teacher on a video call, on a beach at sunset"
             fetchPriority="high"
             className="absolute inset-0 h-full w-full object-cover object-bottom"
           />
@@ -98,7 +98,7 @@ export function DreamBeachScene() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/hero-dream-beach.jpg"
-            alt=""
+            alt="A student learning Spanish online with a Mexican teacher on a video call, on a beach at sunset, dreaming of Mexico's pyramids and colonial streets"
             fetchPriority="high"
             className="absolute inset-0 h-full w-full object-fill"
           />
