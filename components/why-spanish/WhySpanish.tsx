@@ -33,7 +33,7 @@ export function WhySpanish() {
   const { ref: reasonsRef, isVisible: reasonsVisible } = useScrollAnimation()
 
   return (
-    <section id="why-spanish" className="relative py-24 bg-sky-50 overflow-hidden">
+    <section id="why-spanish" className="relative pt-24 pb-12 bg-sky-50 overflow-hidden">
       <div className="container mx-auto px-4 relative">
         <div className="grid items-center gap-x-10 gap-y-12 lg:grid-cols-12 max-w-6xl mx-auto">
           <div

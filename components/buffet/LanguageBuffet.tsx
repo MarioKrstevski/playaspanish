@@ -17,7 +17,7 @@ export function LanguageBuffet() {
   const { ref: menuRef, isVisible: menuVisible } = useScrollAnimation()
 
   return (
-    <section id="buffet" className={cn(display.variable, 'relative py-24 bg-sky-50 text-sky-950')}>
+    <section id="buffet" className={cn(display.variable, 'relative pt-12 pb-12 md:pb-16 bg-sky-50 text-sky-950')}>
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div ref={headRef} className={cn('animate-on-scroll', headVisible && 'visible')}>

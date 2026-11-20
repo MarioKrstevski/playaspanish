@@ -43,9 +43,14 @@ function TeacherProfile({ teacher, reverse }: { teacher: Teacher; reverse?: bool
       >
         <div>
           <h3 className="text-3xl font-bold text-gray-900 mb-4 text-center md:text-left">
-            Hi, nice to meet you. I&apos;m
-            <span className="block mt-1 [font-family:var(--font-caveat)] text-4xl sm:text-5xl text-emerald-700">
-              {teacher.name}
+            {/* "I'm" rides with the name, so it never sits alone on a line */}
+            <span className="block">Hi, nice to meet you.</span>
+            <span className="block mt-1">
+              {/* non-breaking space: a long name may wrap, but never away from "I'm" */}
+              I&apos;m{'\u00a0'}
+              <span className="[font-family:var(--font-caveat)] text-4xl sm:text-5xl text-emerald-700">
+                {teacher.name}
+              </span>
             </span>
           </h3>
           {/* Her title lives on the photo badge only (Angelica, 2026-11-21) */}
@@ -81,7 +86,7 @@ export function AboutTeacher() {
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation()
 
   return (
-    <section id="about" className="relative pt-24 pb-6 bg-emerald-50 overflow-hidden">
+    <section id="about" className="relative pt-16 md:pt-20 pb-6 bg-emerald-50 overflow-hidden">
       <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}

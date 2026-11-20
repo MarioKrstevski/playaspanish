@@ -33,7 +33,7 @@ export function Footer() {
   const onHomepage = pathname === '/' || pathname.startsWith('/v/')
 
   return (
-    <footer className="bg-[#450a0a] text-red-100/80 py-12">
+    <footer className="bg-[#450a0a] text-red-100/80 pt-12">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
@@ -90,7 +90,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-red-900 pt-8 text-center text-sm text-red-200/60">
+        <div className="border-t border-red-900 py-4 text-center text-sm text-red-200/60">
           <p>&copy; {new Date().getFullYear()} Playa Spanish. All rights reserved.</p>
         </div>
       </div>
