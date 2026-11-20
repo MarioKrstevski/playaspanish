@@ -46,17 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${caveat.variable}`}>
-      <head>
-        <script
-          type="text/javascript"
-          src="https://assets.calendly.com/assets/external/widget.js"
-          async
-        />
-      </head>
-      <body>
-        {children}
-        {/* TEMPORARY (PLA-17): design switcher pinned under the header */}
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

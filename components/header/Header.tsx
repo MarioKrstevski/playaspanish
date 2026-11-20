@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 
 // Kept to two links plus the Get Started button (Mario, 2026-11-20); the
 // logo goes home and the footer still lists every section
@@ -64,7 +63,12 @@ export function Header() {
             }}
             className="text-2xl font-bold text-primary-600"
           >
-            <Image width={300} height={500} src="/playaspanish_logowithtext.png" alt="Playa Spanish" />
+            {/* A 560px copy of the 2399px logo: crisp at 2x, a tenth of the weight */}
+            <picture>
+              <source type="image/webp" srcSet="/playaspanish-logo-560.webp" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/playaspanish-logo-560.png" width={300} height={43} alt="Playa Spanish" />
+            </picture>
           </Link>
 
           {/* Desktop Navigation */}

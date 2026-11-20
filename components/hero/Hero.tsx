@@ -27,9 +27,23 @@ export function Hero() {
           Bottom-anchored so the woman at her laptop always shows; the sky
           gives way at the top. */}
       <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
+        {/* WebP first (a fifth of the JPG weight), sized by how wide the
+            cover crop really is: max(width, height × the art's ratio) */}
         <picture>
+          <source media="(min-aspect-ratio: 2/1)" type="image/webp" srcSet="/images/hero-flat-beach.webp" />
           <source media="(min-aspect-ratio: 2/1)" srcSet="/images/hero-flat-beach.jpg" />
+          <source
+            media="(max-aspect-ratio: 9/10)"
+            type="image/webp"
+            srcSet="/images/hero-flat-beach-portrait-720.webp 720w, /images/hero-flat-beach-portrait.webp 1024w"
+            sizes="max(100vw, 67vh)"
+          />
           <source media="(max-aspect-ratio: 9/10)" srcSet="/images/hero-flat-beach-portrait.jpg" />
+          <source
+            type="image/webp"
+            srcSet="/images/hero-flat-beach-3x2-1024.webp 1024w, /images/hero-flat-beach-3x2.webp 1536w"
+            sizes="max(100vw, 150vh)"
+          />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/hero-flat-beach-3x2.jpg"
@@ -53,7 +67,7 @@ export function Hero() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="w-full md:col-span-2 max-w-6xl mx-auto text-center">
             {/* A moon crosses the headline and shows it in Spanish */}
-            <div className="hero-slide-in mb-10 md:mb-6">
+            <div className="hero-rise mb-10 md:mb-6">
               <MoonReveal en={HEADLINE_EN} es={HEADLINE_ES} />
             </div>
 

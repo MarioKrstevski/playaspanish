@@ -74,6 +74,22 @@
     animation: hero-slide-in 0.5s ease-out both;
   }
 
+  /* The headline only rises, it never starts invisible: the browser counts
+     it as painted straight away, which is what phone speed scores measure
+     (PLA-28) */
+  @keyframes hero-rise {
+    from {
+      transform: translateY(20px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .hero-rise {
+    animation: hero-rise 0.5s ease-out both;
+  }
+
   .hero-slide-in-delay-1 {
     animation-delay: 0.15s;
   }

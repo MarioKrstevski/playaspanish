@@ -8,7 +8,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary-600 text-white hover:bg-primary-700',
+        // 700, not 600: white on orange-600 is only 3.5:1, below the 4.5:1
+        // readable minimum (Lighthouse, PLA-28)
+        default: 'bg-primary-700 text-white hover:bg-primary-800',
         outline: 'border border-primary-600 bg-transparent text-primary-600 hover:bg-primary-50',
         ghost: 'hover:bg-primary-50 hover:text-primary-600',
         link: 'text-primary-600 underline-offset-4 hover:underline'

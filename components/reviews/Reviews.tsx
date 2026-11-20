@@ -72,7 +72,7 @@ const reviews: Array<{
 
 function Stars() {
   return (
-    <div className="flex gap-1" aria-label="5 out of 5 stars">
+    <div className="flex gap-1" role="img" aria-label="5 out of 5 stars">
       {Array.from({ length: 5 }, (_, i) => (
         <Star key={i} className="w-4 h-4 text-red-400 fill-red-400" />
       ))}
