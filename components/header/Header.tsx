@@ -8,13 +8,11 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
+// Kept to two links plus the Get Started button (Mario, 2026-11-20); the
+// logo goes home and the footer still lists every section
 const navItems = [
-  { label: 'Home', href: '#hero' },
-  { label: 'The Course', href: '#course' },
-  { label: 'Pricing', href: '#pricing' },
   { label: 'Teachers', href: '#about' },
-  { label: 'Anki', href: '/anki' },
-  { label: 'Contact', href: '#contact' }
+  { label: 'Pricing', href: '#pricing' }
 ]
 
 const navLinkClass =
@@ -45,13 +43,15 @@ export function Header() {
       {/* Backdrop dimmer when mobile menu is open */}
       <div
         className={cn(
-          'fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 lg:hidden',
+          'fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 md:hidden',
           mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
         onClick={() => setMobileMenuOpen(false)}
         aria-hidden
       />
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-md shadow-sm">
+      {/* Solid warm white: see-through never sat right over the page's
+          many colours */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#fffcf7] border-b border-black/5 shadow-sm">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link
@@ -68,7 +68,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => {
               if (item.href.startsWith('#')) {
                 return (
@@ -112,7 +112,7 @@ export function Header() {
           </div>
 
           {/* Mobile: CTA + hamburger */}
-          <div className="lg:hidden flex items-center gap-2">
+          <div className="md:hidden flex items-center gap-2">
             <Button
               onClick={(e) => {
                 e.preventDefault()
@@ -134,11 +134,11 @@ export function Header() {
           {/* Mobile Navigation */}
           <div
             className={cn(
-              'lg:hidden overflow-hidden transition-all duration-300',
-              mobileMenuOpen ? 'max-h-96 mt-4' : 'max-h-0'
+              'md:hidden overflow-hidden transition-all duration-300',
+              mobileMenuOpen ? 'max-h-96 mt-3' : 'max-h-0'
             )}
           >
-            <div className="flex flex-col space-y-4 pb-4">
+            <div className="flex flex-col divide-y divide-black/5 border-t border-black/5 pb-1">
               {navItems.map((item) => {
                 if (item.href.startsWith('#')) {
                   return (
@@ -152,7 +152,7 @@ export function Header() {
                         }
                         setMobileMenuOpen(false)
                       }}
-                      className={navLinkClass}
+                      className="block px-2 py-4 text-lg font-semibold text-indigo-950 transition-colors hover:text-primary-700"
                     >
                       {item.label}
                     </a>

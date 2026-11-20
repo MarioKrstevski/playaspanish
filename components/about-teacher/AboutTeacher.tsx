@@ -3,7 +3,6 @@
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { cn } from '@/lib/utils'
 import { Check, Crown } from 'lucide-react'
-import { AgaveCorner } from '@/components/decor/CornerArt'
 import { teachers, teachersIntro, type Teacher } from '@/lib/content'
 import { TeacherPhoto } from '@/components/teachers/TeacherPhoto'
 
@@ -87,9 +86,7 @@ export function AboutTeacher() {
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation()
 
   return (
-    <section id="about" className="relative py-24 bg-emerald-50 overflow-hidden">
-      {/* Agave leaves, bottom-left */}
-      <AgaveCorner className="hidden lg:block absolute bottom-0 left-4 w-56 pointer-events-none" />
+    <section id="about" className="relative pt-24 pb-6 bg-emerald-50 overflow-hidden">
       <div className="container mx-auto px-4 relative">
         <div
           ref={titleRef}

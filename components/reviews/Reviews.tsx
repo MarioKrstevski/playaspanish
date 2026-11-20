@@ -103,80 +103,39 @@ export function Reviews() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          {reviews.map((review, index) => {
-            const isLeft = index % 2 === 0
-            return (
-              <ReviewRow
-                key={review.name}
-                review={review}
-                isLeft={isLeft}
-                isLast={index === reviews.length - 1}
-              />
-            )
-          })}
+        {/* Two by two, as in version E: each review under a rule with its
+            moon half risen over it, in this page's type and reds */}
+        <div className="grid max-w-5xl mx-auto gap-x-16 gap-y-14 pt-6 md:grid-cols-2">
+          {reviews.map((review, index) => (
+            <ReviewCard key={review.name} review={review} delay={index * 120} />
+          ))}
         </div>
       </div>
     </section>
   )
 }
 
-function ReviewRow({
-  review,
-  isLeft,
-  isLast
-}: {
-  review: (typeof reviews)[number]
-  isLeft: boolean
-  isLast: boolean
-}) {
+function ReviewCard({ review, delay }: { review: (typeof reviews)[number]; delay: number }) {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
-    <div
+    <figure
       ref={ref}
-      className={cn(
-        'grid md:grid-cols-[1fr_80px_1fr]',
-        isLeft ? 'animate-slide-left' : 'animate-slide-right',
-        isVisible && 'visible'
-      )}
+      className={cn('animate-on-scroll relative flex flex-col border-t-2 border-red-300 pt-6', isVisible && 'visible')}
+      style={{ transitionDelay: `${delay}ms` }}
     >
-      {/* Content cell — alternates sides on desktop (yin-yang rhythm) */}
-      <div
-        className={cn(
-          'pb-12 md:row-start-1',
-          isLeft
-            ? 'md:col-start-1 md:text-right md:pr-2'
-            : 'md:col-start-3 md:pl-2'
-        )}
-      >
-        {/* Mobile: moon inline above the quote */}
-        <div className="flex items-center gap-3 mb-3 md:hidden">
-          <MoonPhase phase={review.phase} className="w-8 h-8" />
-          <Stars />
-        </div>
-        <blockquote className="text-2xl font-semibold text-gray-900 leading-snug mb-3">
-          &ldquo;{review.quote}&rdquo;
-        </blockquote>
-        <p className="text-sm text-gray-500 leading-relaxed mb-3">{review.review}</p>
-        <div
-          className={cn(
-            'flex items-center gap-3',
-            isLeft && 'md:justify-end'
-          )}
-        >
-          <span className="font-semibold text-red-700">{review.name}</span>
-          <span className="hidden md:block">
-            <Stars />
-          </span>
-        </div>
-      </div>
-
-      {/* Center rail: moon phase on a thin line */}
-      <div className="hidden md:flex flex-col items-center md:col-start-2 md:row-start-1">
+      {/* the moon, half risen over the rule */}
+      <div aria-hidden className="absolute left-0 bottom-full h-5 w-10 overflow-hidden">
         <MoonPhase phase={review.phase} />
-        {!isLast && <div className="w-px flex-1 bg-red-200 mt-2" />}
       </div>
-    </div>
+      <blockquote className="flex-1">
+        <p className="text-2xl font-semibold text-gray-900 leading-snug">&ldquo;{review.quote}&rdquo;</p>
+        <p className="mt-3 text-gray-600 leading-relaxed">{review.review}</p>
+      </blockquote>
+      <figcaption className="mt-5 flex items-center gap-3">
+        <span className="font-semibold text-red-700">{review.name}</span>
+        <Stars />
+      </figcaption>
+    </figure>
   )
 }

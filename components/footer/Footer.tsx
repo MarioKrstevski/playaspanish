@@ -8,7 +8,8 @@ const navLinks = [
   { label: 'The Course', href: '#course' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Teachers', href: '#about' },
-  { label: 'Anki', href: '/anki' },
+  // The Anki deck is still coming, so it lives here and not in the header
+  { label: 'Anki deck (soon)', href: '/anki' },
   { label: 'Contact', href: '#contact' }
 ]
 
@@ -85,8 +86,6 @@ export function Footer() {
             <h4 className="text-lg font-semibold text-white mb-4">Contact</h4>
             <ul className="space-y-2 text-red-200/70">
               <li>Email: info@playaspanish.com</li>
-              <li>Online Classes via Zoom or Teams – flexible to your platform if needed
-              </li>
             </ul>
           </div>
         </div>

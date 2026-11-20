@@ -1,6 +1,6 @@
 import { Alegreya, Alegreya_Sans } from 'next/font/google'
 
-// Version A, "Con Angelica": Alegreya (Huerta Tipográfica) for display and the
+// Version E keeps version A's type (A itself is gone): Alegreya (Huerta Tipográfica) for display and the
 // Spanish lines, Alegreya Sans for everything you read.
 export const display = Alegreya({
   subsets: ['latin'],

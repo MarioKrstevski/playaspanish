@@ -1,77 +1,71 @@
 'use client'
 
-import { Briefcase, Globe2, MessageCircle, Plane, Stethoscope } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { cn } from '@/lib/utils'
 import { buffet } from '@/lib/content'
+import { display } from '@/lib/fonts'
 
-const audienceIcons = [Globe2, Plane, Briefcase]
-const courseIcons = [MessageCircle, Stethoscope]
+const DISPLAY = '[font-family:var(--font-d-display),var(--font-inter),sans-serif] tracking-[-0.02em]'
+const HAND = '[font-family:var(--font-caveat)] font-semibold leading-none'
 
 // Continues the sky "Why Spanish" zone: who the courses are for, and what is
-// on the menu. From Angelica's "Buffet lingüístico" slide.
+// on the menu. From Angelica's "Buffet lingüístico" slide. Version D's type:
+// the head runs across the full width, the three audiences follow as compact
+// ruled rows, the two courses as dark cards underneath.
 export function LanguageBuffet() {
-  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation()
-  const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation()
+  const { ref: headRef, isVisible: headVisible } = useScrollAnimation()
   const { ref: menuRef, isVisible: menuVisible } = useScrollAnimation()
 
   return (
-    <section id="buffet" className="relative pb-24 bg-sky-50">
+    <section id="buffet" className={cn(display.variable, 'relative py-24 bg-sky-50 text-sky-950')}>
       <div className="container mx-auto px-4">
-        <div
-          ref={titleRef}
-          className={cn('animate-on-scroll text-center mb-12', titleVisible && 'visible')}
-        >
-          <p className="text-sm uppercase tracking-[0.3em] text-sky-700 mb-3">{buffet.titleEs}</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{buffet.title}</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">{buffet.intro}</p>
-        </div>
+        <div className="max-w-6xl mx-auto">
+          <div ref={headRef} className={cn('animate-on-scroll', headVisible && 'visible')}>
+            <h2
+              className={cn(
+                DISPLAY,
+                'font-bold text-[clamp(2.25rem,5.4vw,4.25rem)] leading-[1.02] tracking-[-0.025em] [text-wrap:balance]'
+              )}
+            >
+              {buffet.title}
+            </h2>
+            <div className="mt-4 grid gap-x-12 gap-y-5 md:grid-cols-[auto_minmax(0,1fr)] md:items-center">
+              <p lang="es" className={cn(HAND, '-rotate-2 text-4xl md:text-5xl text-sky-700')}>
+                {buffet.titleEs}
+              </p>
+              <p className="max-w-[56ch] text-lg md:text-xl leading-relaxed text-sky-900/75">{buffet.intro}</p>
+            </div>
 
-        <div
-          ref={cardsRef}
-          className={cn(
-            'animate-on-scroll grid md:grid-cols-3 gap-6 max-w-5xl mx-auto',
-            cardsVisible && 'visible'
-          )}
-        >
-          {buffet.audiences.map((audience, index) => {
-            const Icon = audienceIcons[index]
-            return (
-              <div
-                key={audience.title}
-                className="bg-white rounded-lg border border-sky-100 shadow-sm p-6"
-              >
-                <Icon className="h-7 w-7 text-sky-600 mb-4" aria-hidden />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{audience.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{audience.description}</p>
-              </div>
-            )
-          })}
-        </div>
+            <ul className="mt-12 border-t-2 border-sky-950">
+              {buffet.audiences.map((audience) => (
+                <li
+                  key={audience.title}
+                  className="grid gap-x-8 gap-y-1 border-b border-sky-200 py-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:items-baseline md:py-5"
+                >
+                  <h3 className={cn(DISPLAY, 'text-2xl font-bold leading-tight md:text-[1.75rem]')}>
+                    {audience.title}
+                  </h3>
+                  <p className="text-sky-900/75 leading-relaxed md:text-lg">{audience.description}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div
-          ref={menuRef}
-          className={cn(
-            'animate-on-scroll grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-6',
-            menuVisible && 'visible'
-          )}
-        >
-          {buffet.courses.map((item, index) => {
-            const Icon = courseIcons[index]
-            return (
-              <div
-                key={item.title}
-                className="flex gap-4 rounded-lg bg-sky-700 text-white p-6 shadow-sm"
-              >
-                <Icon className="h-7 w-7 flex-shrink-0 text-sky-200 mt-1" aria-hidden />
-                <div>
-                  <p className="text-xs uppercase tracking-[0.25em] text-sky-200">{item.titleEs}</p>
-                  <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
-                  <p className="text-sky-100 leading-relaxed">{item.description}</p>
-                </div>
-              </div>
-            )
-          })}
+          <div ref={menuRef} className={cn('animate-on-scroll', menuVisible && 'visible')}>
+            <ul className="mt-14 grid gap-5 md:mt-16 md:grid-cols-2">
+              {buffet.courses.map((item) => (
+                <li key={item.title} className="rounded-[28px] bg-sky-900 p-8 text-white md:p-10">
+                  <p lang="es" className={cn(HAND, 'text-3xl md:text-4xl text-sky-300')}>
+                    {item.titleEs}
+                  </p>
+                  <h3 className={cn(DISPLAY, 'mt-2 text-[1.7rem] font-bold leading-[1.08] md:text-[2.1rem]')}>
+                    {item.title}
+                  </h3>
+                  <p className="mt-4 max-w-[36ch] text-sky-100/80 leading-relaxed">{item.description}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

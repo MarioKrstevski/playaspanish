@@ -177,9 +177,9 @@ export const howItWorks = {
         'Everything starts with an email. Tell us you want to learn Spanish. That is all it takes.'
     },
     {
-      title: 'Meet Angelica',
+      title: 'Your first chat',
       description:
-        'A first conversation to understand what you need and where you want to go. Angelica shapes your path and matches you with the teacher who fits you best, which may be her.'
+        'A first conversation to understand what you need and where you want to go, so your lessons fit you from the very start.'
     },
     {
       title: 'Find your rhythm',
@@ -194,6 +194,27 @@ export const howItWorks = {
   ]
 }
 
+// The homepage's pricing, kept short on purpose (Mario, 2026-11-20): the
+// price, the ten-lesson saving, the money-back promise, nothing more.
+export const pricingSimple = {
+  title: 'Pricing',
+  rows: [
+    {
+      name: 'One lesson',
+      price: '$25',
+      points: ['One hour, one-on-one', 'Pay as you go', 'No commitment']
+    },
+    {
+      name: 'Ten lessons',
+      price: '$240',
+      points: ['$24 per lesson, save $10', 'Book them whenever you like', '50% back if it is not for you']
+    }
+  ],
+  cta: 'Start now',
+  custom: 'Need Spanish for your profession? Ask for a custom course.'
+}
+
+// The fuller pricing copy, still used by the design versions under /v/*
 export const pricing = {
   title: 'Simple, honest pricing',
   lead: 'A lesson is $25. Take ten and pay $24 each.',
@@ -272,7 +293,7 @@ export const reviews = {
 
 export const contact = {
   title: 'Ready to Start?',
-  body: 'One email is the whole first step. Angelica reads every message and answers personally. Tell her where you are with Spanish, or just say hola.',
+  body: 'One email is the whole first step. Every message is read and answered personally. Tell us where you are with Spanish, or just say hola.',
   note: 'Online classes via Zoom or Teams, flexible to your platform if needed.'
 }
 

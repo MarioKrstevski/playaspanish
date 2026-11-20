@@ -48,7 +48,9 @@ export function WhySpanish() {
             </p>
             <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-sky-200 pt-8">
               {whySpanish.stats.map((stat) => (
-                <div key={stat.label} className="flex flex-col-reverse">
+                // justify-end is the top in a reversed column: the numbers
+                // line up across a row whatever the label length below
+                <div key={stat.label} className="flex flex-col-reverse justify-end">
                   <dt className="mt-1.5 max-w-[20ch] text-[0.9375rem] leading-snug text-gray-600">
                     {stat.label}
                   </dt>

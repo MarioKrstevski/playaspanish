@@ -1,14 +1,11 @@
 'use client'
 
-import Image from 'next/image'
-import { useState, useCallback, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
+import { ArrowDown } from 'lucide-react'
+import { MoonReveal } from './MoonReveal'
 
 const HEADLINE_EN = 'Your path to Spanish starts here'
 const HEADLINE_ES = 'Tu camino al español empieza aquí'
-const CURSOR_CIRCLE_RADIUS_DESKTOP = 92 // 210px diameter
-const CURSOR_CIRCLE_RADIUS_MOBILE = 75 // smaller for mobile
 
 function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
   e.preventDefault()
@@ -18,198 +15,46 @@ function handleSmoothScroll(e: React.MouseEvent<HTMLButtonElement>) {
   }
 }
 
-const MOBILE_BREAKPOINT = 768
-
-// Desktop hero image height: capped at 93% of the section at >=1300px wide
-// (so the scene never stretches up under the fixed header), easing down
-// linearly to 73% at the md breakpoint (below which the mobile portrait
-// image takes over). Bottom-anchored, so the sky above shrinks, not the scene.
-function useHeroImageHeight() {
-  const [pct, setPct] = useState(93)
-  useEffect(() => {
-    const update = () => {
-      const t = Math.min(Math.max((window.innerWidth - MOBILE_BREAKPOINT) / (1300 - MOBILE_BREAKPOINT), 0), 1)
-      setPct(73 + 20 * t)
-    }
-    update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
-  }, [])
-  return pct
-}
-
-
-function useCircleRadius() {
-  const [state, setState] = useState(() => ({
-    radius: CURSOR_CIRCLE_RADIUS_DESKTOP,
-    isMobile: typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT
-  }))
-  useEffect(() => {
-    const update = () => {
-      const isMobile = window.innerWidth < MOBILE_BREAKPOINT
-      setState({
-        radius: isMobile ? CURSOR_CIRCLE_RADIUS_MOBILE : CURSOR_CIRCLE_RADIUS_DESKTOP,
-        isMobile
-      })
-    }
-    update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
-  }, [])
-  return state
-}
-
 export function Hero() {
-  const imageHeightPct = useHeroImageHeight()
-  const cursorRevealRef = useRef<HTMLDivElement>(null)
-  const [cursorReveal, setCursorReveal] = useState({ x: 0, y: 0, isHovering: false })
-  const { radius: circleRadius, isMobile } = useCircleRadius()
-  const circleCenterX = cursorReveal.isHovering ? cursorReveal.x : 0
-  const circleCenterY = cursorReveal.isHovering
-    ? (isMobile ? cursorReveal.y - circleRadius : cursorReveal.y)
-    : 0
-
-  const updatePosition = useCallback((clientX: number, clientY: number) => {
-    const el = cursorRevealRef.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    setCursorReveal({
-      x: clientX - rect.left,
-      y: clientY - rect.top,
-      isHovering: true
-    })
-  }, [])
-
-  const handleCursorRevealMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    updatePosition(e.clientX, e.clientY)
-  }, [updatePosition])
-
-  const handleCursorRevealLeave = useCallback(() => {
-    setCursorReveal((prev) => ({ ...prev, isHovering: false }))
-  }, [])
-
-  const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    const touch = e.touches[0]
-    if (touch) updatePosition(touch.clientX, touch.clientY)
-  }, [updatePosition])
-
-  const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    const touch = e.touches[0]
-    if (touch) updatePosition(touch.clientX, touch.clientY)
-  }, [updatePosition])
-
-  const handleTouchEnd = useCallback(() => {
-    setCursorReveal((prev) => ({ ...prev, isHovering: false }))
-  }, [])
-
-  const circleDiameter = circleRadius * 2
-  const maskRadius = circleRadius - 2
-
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden bg-[#462a7e]"
+      className="relative min-h-screen flex items-start pt-[max(9.5rem,17vh)] pb-16 overflow-hidden bg-[#462a7e]"
     >
-      {/* Dream-beach scene covering the full hero, anchored to the bottom so
-          the ground scene always shows; the sky crops from the top/sides as
-          needed. Landscape composition on md+, portrait recomposition on
-          mobile. The top blend into the section color hides any crop seam. */}
+      {/* The beach scene, drawn three times for three screen shapes (PLA-26):
+          very wide, standard landscape and phone portrait. The browser picks
+          by the hero's shape, so the art is cropped a little, never squashed.
+          Bottom-anchored so the woman at her laptop always shows; the sky
+          gives way at the top. */}
       <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
-        {/* Mobile: portrait recomposition covering the full hero */}
-        <div className="md:hidden absolute inset-0">
-          <Image
-            src="/images/hero-dream-beach-mobile.jpg"
+        <picture>
+          <source media="(min-aspect-ratio: 2/1)" srcSet="/images/hero-flat-beach.jpg" />
+          <source media="(max-aspect-ratio: 9/10)" srcSet="/images/hero-flat-beach-portrait.jpg" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-flat-beach-3x2.jpg"
             alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-bottom"
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover object-bottom"
           />
-          <div
-            className="absolute inset-x-0 top-0 h-36"
-            style={{ background: 'linear-gradient(to bottom, #462a7e, rgba(70, 42, 126, 0))' }}
-          />
-        </div>
-        {/* Desktop: bottom-anchored wrapper whose height eases 100% -> 73%
-            as the viewport narrows from 1300px to md */}
+        </picture>
+        {/* Deepens the sky behind the copy so it reads over the sunset, and
+            hides any crop seam against the section colour at the top */}
         <div
-          className="hidden md:block absolute inset-x-0 bottom-0"
-          style={{ height: `${imageHeightPct}%` }}
-        >
-          <Image
-            src="/images/hero-dream-beach.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-fill"
-          />
-          <div
-            className="absolute inset-x-0 top-0 h-28"
-            style={{ background: 'linear-gradient(to bottom, #462a7e, rgba(70, 42, 126, 0))' }}
-          />
-        </div>
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to bottom, #462a7e 0%, rgba(70, 42, 126, 0.55) 30%, rgba(70, 42, 126, 0.25) 48%, rgba(70, 42, 126, 0) 62%)'
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-4 relative">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="w-full md:col-span-2 max-w-4xl mx-auto  text-center">
-            {/* Cursor reveal: English with circular cutout, Spanish visible only in circle on hover */}
-            <div
-              ref={cursorRevealRef}
-              className="hero-slide-in relative min-h-[7rem]   md:min-h-[5rem] flex items-center justify-center select-none mb-24 md:mb-12 hover:cursor-none touch-none"
-              onMouseMove={handleCursorRevealMove}
-              onMouseLeave={handleCursorRevealLeave}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              onTouchCancel={handleTouchEnd}
-            >
-              {/* Spanish layer: revealed only inside circle; clip-path only so edge is crisp and aligned to border */}
-              <h1
-                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-white [text-shadow:0_2px_18px_rgba(40,16,70,0.45)] whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10"
-                style={{
-                  opacity: cursorReveal.isHovering ? 1 : 0,
-                  clipPath: cursorReveal.isHovering
-                    ? `circle(${maskRadius}px at ${circleCenterX}px ${circleCenterY}px)`
-                    : 'none',
-                  WebkitClipPath: cursorReveal.isHovering
-                    ? `circle(${maskRadius}px at ${circleCenterX}px ${circleCenterY}px)`
-                    : 'none'
-                }}
-                aria-hidden={!cursorReveal.isHovering}
-              >
-                {HEADLINE_ES}
-              </h1>
-              {/* English layer: always visible, with circular cutout on hover/touch */}
-              <h1
-                className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl lg:text-5xl font-bold text-white [text-shadow:0_2px_18px_rgba(40,16,70,0.45)] whitespace-normal md:whitespace-nowrap text-center py-24 md:py-10 tracking-wider"
-                style={{
-                  WebkitMaskImage: cursorReveal.isHovering
-                    ? `radial-gradient(circle ${maskRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${maskRadius}px, black ${maskRadius}px)`
-                    : 'none',
-                  maskImage: cursorReveal.isHovering
-                    ? `radial-gradient(circle ${maskRadius}px at ${circleCenterX}px ${circleCenterY}px, transparent 0, transparent ${maskRadius}px, black ${maskRadius}px)`
-                    : 'none'
-                }}
-              >
-                {HEADLINE_EN}
-              </h1>
-              {/* Visible circle at cursor/touch with smoky inner rim and black border */}
-              {cursorReveal.isHovering && (
-                <div
-                  className="pointer-events-none absolute rounded-full border-2 border-white/80 -translate-x-1/2 -translate-y-1/2"
-                  style={{
-                    left: circleCenterX,
-                    top: circleCenterY,
-                    width: circleDiameter,
-                    height: circleDiameter,
-                    background: 'radial-gradient(circle, transparent 60%, rgba(139, 92, 246, 0.15) 80%, rgba(139, 92, 246, 0.3) 100%)',
-                    boxShadow: 'inset 0 0 20px 8px rgba(139, 92, 246, 0.2), 0 0 15px 5px rgba(139, 92, 246, 0.15)'
-                  }}
-                  aria-hidden
-                />
-              )}
+          <div className="w-full md:col-span-2 max-w-6xl mx-auto text-center">
+            {/* A moon crosses the headline and shows it in Spanish */}
+            <div className="hero-slide-in mb-10 md:mb-6">
+              <MoonReveal en={HEADLINE_EN} es={HEADLINE_ES} />
             </div>
 
             {/* Warm cream and sunset gold pick up the scene instead of fighting
@@ -226,10 +71,12 @@ export function Hero() {
             <Button
               size="lg"
               onClick={handleSmoothScroll}
-              className="hero-slide-in hero-slide-in-delay-2 text-lg px-8 py-6"
+              // Moonlight cream, like the blouse and the laptop glow in the scene:
+              // orange fought the sunset sky
+              className="hero-slide-in hero-slide-in-delay-2 text-lg px-8 py-6 rounded-full bg-[#fff3d1] text-[#3b0764] font-semibold shadow-[0_8px_30px_rgba(255,214,150,0.35)] hover:bg-white hover:text-[#3b0764] transition-colors"
             >
               Start now
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowDown className="ml-2 h-5 w-5" aria-hidden />
             </Button>
           </div>
 

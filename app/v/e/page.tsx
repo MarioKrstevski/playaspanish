@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { fontVariables } from '@/components/versions/a/fonts'
+import { fontVariables } from '@/components/versions/e/a-fonts'
 import { SiteHeader } from '@/components/versions/e/SiteHeader'
 import { TileRail } from '@/components/versions/e/TileRail'
 import { Pyramid } from '@/components/versions/e/Pyramid'

@@ -39,7 +39,8 @@ export function Experience() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">The Course</h2>
           <p className="text-xl text-purple-200 max-w-2xl mx-auto">
-            Half structure, half conversation. Half language, half culture. The balance is the method.
+            Half structure, half conversation. Half language, half culture.
+            <span className="block mt-1 font-semibold text-white">The balance is the method.</span>
           </p>
         </div>
 

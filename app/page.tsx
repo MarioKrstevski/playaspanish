@@ -11,6 +11,7 @@ import { Reviews } from '@/components/reviews/Reviews'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { Footer } from '@/components/footer/Footer'
 import { PyramidThreshold } from '@/components/dividers/PyramidThreshold'
+import { SarapeBand } from '@/components/dividers/SarapeBand'
 import { ChakraRail } from '@/components/chakra-rail/ChakraRail'
 
 // Section background colors, descending through the seven chakras:
@@ -19,7 +20,7 @@ const colors = {
   experience: '#3b0764', // purple-950
   whySpanish: '#f0f9ff', // sky-50
   about: '#ecfdf5', // emerald-50
-  journey: '#fef9c3', // yellow-100
+  journey: '#fcf5e1', // warm sand cream: yellow enough, calmer than chakra yellow
   pricing: '#fff7ed', // orange-50
   reviews: '#fef2f2', // red-50
   contact: '#fef2f2', // red-50
@@ -33,30 +34,22 @@ export default function Home() {
       <ChakraRail />
       <main>
         <Hero />
-        {/* The purple pyramid rises directly out of the hero scene: transparent
-            band pulled up over the image's bottom edge */}
-        <div
-          className="relative z-10"
-          // the threshold is 15% as tall as it is wide (700px to 1200px)
-          style={{ marginTop: 'calc(min(max(100vw, 700px), 1200px) * -0.15)' }}
-        >
-          <PyramidThreshold kind="giza" apexX={690} from="transparent" to={colors.experience} />
-        </div>
+        <SarapeBand />
         <Experience />
         <InClass />
-        <PyramidThreshold kind="kukulkan" apexX={500} stars from={colors.experience} to={colors.whySpanish} />
+        {/* Three thresholds only. Moons stay at four on the whole page: the
+            full moon here, the half moon before How it works, its cycle, and
+            the reviews timeline */}
+        <PyramidThreshold kind="kukulkan" apexX={660} stars moon={{ x: 430, y: 66, phase: 'full' }} from={colors.experience} to={colors.whySpanish} />
         <WhySpanish />
         <LanguageBuffet />
-        <PyramidThreshold kind="spire" apexX={710} from={colors.whySpanish} to={colors.about} edge="#6ee7b7" />
         <AboutTeacher />
-        <PyramidThreshold kind="giza" apexX={490} from={colors.about} to={colors.journey} edge="#facc15" />
+        <PyramidThreshold kind="giza" apexX={490} moon={{ x: 760, y: 70, phase: 'half' }} from={colors.about} to={colors.journey} stone={{ near: '#ecc56a', shade: '#d9ad4f', far: '#f3e2b0' }} />
         <MoonJourney />
-        <PyramidThreshold kind="kukulkan" apexX={720} from={colors.journey} to={colors.pricing} edge="#fdba74" />
         <Pricing />
-        <PyramidThreshold kind="spire" apexX={480} from={colors.pricing} to={colors.reviews} edge="#fca5a5" />
         <Reviews />
         <ContactForm />
-        <PyramidThreshold kind="kukulkan" apexX={700} from={colors.contact} to={colors.footer} />
+        <PyramidThreshold kind="chakra" apexX={600} from={colors.contact} to={colors.footer} />
       </main>
       <Footer />
     </>

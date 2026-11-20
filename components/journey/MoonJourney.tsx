@@ -5,8 +5,8 @@ import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { cn } from '@/lib/utils'
 
 const MOON_LIGHT = '#fffdf2'
-const MOON_DARK = '#a16207'
-const MOON_RIM = '#ca8a04'
+const MOON_DARK = '#b5832f'
+const MOON_RIM = '#d1a24a'
 
 type Phase = 'new' | 'waxing' | 'full' | 'waning'
 
@@ -40,9 +40,9 @@ const steps: Array<{ phase: Phase; title: string; description: string }> = [
   },
   {
     phase: 'waxing',
-    title: 'Meet Angelica',
+    title: 'Your first chat',
     description:
-      'A first conversation to understand what you need and where you want to go. Angelica shapes your path and matches you with the teacher who fits you best, which may be her.'
+      'A first conversation to understand what you need and where you want to go, so your lessons fit you from the very start.'
   },
   {
     phase: 'full',
@@ -63,7 +63,7 @@ export function MoonJourney() {
   const { ref: stepsRef, isVisible: stepsVisible } = useScrollAnimation()
 
   return (
-    <section id="how-it-works" className="py-24 bg-yellow-100 text-yellow-950">
+    <section id="how-it-works" className="py-24 bg-[#fcf5e1] text-yellow-950">
       <div className="container mx-auto px-4">
         <div
           ref={titleRef}
@@ -79,7 +79,7 @@ export function MoonJourney() {
           {/* Connecting arc line behind the moons */}
           <div
             aria-hidden
-            className="hidden md:block absolute top-10 left-[12%] right-[12%] border-t border-dashed border-yellow-500"
+            className="hidden md:block absolute top-10 left-[12%] right-[12%] border-t border-dashed border-[#d9b569]"
           />
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
             {steps.map((step, index) => (
@@ -106,14 +106,14 @@ export function MoonJourney() {
                         next step's moon */}
                     <path
                       d="M22 4 C 8 28, 12 54, 48 66"
-                      stroke="#a16207"
+                      stroke="#b5832f"
                       strokeOpacity="0.6"
                       strokeWidth="2.5"
                       strokeLinecap="round"
                     />
                     <path
                       d="M39 55 L50 66 L37 73"
-                      stroke="#a16207"
+                      stroke="#b5832f"
                       strokeOpacity="0.6"
                       strokeWidth="2.5"
                       strokeLinecap="round"

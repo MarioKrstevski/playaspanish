@@ -16,7 +16,6 @@ import { cn } from '@/lib/utils'
  */
 export const VERSIONS = [
   { href: '/', label: 'Now', name: 'Current design, Ascension' },
-  { href: '/v/a', label: 'A', name: 'Version A, Con Angelica' },
   { href: '/v/c', label: 'C', name: 'Version C, Ascension distilled' },
   { href: '/v/d', label: 'D', name: 'Version D, Ascension redrawn' },
   { href: '/v/e', label: 'E', name: 'Version E, Con Angelica with the Ascension ideas' }
@@ -26,7 +25,7 @@ const PLACE_KEY = 'ps-version-place'
 const BAR_HEIGHT = 44
 
 export function VersionBar() {
-  // Static export may serve /v/a/ with a trailing slash
+  // Static export may serve /v/c/ with a trailing slash
   const pathname = (usePathname() || '/').replace(/(.)\/$/, '$1')
   const show = VERSIONS.some((v) => v.href === pathname)
   const [top, setTop] = useState(0)
@@ -110,8 +109,8 @@ export function VersionBar() {
 
   return (
     <div
-      className="fixed inset-x-0 z-40 flex items-center justify-center border-b border-black/10 bg-white/85 backdrop-blur-md"
-      style={{ top, height: BAR_HEIGHT }}
+      className="fixed inset-x-0 z-40 flex items-center justify-center border-b border-black/10 backdrop-blur-md transition-colors duration-300"
+      style={{ top, height: BAR_HEIGHT, backgroundColor: 'var(--chrome-bg, rgb(255 255 255 / 0.85))' }}
     >
       <nav
         aria-label="Homepage designs"
