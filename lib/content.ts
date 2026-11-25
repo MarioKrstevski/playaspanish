@@ -129,8 +129,9 @@ export const teachers: Teacher[] = [
     badge: { short: 'Owner & CEO', long: 'Proud owner & CEO of Playa Spanish' },
     intro: 'Real connection, real conversations, and lessons shaped around your life and goals.',
     credentials: [
-      'Lic. in English Language',
-      'Certified Level C1',
+      // From Angelica, 2026-11-25
+      "Bachelor's degree in English Language, majoring in English and American Literature, Universidad Autónoma de Chihuahua (UACH)",
+      'C1 certified by Trinity College London',
       'More than 15 years of teaching experience'
     ],
     sections: [
